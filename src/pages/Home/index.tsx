@@ -1,21 +1,22 @@
 import React from "react";
-import logo from "@/assets/images/logo.svg";
+import arduino from "@/assets/images/arduino.svg";
 import "./index.scss";
 
-function Home() {
+const Home: React.FC = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="Home">
+      <header className="Home-header">
+        <img src={arduino} className="Home-arduino" alt="arduino" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+        <a className="Home-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Learn React
         </a>
       </header>
     </div>
   );
-}
+};
 
 export default Home;
