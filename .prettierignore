@@ -1,0 +1,8 @@
+# Ignore artifacts:
+.vscode
+build
+target/coverage
+node_modules
+
+*.html
+*.md
