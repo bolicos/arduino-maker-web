@@ -1,21 +1,68 @@
-import React from "react";
-import arduino from "@/assets/images/arduino.svg";
+import React, { useState } from "react";
+import { Container, Row, Col, Card, Stack } from "react-bootstrap";
+import Header from "@/components/Header";
 import "./index.scss";
 
+interface State {
+  code: string;
+}
+
 const Home: React.FC = () => {
+  const [state, setState] = useState<State>({
+    code: ""
+  });
 
   return (
-    <div className="Home">
-      <header className="Home-header">
-        <img src={arduino} className="Home-arduino" alt="arduino" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="Home-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid>
+      <Row>
+        <Header />
+      </Row>
+      <Row className="justify-content-md-center">
+
+        <Col xs={2}>
+          <Card className="text-center home-fluid">
+            <Card.Header>Componentes</Card.Header>
+            <Card.Body>
+              <Card.Title>Aqui tem alguns componentes</Card.Title>
+              <Card.Text>Cada compenentes representa um Bloco do Arduino.</Card.Text>
+              <Container >
+                <Row>
+                  <Col>
+                    <Stack gap={3}>
+                      <div className="bg-light border">Primeiro componente</div>
+                      <div className="bg-light border">Segundo componente</div>
+                      <div className="bg-light border">Terceiro componente</div>
+                    </Stack>
+                  </Col>
+                </Row>
+              </Container>
+            </Card.Body>
+            <Card.Footer className="text-muted"><br /></Card.Footer>
+          </Card>
+        </Col>
+
+        <Col xs={6}>
+          <Card className="text-center home-fluid">
+            <Card.Header>Lousa</Card.Header>
+            <Card.Body>
+
+            </Card.Body>
+            <Card.Footer className="text-muted"><br /></Card.Footer>
+          </Card>
+        </Col>
+
+        <Col xs={4}>
+          <Card className="text-center home-fluid">
+            <Card.Header>Codigo Arduino</Card.Header>
+            <Card.Body>
+              {state.code}
+            </Card.Body>
+            <Card.Footer className="text-muted"><br /></Card.Footer>
+          </Card>
+        </Col>
+
+      </Row>
+    </Container>
   );
 };
 
