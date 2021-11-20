@@ -12,6 +12,12 @@ const Home: React.FC = () => {
     code: ""
   });
 
+  const handleCode = () => {
+    setState(prev => ({
+      code: ""
+    }));
+  }
+
   return (
     <Container fluid>
       <Row>
@@ -29,9 +35,9 @@ const Home: React.FC = () => {
                 <Row>
                   <Col>
                     <Stack gap={3}>
-                      <div className="bg-light border">Primeiro componente</div>
-                      <div className="bg-light border">Segundo componente</div>
-                      <div className="bg-light border">Terceiro componente</div>
+                      <div className="bg-light border" onClick={handleCode}>Primeiro componente</div>
+                      <div className="bg-light border" onClick={handleCode}>Segundo componente</div>
+                      <div className="bg-light border" onClick={handleCode}>Terceiro componente</div>
                     </Stack>
                   </Col>
                 </Row>
