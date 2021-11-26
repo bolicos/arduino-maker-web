@@ -1,6 +1,6 @@
-import { CSSProperties, FC } from 'react'
+import React, { CSSProperties } from 'react'
 import { useDrag } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import { ItemTypes } from '@/models/ItemTypes'
 
 const style: CSSProperties = {
   border: '1px dashed gray',
@@ -20,7 +20,7 @@ interface DropResult {
   name: string
 }
 
-export const Block: FC<BoxProps> = function Box({ name }) {
+export const Block: React.FC<BoxProps> = function Box({ name }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.BOX,
     item: { name },
@@ -48,3 +48,5 @@ export const Block: FC<BoxProps> = function Box({ name }) {
     </div>
   )
 }
+
+export default Block;

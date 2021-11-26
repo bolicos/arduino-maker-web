@@ -1,12 +1,13 @@
-import Header from "@/components/Header";
 import React, { useState } from "react";
 import { Card, Col, Container, Row, Stack } from "react-bootstrap";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Board } from "../../components/Blocks/Board";
-import { Block } from "../../components/Blocks/Block";
+
+import Header from "@/components/Header";
+import DragAndDrop from "@/components/DragAndDrop";
+
 import "./index.scss";
-import { ComponentsDrop } from "#/src/components/Blocks/ComponentsDrop";
+
 
 interface State {
   code: string;
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
         <Col xs={9}>
               <DndProvider backend={HTML5Backend}>
                 <div style={{ overflow: 'hidden', clear: 'both' }}>
-                  <ComponentsDrop />
+                  <DragAndDrop />
                 </div>
               </DndProvider>
 

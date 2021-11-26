@@ -1,10 +1,10 @@
-import React, { FC, memo } from "react";
+import React, { memo } from "react";
 import { Card, Row } from "react-bootstrap";
-import "./../../pages/Home/index.scss";
-import { Block } from './Block';
-import { Board } from './Board';
+import "@/pages/Home/index.scss";
+import Block from '@/components/Block';
+import Board from '@/components/Board';
 
-export const ComponentsDrop: FC = memo(function Container() {
+export const DragAndDrop: React.FC = memo(function Container() {
   return (
     <div className="flex-container">
 
@@ -22,7 +22,8 @@ export const ComponentsDrop: FC = memo(function Container() {
               </Row>
             </div>
           </Card.Body>
-          <Card.Footer className="text-muted"><br /></Card.Footer>
+          <Card.Footer className="text-muted"><br />
+          </Card.Footer>
         </Card>
       </div>
 
@@ -42,3 +43,5 @@ export const ComponentsDrop: FC = memo(function Container() {
     </div>
   )
 })
+
+export default DragAndDrop;

@@ -1,6 +1,6 @@
 import { CSSProperties, FC } from "react";
 import { useDrop } from "react-dnd";
-import { ItemTypes } from "./ItemTypes";
+import { ItemTypes } from "@/models/ItemTypes";
 
 const style: CSSProperties = {
   height: "20rem",
@@ -38,3 +38,5 @@ export const Board: FC = () => {
     </div>
   );
 };
+
+export default Board;
