@@ -1,7 +1,12 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Card, Stack } from "react-bootstrap";
 import Header from "@/components/Header";
+import React, { useState } from "react";
+import { Card, Col, Container, Row, Stack } from "react-bootstrap";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Board } from "../../components/Blocks/Board";
+import { Block } from "../../components/Blocks/Block";
 import "./index.scss";
+import { ComponentsDrop } from "#/src/components/Blocks/ComponentsDrop";
 
 interface State {
   code: string;
@@ -25,39 +30,16 @@ const Home: React.FC = () => {
       </Row>
       <Row className="justify-content-md-center">
 
-        <Col xs={2}>
-          <Card className="text-center home-fluid">
-            <Card.Header>Componentes</Card.Header>
-            <Card.Body>
-              <Card.Title>Aqui tem alguns componentes</Card.Title>
-              <Card.Text>Cada compenentes representa um Bloco do Arduino.</Card.Text>
-              <Container >
-                <Row>
-                  <Col>
-                    <Stack gap={3}>
-                      <div className="bg-light border" onClick={handleCode}>Primeiro componente</div>
-                      <div className="bg-light border" onClick={handleCode}>Segundo componente</div>
-                      <div className="bg-light border" onClick={handleCode}>Terceiro componente</div>
-                    </Stack>
-                  </Col>
-                </Row>
-              </Container>
-            </Card.Body>
-            <Card.Footer className="text-muted"><br /></Card.Footer>
-          </Card>
+        <Col xs={9}>
+              <DndProvider backend={HTML5Backend}>
+                <div style={{ overflow: 'hidden', clear: 'both' }}>
+                  <ComponentsDrop />
+                </div>
+              </DndProvider>
+
         </Col>
 
-        <Col xs={6}>
-          <Card className="text-center home-fluid">
-            <Card.Header>Lousa</Card.Header>
-            <Card.Body>
-
-            </Card.Body>
-            <Card.Footer className="text-muted"><br /></Card.Footer>
-          </Card>
-        </Col>
-
-        <Col xs={4}>
+        <Col xs={3}>
           <Card className="text-center home-fluid">
             <Card.Header>Codigo Arduino</Card.Header>
             <Card.Body>
