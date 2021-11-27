@@ -1,33 +1,28 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
+import clsx from 'clsx';
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '@/models/ItemTypes'
+import { BlockTypes } from '@/models/blocks'
 
-const style: CSSProperties = {
-  border: '1px dashed gray',
-  backgroundColor: 'white',
-  padding: '0.5rem 1rem',
-  marginRight: '1.5rem',
-  marginBottom: '1.5rem',
-  cursor: 'move',
-  float: 'left',
-}
+import style from "./style.module.scss"
 
-export interface BoxProps {
-  name: string
+export interface Props extends React.HTMLAttributes<HTMLButtonElement>{
+  block: BlockTypes
 }
 
 interface DropResult {
   name: string
 }
 
-export const Block: React.FC<BoxProps> = function Box({ name }) {
+export const Block: React.FC<Props> = ({ block }) => {
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.BOX,
-    item: { name },
+    item: { block },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<DropResult>()
       if (item && dropResult) {
-        alert(`You dropped ${item.name} into ${dropResult.name}!`)
+        alert(`You dropped ${item} into ${dropResult.name}!`)
       }
     },
     collect: (monitor) => ({
@@ -36,15 +31,20 @@ export const Block: React.FC<BoxProps> = function Box({ name }) {
     }),
   }))
 
-  const opacity = isDragging ? 0.4 : 1
   return (
     <div
+      className={
+        clsx(
+          [style.block],
+          isDragging ? style.opacityIsDraggin : style.opacity,
+        )
+      }
+
       ref={drag}
-      role="Box"
-      style={{ ...style, opacity }}
-      data-testid={`box-${name}`}
+      role="none"
+      data-testid={`box-${block}`}
     >
-      {name}
+      {block}
     </div>
   )
 }
