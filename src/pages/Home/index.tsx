@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Card, Stack } from "react-bootstrap";
+import { Card, Col, Container, Row, Stack } from "react-bootstrap";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 import Header from "@/components/Header";
+import Block from "@/components/Block";
+import Board from "@/components/Board";
+import { BlockTypes } from '@/models/blocks';
+
 import "./index.scss";
+
 
 interface State {
   code: string;
@@ -11,6 +19,10 @@ const Home: React.FC = () => {
   const [state, setState] = useState<State>({
     code: ""
   });
+
+  const blocks = [
+    BlockTypes.SMART_MOTORS,
+  ];
 
   const handleCode = () => {
     setState(prev => ({
@@ -25,37 +37,39 @@ const Home: React.FC = () => {
       </Row>
       <Row className="justify-content-md-center">
 
-        <Col xs={2}>
-          <Card className="text-center home-fluid">
-            <Card.Header>Componentes</Card.Header>
-            <Card.Body>
-              <Card.Title>Aqui tem alguns componentes</Card.Title>
-              <Card.Text>Cada compenentes representa um Bloco do Arduino.</Card.Text>
-              <Container >
-                <Row>
-                  <Col>
-                    <Stack gap={3}>
-                      <div className="bg-light border" onClick={handleCode}>Primeiro componente</div>
-                      <div className="bg-light border" onClick={handleCode}>Segundo componente</div>
-                      <div className="bg-light border" onClick={handleCode}>Terceiro componente</div>
-                    </Stack>
-                  </Col>
-                </Row>
-              </Container>
-            </Card.Body>
-            <Card.Footer className="text-muted"><br /></Card.Footer>
-          </Card>
-        </Col>
+        <DndProvider backend={HTML5Backend}>
 
-        <Col xs={6}>
-          <Card className="text-center home-fluid">
-            <Card.Header>Lousa</Card.Header>
-            <Card.Body>
+          <Col xs={2}>
+            <Card className="text-center home-fluid">
+              <Card.Header>Componentes</Card.Header>
+              <Card.Body>
+                <Card.Title>Aqui tem alguns componentes</Card.Title>
+                <Card.Text>Cada compenentes representa um Bloco do Arduino.</Card.Text>
+                <Container >
+                  <Row>
+                    <Col>
+                      <Stack gap={3}>
+                        {blocks.map(block => <Block block={block} onClick={handleCode} />)}
+                      </Stack>
+                    </Col>
+                  </Row>
+                </Container>
+              </Card.Body>
+              <Card.Footer className="text-muted"><br /></Card.Footer>
+            </Card>
+          </Col>
 
-            </Card.Body>
-            <Card.Footer className="text-muted"><br /></Card.Footer>
-          </Card>
-        </Col>
+          <Col xs={6}>
+            <Card className="text-center home-fluid">
+              <Card.Header>Lousa</Card.Header>
+              <Card.Body>
+                <Board />
+              </Card.Body>
+              <Card.Footer className="text-muted"><br /></Card.Footer>
+            </Card>
+          </Col>
+
+        </DndProvider>
 
         <Col xs={4}>
           <Card className="text-center home-fluid">
