@@ -1,47 +1,72 @@
-export enum LightPinAnalogEnum {
-  A1 = "A1",
-  A2 = "A2",
-  A3 = "A3",
+export enum AnalogSensorsEnum {
+  lightPin = "A0",
+  potPin = "A1",
+  linePin = "A2",
+  distIRPin = "A3",
+  distTrigPin = "12",
+  distEchoPin = "13"
+}
+
+export enum Button {
+  buttonPin = "7"
+}
+
+export enum Servo {
+  servoPin = "3"  
 }
 
 export enum Motor1 {
-  A1 = "A1",
-  A2 = "A2",
-  A3 = "A3",
+  dir1PinA = "2",
+  dir2PinA = "4",
+  speedPinA = "5"
 }
 
-
 export enum RgbLed {
-  A1 = "A1",
-  A2 = "A2",
-  A3 = "A3",
+  redPin = "11",
+  greenPin = "9",
+  bluePin = "10"
 }
 
 export interface ArduinoCodeType {
-  lightPin: LightPinAnalogEnum;
-  potPin: Motor1;
+  lightPin: AnalogSensorsEnum;
+  potPin: AnalogSensorsEnum;
+  linePin: AnalogSensorsEnum;
+  distIRPin: AnalogSensorsEnum;
+  distTrigPin: AnalogSensorsEnum;
+  distEchoPin: AnalogSensorsEnum;
 
+  buttonPin: Button;
+
+  servoPin: Servo;
+
+  dir1PinA: Motor1;
+  dir2PinA: Motor1;
+  speedPinA: Motor1;
+
+  redPin: RgbLed;
+  greenPin: RgbLed;
+  bluePin: RgbLed;
 }
 
 export const ArduinoCode = (param: ArduinoCodeType) => {
   return `
     int lightPin = ${param.lightPin};
-    int potPin = A1;
-    int linePin = A2;
-    int distIRPin = A3;
-    int distTrigPin = 12;
-    int distEchoPin = 13;
+    int potPin = ${param.potPin};
+    int linePin = ${param.linePin};
+    int distIRPin = ${param.distIRPin};
+    int distTrigPin =${param.distTrigPin};
+    int distEchoPin = ${param.distEchoPin};
 
-    int buttonPin = 7;
-    int servoPin = 3;
+    int buttonPin = ${param.buttonPin};
+    int servoPin = ${param.servoPin};
 
-    int dir1PinA = 2;
-    int dir2PinA = 4;
-    int speedPinA = 5; 
+    int dir1PinA = 2;${param.dir1PinA};
+    int dir2PinA = ${param.dir2PinA};
+    int speedPinA = ${param.speedPinA};
 
-    int redPin = 11;
-    int greenPin = 9;
-    int bluePin = 10;
+    int redPin = ${param.redPin};
+    int greenPin = ${param.greenPin};
+    int bluePin = ${param.bluePin};
 
     int lightVal, potVal, buttonVal, lastButtonVal, lineVal, distIRVal, sensorVal, actuatorVal, pastVal, distUSVal;
     int buttonCounter = 0;
