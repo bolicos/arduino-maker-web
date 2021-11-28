@@ -23,7 +23,6 @@ export const Block: React.FC<Props> = ({ block }) => {
       const dropResult = monitor.getDropResult<DropResult>()
       if (item && dropResult) {
         alert(`You dropped ${item} into ${dropResult.name}!`)
-        // FIXAR O BLOCO E MOSTRAR A STRING
       }
     },
     collect: (monitor) => ({

@@ -1,30 +1,30 @@
 export enum AnalogSensorsEnum {
-  lightPin = "A0",
-  potPin = "A1",
-  linePin = "A2",
-  distIRPin = "A3",
-  distTrigPin = "12",
-  distEchoPin = "13"
+  PINO_A0 = "A0",
+  PINO_A1 = "A1",
+  PINO_A2 = "A2",
+  PINO_A3 = "A3",
+  PINO_12 = "12",
+  PINO_13 = "13"
 }
 
 export enum Button {
-  buttonPin = "7"
+  PINO_07 = "7"
 }
 
 export enum Servo {
-  servoPin = "3"  
+  PINO_03 = "3"  
 }
 
 export enum Motor1 {
-  dir1PinA = "2",
-  dir2PinA = "4",
-  speedPinA = "5"
+  PINO_02 = "2",
+  PINO_04 = "4",
+  PINO_05 = "5"
 }
 
 export enum RgbLed {
-  redPin = "11",
-  greenPin = "9",
-  bluePin = "10"
+  PINO_11 = "11",
+  PINO_09 = "9",
+  PINO_10 = "10"
 }
 
 export interface ArduinoCodeType {
@@ -93,22 +93,21 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
       pinMode(dir2PinA, OUTPUT);
       pinMode(speedPinA, OUTPUT);
       
-      pinMode(distTrigPin, OUTPUT); // Sets the distTrigPin as an OUTPUT
-      pinMode(distEchoPin, INPUT); // Sets the distEchoPin as an INPUT
+      pinMode(distTrigPin, OUTPUT);
+      pinMode(distEchoPin, INPUT);
       Serial.write("running");
       servo.attach(servoPin);
-      pastVal = analogRead(lightPin); // change pin when changing sensor to read change from
+      pastVal = analogRead(lightPin);
 
     }
 
     int getSensor() {
-      //  read values
-      lightVal = analogRead(lightPin); // 0 - 250
-      potVal = analogRead(potPin); // 0 - 1023
-      buttonVal = digitalRead(buttonPin); // 0 - 1
-      lineVal = analogRead(linePin); // 0 - 1023
-      distIRVal = analogRead(distIRPin); //
-    //  return abs(lightVal - pastVal);
+      lightVal = analogRead(lightPin);
+      potVal = analogRead(potPin);
+      buttonVal = digitalRead(buttonPin);
+      lineVal = analogRead(linePin);
+      distIRVal = analogRead(distIRPin);
+    
       pastVal = lightVal;
 
       digitalWrite(distTrigPin, LOW);
@@ -117,7 +116,7 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
       delayMicroseconds(10);
       digitalWrite(distTrigPin, LOW);
       int duration = pulseIn(distEchoPin, HIGH);
-      int distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+      int distance = duration * 0.034 / 2;
 
       return distance;
     }
@@ -130,13 +129,6 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
 
       actuatorVal = potVal;
 
-      //    print values
-    //      Serial.println(lightVal);
-    //      Serial.println(potVal);
-    //      Serial.println(buttonVal);
-    //        Serial.println(lineVal);
-    //  Serial.println(distIRVal);
-
       buttonHeld = (not buttonVal and lastButtonVal and buttonCounter > 15);
       buttonPressed = (not buttonVal and lastButtonVal and not buttonHeld);
       if (buttonHeld) {
@@ -146,10 +138,8 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
       }
 
       if (buttonVal) {
-        //        RGBcolor("white");
-        buttonCounter++;
-        //        Serial.println(buttonCounter);
-      }
+              buttonCounter++;
+            }
       else
         buttonCounter = 0;
 
@@ -165,7 +155,6 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
           }
         }
         actuatorVal = actuatorArray[closestPos];
-        //        Serial ray, trainingNum);
         writeActuator(actuatorVal);
 
         if (buttonPressed) {
@@ -216,23 +205,6 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
     }
 
     void writeActuator(int val) {
-      //      dc motor
-    //  val = map(val, 0, 1023, -255, 255);
-    //  analogWrite(speedPinA, abs(val));
-    //  if (val > 0) {
-    //    digitalWrite(dir1PinA, LOW);
-    //    digitalWrite(dir2PinA, HIGH);
-    //  }
-    //  else {
-    //    digitalWrite(dir1PinA, HIGH);
-    //    digitalWrite(dir2PinA, LOW);
-    //  }
-    //    analogWrite(speedPinA, abs(map(200, 0, 1023, -255, 255)));
-    //    digitalWrite(dir1PinA, HIGH);
-    //    digitalWrite(dir2PinA, LOW);
-    //  
-
-    //        servo
             val = map(val, 0, 1023, 0, 180);
             servo.write(val);
     }
@@ -258,18 +230,10 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
         RGBcolor(255, 0, 255);
       else if (color == "white")
         RGBcolor(255, 255, 255);
-      //  else if (color == "yellow")
-      //    RGBcolor(0, 255, 255);
-      //  else if (color == "white")
-      //    RGBcolor(255, 255, 255);
       else if (color == "none")
         RGBcolor(0, 0, 0);
     }
     void RGBcolor(int redVal, int greenVal, int blueVal) {
-      //    Serial.println(redVal);
-      //    Serial.println(greenVal);
-      //    Serial.println(blueVal);
-
       analogWrite(redPin, redVal);
       analogWrite(greenPin, greenVal);
       analogWrite(bluePin, blueVal);
