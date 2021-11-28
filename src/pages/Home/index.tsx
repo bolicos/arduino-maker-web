@@ -22,6 +22,7 @@ const Home: React.FC = () => {
 
   const blocks = [
     BlockTypes.SMART_MOTORS,
+    BlockTypes.IF,
   ];
 
   const handleCode = () => {
