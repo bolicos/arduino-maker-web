@@ -1,37 +1,37 @@
-import React from "react";
-import clsx from 'clsx';
+import { blocks } from "#/src/models/blocks";
+import React, { useState } from "react";
+import { Card } from "react-bootstrap";
 import { useDrop } from "react-dnd";
-import { ItemTypes } from "@/models/ItemTypes";
+import Block from "../Block";
 
-import style from "./style.module.scss"
 
 export const Board: React.FC = () => {
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: ItemTypes.BOX,
-    drop: () => ({ name: "Board" }),
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop()
-    })
-  }));
+  const [board, setBoard] = useState([] as any[]);
 
-  const isActive = canDrop && isOver;
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "blockImage",
+    drop: (item: any) => addBlockToBoard(item.id),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    })
+  }))
+
+  const addBlockToBoard = (id) => {
+    const boardList = blocks.filter((block) => id === block.id);
+    setBoard((board) => [...board, boardList[0]]);
+  }
 
   return (
-    <div
-      className={
-        clsx(
-          [style.board, style.backgroundColor],
-          isActive && style.backgroundColorIsActive,
-          canDrop && style.backgroundColorCanDrop,
-        )
-      }
-      ref={drop}
-      role={"none"}
-    >
-      {isActive ? "Release to drop" : "Drag a block here"}
-    </div>
-  );
+    <Card className="text-center home-fluid">
+      <Card.Header>Lousa</Card.Header>
+      <Card.Body ref={drop}>
+        {board.map((block) => {
+          return <Block id={block.id} type={block.type} />
+        })}
+      </Card.Body>
+      <Card.Footer className="text-muted"><br /></Card.Footer>
+    </Card>
+  )
 };
 
 export default Board;

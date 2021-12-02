@@ -5,48 +5,26 @@ import { ItemTypes } from '@/models/ItemTypes'
 import { BlockTypes } from '@/models/blocks'
 
 import style from "./style.module.scss"
+import { monitorEventLoopDelay } from 'perf_hooks';
 
-export interface Props extends React.HTMLAttributes<HTMLButtonElement>{
-  block: BlockTypes
+export interface Props {
+  id: number,
+  type: BlockTypes
 }
 
-interface DropResult {
-  name: string
-}
+export const Block: React.FC<Props> = ({id, type}) => {
 
-export const Block: React.FC<Props> = ({ block }) => {
-
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemTypes.BOX,
-    item: { block },
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult<DropResult>()
-      if (item && dropResult) {
-        alert(`You dropped ${item} into ${dropResult.name}!`)
-      }
-    },
+  const [{isDragging}, drag] = useDrag(() => ({
+    type: "blockImage",
+    item: {id: id},
     collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-      handlerId: monitor.getHandlerId(),
-    }),
+      isDragging: !!monitor.isDragging(),
+    })
   }))
 
-  return (
-    <div
-      className={
-        clsx(
-          [style.block],
-          isDragging ? style.opacityIsDraggin : style.opacity,
-        )
-      }
-
-      ref={drag}
-      role="none"
-      data-testid={`box-${block}`}
-    >
-      {block}
-    </div>
-  )
-}
-
-export default Block;
+    return (
+      <h6 ref={drag} style={{border: isDragging ? "5px solid pink" : "0px"}}> I'm a block id {id} and type {type} </h6>
+    )
+  }
+  
+  export default Block;
