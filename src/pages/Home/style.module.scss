@@ -1,0 +1,17 @@
+.row {
+  text-align: -webkit-center;
+}
+
+.card {
+  width: 18rem;
+  border-radius: 2rem;
+}
+
+.mobile {
+  @media screen and (max-width: 900px) {
+    display: unset !important;
+    > img {
+      width: unset;
+    }
+  }
+}

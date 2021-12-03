@@ -1,88 +1,107 @@
-import React, { useState } from "react";
-import { Card, Col, Container, Row, Stack } from "react-bootstrap";
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import React from "react";
+import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Image,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Offcanvas,
+  Row
+} from "react-bootstrap";
+import { ROUTES as R, LINKS } from "#/src/constants";
+import arduinoLogo from "@/assets/images/arduino-logo.png"
+import arduinoMaker from "@/assets/images/arduino-maker.jpg"
+import arduinoCommunity from "@/assets/images/arduino-community.png"
 
-import Header from "@/components/Header";
-import Block from "@/components/Block";
-import Board from "@/components/Board";
-import { BlockTypes } from '@/models/blocks';
-
-import "./index.scss";
-
-
-interface State {
-  code: string;
-}
+import style from "./style.module.scss"
 
 const Home: React.FC = () => {
-  const [state, setState] = useState<State>({
-    code: ""
-  });
-
-  const blocks = [
-    BlockTypes.SMART_MOTORS,
-    BlockTypes.IF,
-  ];
-
-  const handleCode = () => {
-    setState(prev => ({
-      code: ""
-    }));
-  }
+  const navigate = useNavigate();
 
   return (
     <Container fluid>
       <Row>
-        <Header />
+        <Navbar bg="light" expand={false}>
+          <Container fluid>
+            <Navbar.Brand href="#">Arduino IFRS</Navbar.Brand>
+            <Navbar.Toggle aria-controls="offcanvasNavbar" />
+            <Navbar.Offcanvas
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id="offcanvasNavbarLabel">Menu Lateral</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                  <Nav.Link href={R.HOME()}>Home</Nav.Link>
+                  <NavDropdown title="Produtos" id="products">
+                    <NavDropdown.Item href={R.CREATE()}>Arduino Criação</NavDropdown.Item>
+                    <NavDropdown.Item href={R.MAKER()}>Arduino Maker</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#exemplo">Exemplo de outra coisa</NavDropdown.Item>
+                  </NavDropdown>
+                  <NavDropdown title="Vamos Começar" id="getStarted">
+                    <NavDropdown.Item target="_blank" href={LINKS.GITHUB()} >Github</NavDropdown.Item>
+                    <NavDropdown.Item target="_blank" href={LINKS.NOTION()}>Notion</NavDropdown.Item>
+                    <NavDropdown.Item target="_blank" href={LINKS.DOCS()}>Docs</NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+
       </Row>
-      <Row className="justify-content-md-center">
 
-        <DndProvider backend={HTML5Backend}>
+      <br />
 
-          <Col xs={2}>
-            <Card className="text-center home-fluid">
-              <Card.Header>Componentes</Card.Header>
-              <Card.Body>
-                <Card.Title>Aqui tem alguns componentes</Card.Title>
-                <Card.Text>Cada compenentes representa um Bloco do Arduino.</Card.Text>
-                <Container >
-                  <Row>
-                    <Col>
-                      <Stack gap={3}>
-                        {blocks.map(block => <Block block={block} onClick={handleCode} />)}
-                      </Stack>
-                    </Col>
-                  </Row>
-                </Container>
-              </Card.Body>
-              <Card.Footer className="text-muted"><br /></Card.Footer>
-            </Card>
-          </Col>
+      <Row
+        className={
+          clsx(
+            ["justify-content-md-center", style.row],
+          )
+        }
+      >
 
-          <Col xs={6}>
-            <Card className="text-center home-fluid">
-              <Card.Header>Lousa</Card.Header>
-              <Card.Body>
-                <Board />
-              </Card.Body>
-              <Card.Footer className="text-muted"><br /></Card.Footer>
-            </Card>
-          </Col>
-
-        </DndProvider>
-
-        <Col xs={4}>
-          <Card className="text-center home-fluid">
-            <Card.Header>Codigo Arduino</Card.Header>
+        <Col xs={6} md={4}>
+          <Card className={clsx([style.card])}>
+            <Card.Img variant="top" src={arduinoMaker} />
             <Card.Body>
-              {state.code}
+              <Card.Title>Project Create</Card.Title>
+              <Card.Text>
+                Este é o prejeto para criação de codigo em C para professores.
+              </Card.Text>
+              <Button variant="primary" onClick={() => navigate(R.CREATE())} >Projeto Create</Button>
             </Card.Body>
-            <Card.Footer className="text-muted"><br /></Card.Footer>
+          </Card>
+        </Col>
+
+        <Col xs={6} md={4}>
+          <Image src={arduinoLogo} thumbnail height={300} width={300} />
+        </Col>
+
+        <Col xs={6} md={4}>
+          <Card className={clsx([style.card, style.mobile])}>
+            <Card.Img variant="top" src={arduinoCommunity} />
+            <Card.Body>
+              <Card.Title>Project Maker</Card.Title>
+              <Card.Text>
+                Este é o prejeto para criação de lógica de promação para os alunos.
+              </Card.Text>
+              <Button variant="primary" onClick={() => navigate(R.MAKER())} >Projeto Maker</Button>
+            </Card.Body>
           </Card>
         </Col>
 
       </Row>
+
     </Container>
   );
 };
