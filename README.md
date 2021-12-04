@@ -11,12 +11,11 @@ Create a way to make the Smart Motors code more flexible so that it can be used 
 3. LDR;
 4. Potentiometer;
 5. One Button
+>Note: the connection ports can change and keep working as expected.
 
 # Members
 @Ana Lucia
 @Michele Menezes
 @Andressa Ruy
-
->Note: the connection ports can change and keep working as expected.
 
 **alma-smart-motors-ifrs.notion.site(https://alma-smart-motors-ifrs.notion.site/Github-981509f3960846db98a6942e6e84072c)**
