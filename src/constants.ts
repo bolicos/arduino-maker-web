@@ -7,6 +7,6 @@ export const ROUTES = {
 
 export const LINKS = {
   GITHUB: () => "https://github.com/analuciabolico/arduino-maker-web",
-  NOTION: () => "https://repeated-settee-482.notion.site/IFRS-ALMA-with-Tufts-Smart-Motors-7b974cd2c0d14f1685f5db83c1587f4b",
+  NOTION: () => "https://alma-smart-motors-ifrs.notion.site/Github-981509f3960846db98a6942e6e84072c",
   DOCS: () => "https://github.com/analuciabolico/arduino-maker-web/wiki"
 }

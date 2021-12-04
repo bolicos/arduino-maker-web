@@ -7,6 +7,11 @@
   border-radius: 2rem;
 }
 
+.imageCentral {
+  height: 300;
+  width: 300;
+}
+
 .mobile {
   @media screen and (max-width: 900px) {
     display: unset !important;
