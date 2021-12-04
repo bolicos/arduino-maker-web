@@ -6,10 +6,10 @@ import arduinoImage from "@/assets/images/arduino.png";
 
 import "./index.scss";
 
-interface State {
+interface Props {
   title: string;
 }
-const Header: React.FC<State> = ({ title }) => {
+const Header: React.FC<Props> = ({ title }) => {
   const navigate = useNavigate();
 
   return (

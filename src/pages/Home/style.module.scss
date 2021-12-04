@@ -4,7 +4,11 @@
 
 .card {
   width: 18rem;
-  border-radius: 2rem;
+  border-radius: 5rem;
+
+  &:nth-child(2n) {
+    border : unset;
+  }
 }
 
 .imageCentral {
@@ -12,11 +16,15 @@
   width: 300;
 }
 
-.mobile {
-  @media screen and (max-width: 900px) {
-    display: unset !important;
-    > img {
-      width: unset;
-    }
+@media screen and (max-width: 900px) {
+  .imageCentral {
+    height: 100;
+    width: 100;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card:nth-last-child(1n) {
+    margin-bottom: 20px;
   }
 }

@@ -70,8 +70,8 @@ const Home: React.FC = () => {
         }
       >
 
-        <Col xs={6} md={4}>
-          <Card className={clsx([style.card, style.mobile])}>
+        <Col xs={12} md={4}>
+          <Card className={clsx([style.card])}>
             <Card.Img variant="top" src={arduinoMaker} />
             <Card.Body>
               <Card.Title>Project Create</Card.Title>
@@ -83,12 +83,12 @@ const Home: React.FC = () => {
           </Card>
         </Col>
 
-        <Col xs={6} md={4}>
-          <Image className={clsx([style.card, style.mobile, style.imageCentral])} src={arduinoLogo} thumbnail />
+        <Col xs={12} md={4}>
+          <Image className={clsx([style.card, style.imageCentral])} src={arduinoLogo} thumbnail />
         </Col>
 
-        <Col xs={6} md={4}>
-          <Card className={clsx([style.card, style.mobile])}>
+        <Col xs={12} md={4}>
+          <Card className={clsx([style.card])}>
             <Card.Img variant="top" src={arduinoCommunity} />
             <Card.Body>
               <Card.Title>Project Maker</Card.Title>
