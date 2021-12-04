@@ -84,7 +84,7 @@ const Home: React.FC = () => {
         </Col>
 
         <Col xs={12} md={4}>
-          <Image className={clsx([style.card, style.imageCentral])} src={arduinoLogo} thumbnail />
+          <Image className={clsx([style.card, style.centralImage])} src={arduinoLogo} thumbnail />
         </Col>
 
         <Col xs={12} md={4}>

@@ -3,28 +3,29 @@
 }
 
 .card {
-  width: 18rem;
-  border-radius: 5rem;
-
-  &:nth-child(2n) {
-    border : unset;
-  }
+  width: 25rem;
+  border-radius: 2rem !important;
 }
 
-.imageCentral {
+.centralImage {
   height: 300;
   width: 300;
+  border: unset !important;
 }
 
 @media screen and (max-width: 900px) {
-  .imageCentral {
+  .centralImage {
     height: 100;
     width: 100;
     margin-top: 20px;
     margin-bottom: 20px;
   }
 
-  .card:nth-last-child(1n) {
-    margin-bottom: 20px;
+  .card {
+    width: 18rem;
+
+    &:nth-last-child(1n) {
+      margin-bottom: 20px;
+    }
   }
 }
