@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import clsx from 'clsx';
 import { useDrag } from 'react-dnd'
+import { StateMaker } from '@/pages/Maker';
 import { ItemTypes } from '@/models/ItemTypes'
-import { BlockTypes } from '@/models/blocks'
+import { BlockTypesEnum } from '@/models/blocks'
 
 import style from "./style.module.scss"
 
-export interface Props extends React.HTMLAttributes<HTMLButtonElement>{
-  block: BlockTypes
+
+export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
+  block: BlockTypesEnum,
+  setState: Dispatch<SetStateAction<StateMaker>>,
 }
 
 interface DropResult {
   name: string
 }
 
-export const Block: React.FC<Props> = ({ block }) => {
+export const Block: React.FC<Props> = ({ block, setState }) => {
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.BOX,
@@ -22,7 +25,10 @@ export const Block: React.FC<Props> = ({ block }) => {
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<DropResult>()
       if (item && dropResult) {
-        alert(`You dropped ${item} into ${dropResult.name}!`)
+        setState(prev => ({
+          ...prev,
+          code: block
+        }));
       }
     },
     collect: (monitor) => ({

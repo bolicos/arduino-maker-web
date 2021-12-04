@@ -1,4 +1,4 @@
-export enum BlockTypes {
+export enum BlockTypesEnum {
   SMART_MOTORS = "Smart Motors",
   IF = "If"
 }

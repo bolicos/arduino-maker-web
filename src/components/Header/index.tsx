@@ -1,9 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import { Image, Navbar, Button, Container } from "react-bootstrap";
+import { ROUTES as R } from "#/src/constants"
 import arduinoImage from "@/assets/images/arduino.png";
+
 import "./index.scss";
 
-const Header: React.FC = () => {
+interface Props {
+  title: string;
+}
+const Header: React.FC<Props> = ({ title }) => {
+  const navigate = useNavigate();
 
   return (
 
@@ -12,13 +19,15 @@ const Header: React.FC = () => {
         <Navbar.Brand className="me-auto">
           <Image
             src={arduinoImage}
-            rounded
             className="d-inline-block align-top spacing"
+            onClick={() => navigate(R.HOME())}
+            rounded
             alt="Logo"
             width="50px"
-            height="50px" />
+            height="50px"
+          />
           {' '}
-          Arduino Maker
+          {title}
         </Navbar.Brand>
 
         <Button variant="outline-secondary" className="spacing">Importar</Button>{' '}
