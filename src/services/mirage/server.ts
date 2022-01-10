@@ -3,11 +3,11 @@ import { APP } from "@/constants";
 import { RoutesMirage } from "@/services/mirage/routes";
 
 export const MirageServer = () => {
-  const server = new Server({
-    urlPrefix: APP.BFF_URL,
-    environment: APP.ENV,
-    trackRequests: true,
-  });
+	const server = new Server({
+		urlPrefix: APP.BFF_URL,
+		environment: APP.ENV,
+		trackRequests: true,
+	});
 
-  return RoutesMirage(server);
+	return RoutesMirage(server);
 };

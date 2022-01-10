@@ -8,16 +8,16 @@ import MakerPage from "@/pages/Maker";
 import NotFoundPage from "@/pages/NotFound";
 
 const Routes: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path={R.HOME()} element={<HomePage />} />
-        <Route path={R.CREATE()} element={<CreatePage />} />
-        <Route path={R.MAKER()} element={<MakerPage />} />
-        <Route path={R.NOT_FOUND()} element={<NotFoundPage />} />
-      </Switch>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path={R.HOME()} element={<HomePage />} />
+				<Route path={R.CREATE()} element={<CreatePage />} />
+				<Route path={R.MAKER()} element={<MakerPage />} />
+				<Route path={R.NOT_FOUND()} element={<NotFoundPage />} />
+			</Switch>
+		</BrowserRouter>
+	);
 };
 
 export default Routes;

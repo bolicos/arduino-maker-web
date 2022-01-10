@@ -7,57 +7,57 @@ import Header from ".";
 import { Server } from "miragejs";
 
 function setup(title: string) {
-  const history = createMemoryHistory({
-    initialEntries: [ROUTES.HOME()],
-  });
+	const history = createMemoryHistory({
+		initialEntries: [ROUTES.HOME()],
+	});
 
-  return {
-    ...render(
-      <Router location={ROUTES.HOME()} navigator={history}>
-        <Header title={title} />
-      </Router>
-    ),
-    history,
-  };
+	return {
+		...render(
+			<Router location={ROUTES.HOME()} navigator={history}>
+				<Header title={title} />
+			</Router>
+		),
+		history,
+	};
 }
 
 describe("Header :", () => {
-  let server: Server;
+	let server: Server;
 
-  beforeEach(() => {
-    server = MirageServer();
-  });
+	beforeEach(() => {
+		server = MirageServer();
+	});
 
-  afterEach(() => {
-    server.shutdown();
-  });
+	afterEach(() => {
+		server.shutdown();
+	});
 
-  it("Component is alive", () => {
-    const { getByTestId } = setup("Example");
-    const element = getByTestId("navbar");
+	it("Component is alive", () => {
+		const { getByTestId } = setup("Example");
+		const element = getByTestId("navbar");
 
-    expect(element).toBeInTheDocument();
-  });
+		expect(element).toBeInTheDocument();
+	});
 
-  it("Verify that the elements are present on screen", () => {
-    const { getByTestId } = setup("Example");
-    const navBrand = getByTestId("navBrand");
-    const navImport = getByTestId("navImport");
-    const navDownload = getByTestId("navDownload");
-    const navDelete = getByTestId("navDelete");
+	it("Verify that the elements are present on screen", () => {
+		const { getByTestId } = setup("Example");
+		const navBrand = getByTestId("navBrand");
+		const navImport = getByTestId("navImport");
+		const navDownload = getByTestId("navDownload");
+		const navDelete = getByTestId("navDelete");
 
-    expect(navBrand).toBeInTheDocument();
-    expect(navImport).toBeInTheDocument();
-    expect(navDownload).toBeInTheDocument();
-    expect(navDelete).toBeInTheDocument();
-  });
+		expect(navBrand).toBeInTheDocument();
+		expect(navImport).toBeInTheDocument();
+		expect(navDownload).toBeInTheDocument();
+		expect(navDelete).toBeInTheDocument();
+	});
 
-  it("Should make the replace of the title", () => {
-    const { getByTestId } = setup("Example");
-    const navBrand = getByTestId("navBrand");
+	it("Should make the replace of the title", () => {
+		const { getByTestId } = setup("Example");
+		const navBrand = getByTestId("navBrand");
 
-    expect(navBrand).toBeInTheDocument();
-    expect(navBrand).toContainHTML("img");
-    expect(navBrand).toContainHTML("Example");
-  });
+		expect(navBrand).toBeInTheDocument();
+		expect(navBrand).toContainHTML("img");
+		expect(navBrand).toContainHTML("Example");
+	});
 });

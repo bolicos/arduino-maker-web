@@ -1,96 +1,116 @@
 {
-  "name": "arduino-maker-web",
-  "version": "1.0.0",
-  "author": "amimenezes, analuciabolico, thedessa",
-  "license": "MIT",
-  "repository": "https://github.com/analuciabolico/arduino-maker-web",
-  "private": true,
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --testPathPattern=src",
-    "test:e2e": "jest --watchAll --testPathPattern=e2e",
-    "eject": "react-app-rewired eject",
-    "prettier:check": "prettier --check .",
-    "prettier:lint": "prettier --write ."
-  },
-  "config-overrides-path": "config/config-overrides.js",
-  "dependencies": {
-    "bootstrap": "^5.1.3",
-    "clsx": "^1.1.1",
-    "customize-cra": "^1.0.0",
-    "react": "^17.0.2",
-    "react-bootstrap": "^2.0.2",
-    "react-dnd": "^14.0.4",
-    "react-dnd-html5-backend": "^14.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^6.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^2.1.2"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.15.0",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.4.0",
-    "@types/node": "^16.11.7",
-    "@types/react": "^17.0.35",
-    "@types/react-dom": "^17.0.11",
-    "@types/react-router-dom": "^5.3.2",
-    "chromedriver": "^97.0.0",
-    "miragejs": "^0.1.43",
-    "node-sass": "^6.0.1",
-    "prettier": "^2.4.1",
-    "react-app-rewired": "^2.1.8",
-    "selenium-webdriver": "^4.1.0",
-    "typescript": "^4.5.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/config/setupTests.ts"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "js",
-      "jsx",
-      "tsx"
-    ],
-    "moduleNameMapper": {
-      "@/(.*)": "<rootDir>/src/$1",
-      "#/(.*)": "<rootDir>/$1"
-    },
-    "verbose": true,
-    "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/coverage",
-    "coverageReporters": [
-      "json",
-      "html"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 10,
-        "functions": 10,
-        "lines": 10,
-        "statements": -100
-      }
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "arduino-maker-web",
+	"version": "1.0.0",
+	"author": "amimenezes, analuciabolico, thedessa",
+	"license": "MIT",
+	"repository": "https://github.com/analuciabolico/arduino-maker-web",
+	"private": true,
+	"scripts": {
+		"start": "react-app-rewired start",
+		"build": "react-app-rewired build",
+		"test": "react-app-rewired test --testPathPattern=src",
+		"test:e2e": "jest --watchAll --testPathPattern=e2e",
+		"eject": "react-app-rewired eject",
+		"prettier": "prettier --check .",
+		"prettier:fix": "prettier --write .",
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix"
+	},
+	"config-overrides-path": "config/config-overrides.js",
+	"dependencies": {
+		"bootstrap": "^5.1.3",
+		"clsx": "^1.1.1",
+		"customize-cra": "^1.0.0",
+		"react": "^17.0.2",
+		"react-bootstrap": "^2.0.2",
+		"react-dnd": "^14.0.4",
+		"react-dnd-html5-backend": "^14.0.2",
+		"react-dom": "^17.0.2",
+		"react-router-dom": "^6.0.2",
+		"react-scripts": "4.0.3",
+		"web-vitals": "^2.1.2"
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^5.15.0",
+		"@testing-library/react": "^12.1.2",
+		"@testing-library/user-event": "^13.5.0",
+		"@types/jest": "^27.4.0",
+		"@types/node": "^16.11.7",
+		"@types/react": "^17.0.35",
+		"@types/react-dom": "^17.0.11",
+		"@types/react-router-dom": "^5.3.2",
+		"chromedriver": "^97.0.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"husky": "^7.0.4",
+		"lint-staged": "^12.1.7",
+		"miragejs": "^0.1.43",
+		"node-sass": "^6.0.1",
+		"prettier": "^2.5.1",
+		"react-app-rewired": "^2.1.8",
+		"selenium-webdriver": "^4.1.0",
+		"typescript": "^4.5.2"
+	},
+	"lint-staged": {
+		"*.+(ts|tsx)": [
+			"eslint --fix"
+		],
+		"*.+(json|css|md)": [
+			"prettier --write"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"jest": {
+		"setupFilesAfterEnv": [
+			"<rootDir>/config/setupTests.ts"
+		],
+		"moduleFileExtensions": [
+			"ts",
+			"js",
+			"jsx",
+			"tsx"
+		],
+		"moduleNameMapper": {
+			"@/(.*)": "<rootDir>/src/$1",
+			"#/(.*)": "<rootDir>/$1"
+		},
+		"verbose": true,
+		"collectCoverage": true,
+		"coverageDirectory": "<rootDir>/coverage",
+		"coverageReporters": [
+			"json",
+			"html"
+		],
+		"coverageThreshold": {
+			"global": {
+				"branches": 10,
+				"functions": 10,
+				"lines": 10,
+				"statements": -100
+			}
+		}
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }

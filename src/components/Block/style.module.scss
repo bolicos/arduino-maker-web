@@ -1,17 +1,17 @@
 .block {
-  border: 1px dashed gray;
-  background-color: white;
-  padding: 0.5rem 1rem;
-  margin-right: 1.5rem;
-  margin-bottom: 1.5rem;
-  cursor: move;
-  float: left;
+	border: 1px dashed gray;
+	background-color: white;
+	padding: 0.5rem 1rem;
+	margin-right: 1.5rem;
+	margin-bottom: 1.5rem;
+	cursor: move;
+	float: left;
 }
 
 .opacity {
-  opacity: 1;
+	opacity: 1;
 }
 
 .opacityIsDraggin {
-  opacity: 0.4;
+	opacity: 0.4;
 }
