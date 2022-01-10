@@ -1,10 +1,7 @@
 import React from "react";
 
 const Footer: React.FC = () => {
-
-  return (
-    <div>FOOTER</div>
-  );
+  return <div data-testid="footer">FOOTER</div>;
 };
 
 export default Footer;

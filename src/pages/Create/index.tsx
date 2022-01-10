@@ -4,7 +4,7 @@ import { Card, Col, Container, Form, ProgressBar, Row, Button } from "react-boot
 
 import Header from "@/components/Header";
 
-import style from "./style.module.scss"
+import style from "./style.module.scss";
 
 const ArduinoCode = () => {
   return `
@@ -18,8 +18,8 @@ const ArduinoCode = () => {
       //indicando que o programa acabou
       return 0;
   }
-`
-}
+`;
+};
 
 interface State {
   code: string;
@@ -46,31 +46,30 @@ const Create: React.FC = () => {
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>, type: string) => {
     const newValue = event.currentTarget.value;
 
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      [type]: newValue
+      [type]: newValue,
     }));
   };
 
   const handleProgress = () => {
     const array = [state.input, state.output, state.inputPort, state.outputPort];
-    const values: Array<number> = array.map(key => key === "" ? 0 : 25);
+    const values: Array<number> = array.map((key) => (key === "" ? 0 : 25));
 
     return values.reduce((a, b) => a + b, 0);
-  }
+  };
 
   const handleGenerateCode = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      code: ArduinoCode()
+      code: ArduinoCode(),
     }));
-  }
+  };
 
   const progress: number = useMemo(handleProgress, [state.input, state.output, state.inputPort, state.outputPort]);
 
   return (
     <Container fluid>
-
       <Row>
         <Header title={"Projeto Create"} />
       </Row>
@@ -83,66 +82,69 @@ const Create: React.FC = () => {
 
       <br />
 
-      <Row
-        className={
-          clsx(
-            ["justify-content-md-center", style.row],
-          )
-        }
-      >
+      <Row className={clsx(["justify-content-md-center", style.row])}>
         <Col>
           <>
             <Form.Label>Selecione o INPUT</Form.Label>
-            <Form.Select
-              aria-label="select-input"
-              onChange={(event) => handleSelectChange(event, "input")}
-            >
-              <option key={"0"} value={""}>Selecione uma opção:</option>
-              {inputList?.map(item => <option key={item} value={item}>{item}</option>)}
+            <Form.Select aria-label="select-input" onChange={(event) => handleSelectChange(event, "input")}>
+              <option key={"0"} value={""}>
+                Selecione uma opção:
+              </option>
+              {inputList?.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
             </Form.Select>
           </>
 
-
-          {state.input &&
+          {state.input && (
             <>
               <br />
               <Form.Label>Selecione a porta do INPUT</Form.Label>
-              <Form.Select
-                aria-label="select-input"
-                onChange={(event) => handleSelectChange(event, "inputPort")}
-              >
-                <option key={"0"} value={""}>Selecione uma opção:</option>
-                {inputPortList?.map(item => <option key={item} value={item}>{item}</option>)}
+              <Form.Select aria-label="select-input" onChange={(event) => handleSelectChange(event, "inputPort")}>
+                <option key={"0"} value={""}>
+                  Selecione uma opção:
+                </option>
+                {inputPortList?.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </Form.Select>
             </>
-          }
+          )}
         </Col>
 
         <Col>
           <>
             <Form.Label>Selecione o OUTPUT</Form.Label>
-            <Form.Select
-              aria-label="select-output"
-              onChange={(event) => handleSelectChange(event, "output")}
-            >
+            <Form.Select aria-label="select-output" onChange={(event) => handleSelectChange(event, "output")}>
               <option value={""}>Selecione uma opção:</option>
-              {outputList?.map(item => <option key={item} value={item}>{item}</option>)}
+              {outputList?.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
             </Form.Select>
           </>
 
-          {state.output &&
+          {state.output && (
             <>
               <br />
               <Form.Label>Selecione a porta do OUTPUT</Form.Label>
-              <Form.Select
-                aria-label="select-input"
-                onChange={(event) => handleSelectChange(event, "outputPort")}
-              >
-                <option key={"0"} value={""}>Selecione uma opção:</option>
-                {outputPortList?.map(item => <option key={item} value={item}>{item}</option>)}
+              <Form.Select aria-label="select-input" onChange={(event) => handleSelectChange(event, "outputPort")}>
+                <option key={"0"} value={""}>
+                  Selecione uma opção:
+                </option>
+                {outputPortList?.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </Form.Select>
             </>
-          }
+          )}
         </Col>
       </Row>
 
@@ -154,32 +156,22 @@ const Create: React.FC = () => {
         </Col>
       </Row>
 
-      {progress === 100 &&
+      {progress === 100 && (
         <>
-          <Row
-            className={
-              clsx(
-                ["justify-content-md-center", "text-center", style.row],
-              )
-            }
-          >
+          <Row className={clsx(["justify-content-md-center", "text-center", style.row])}>
             <Col>
               <br />
-              <Button variant="success" onClick={handleGenerateCode}>Gerar Código</Button>
+              <Button variant="success" onClick={handleGenerateCode}>
+                Gerar Código
+              </Button>
             </Col>
           </Row>
         </>
-      }
+      )}
 
-      {progress === 100 && state.code &&
+      {progress === 100 && state.code && (
         <>
-          <Row
-            className={
-              clsx(
-                ["justify-content-md-center", style.row],
-              )
-            }
-          >
+          <Row className={clsx(["justify-content-md-center", style.row])}>
             <Col>
               <br />
               <Card>
@@ -197,8 +189,7 @@ const Create: React.FC = () => {
             </Col>
           </Row>
         </>
-      }
-
+      )}
     </Container>
   );
 };
