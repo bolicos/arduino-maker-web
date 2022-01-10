@@ -1,0 +1,30 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser", // allows ESLint to understand TypeScript syntax
+	"parserOptions": {
+		"files": ["*.ts", "*.tsx"], // Your TypeScript files extension
+		"project": ["./tsconfig.json"] // required for "type-aware linting"
+	},
+	"plugins": [
+		"@typescript-eslint" // allows to use the rules within the codebase
+	],
+	"ignorePatterns": [
+		"/lib/**/*", // Ignore built files.
+		"jest.config.ts" // Ignore files outside of src/
+	],
+	"extends": [
+		"plugin:import/recommended",
+		"airbnb-typescript/base" //use Airbnb config
+	],
+	"rules": {
+		"no-tabs": 0,
+		"import/extensions": 0,
+		"@typescript-eslint/comma-dangle": 0,
+		"@typescript-eslint/indent": [2, "tab"],
+		"@typescript-eslint/quotes": [2, "double", { "avoidEscape": true }],
+		"import/no-extraneous-dependencies": [
+			"error",
+			{ "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/*.config.ts"] }
+		]
+	}
+}

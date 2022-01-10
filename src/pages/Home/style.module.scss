@@ -1,31 +1,31 @@
 .row {
-  text-align: -webkit-center;
+	text-align: -webkit-center;
 }
 
 .card {
-  width: 25rem;
-  border-radius: 2rem !important;
+	width: 25rem;
+	border-radius: 2rem !important;
 }
 
 .centralImage {
-  height: 300;
-  width: 300;
-  border: unset !important;
+	height: 300;
+	width: 300;
+	border: unset !important;
 }
 
 @media screen and (max-width: 900px) {
-  .centralImage {
-    height: 100;
-    width: 100;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+	.centralImage {
+		height: 100;
+		width: 100;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
 
-  .card {
-    width: 18rem;
+	.card {
+		width: 18rem;
 
-    &:nth-last-child(1n) {
-      margin-bottom: 20px;
-    }
-  }
+		&:nth-last-child(1n) {
+			margin-bottom: 20px;
+		}
+	}
 }
