@@ -4,27 +4,27 @@ export enum AnalogSensorsEnum {
   PINO_A2 = "A2",
   PINO_A3 = "A3",
   PINO_12 = "12",
-  PINO_13 = "13"
+  PINO_13 = "13",
 }
 
 export enum Button {
-  PINO_07 = "7"
+  PINO_07 = "7",
 }
 
 export enum Servo {
-  PINO_03 = "3"  
+  PINO_03 = "3",
 }
 
 export enum Motor1 {
   PINO_02 = "2",
   PINO_04 = "4",
-  PINO_05 = "5"
+  PINO_05 = "5",
 }
 
 export enum RgbLed {
   PINO_11 = "11",
   PINO_09 = "9",
-  PINO_10 = "10"
+  PINO_10 = "10",
 }
 
 export interface ArduinoCodeType {
@@ -238,5 +238,5 @@ export const ArduinoCode = (param: ArduinoCodeType) => {
       analogWrite(greenPin, greenVal);
       analogWrite(bluePin, blueVal);
     }
-  `
-}
+  `;
+};

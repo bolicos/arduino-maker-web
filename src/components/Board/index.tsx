@@ -1,9 +1,9 @@
 import React from "react";
-import clsx from 'clsx';
+import clsx from "clsx";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "@/models/ItemTypes";
 
-import style from "./style.module.scss"
+import style from "./style.module.scss";
 
 export const Board: React.FC = () => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -11,21 +11,20 @@ export const Board: React.FC = () => {
     drop: () => ({ name: "Board" }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
-      canDrop: monitor.canDrop()
-    })
+      canDrop: monitor.canDrop(),
+    }),
   }));
 
   const isActive = canDrop && isOver;
 
   return (
     <div
-      className={
-        clsx(
-          [style.board, style.backgroundColor],
-          isActive && style.backgroundColorIsActive,
-          canDrop && style.backgroundColorCanDrop,
-        )
-      }
+      data-testid="board"
+      className={clsx(
+        [style.board, style.backgroundColor],
+        isActive && style.backgroundColorIsActive,
+        canDrop && style.backgroundColorCanDrop
+      )}
       ref={drop}
       role={"none"}
     >
