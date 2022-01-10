@@ -13,8 +13,8 @@
 		"eject": "react-app-rewired eject",
 		"prettier": "prettier --check .",
 		"prettier:fix": "prettier --write .",
-		"lint": "eslint .",
-		"lint:fix": "eslint --fix"
+		"lint": "eslint --ext ts,tsx .",
+		"lint:fix": "eslint --ext ts,tsx . --fix"
 	},
 	"config-overrides-path": "config/config-overrides.js",
 	"dependencies": {
@@ -39,6 +39,8 @@
 		"@types/react": "^17.0.35",
 		"@types/react-dom": "^17.0.11",
 		"@types/react-router-dom": "^5.3.2",
+		"@typescript-eslint/eslint-plugin": "^5.9.0",
+		"@typescript-eslint/parser": "^5.9.0",
 		"chromedriver": "^97.0.0",
 		"eslint-config-airbnb": "^19.0.4",
 		"eslint-config-prettier": "^8.3.0",
@@ -50,11 +52,11 @@
 		"prettier": "^2.5.1",
 		"react-app-rewired": "^2.1.8",
 		"selenium-webdriver": "^4.1.0",
-		"typescript": "^4.5.2"
+		"typescript": "^4.5.4"
 	},
 	"lint-staged": {
 		"*.+(ts|tsx)": [
-			"eslint --fix"
+			"eslint --ext ts,tsx --fix"
 		],
 		"*.+(json|css|md)": [
 			"prettier --write"

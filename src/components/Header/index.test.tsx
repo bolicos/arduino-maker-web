@@ -1,10 +1,11 @@
+import React from "react";
 import { render } from "@testing-library/react";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import { Server } from "miragejs";
 import { ROUTES } from "@/constants";
 import { MirageServer } from "@/services/mirage/server";
 import Header from ".";
-import { Server } from "miragejs";
 
 function setup(title: string) {
 	const history = createMemoryHistory({

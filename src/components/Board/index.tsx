@@ -26,7 +26,7 @@ export const Board: React.FC = () => {
 				canDrop && style.backgroundColorCanDrop
 			)}
 			ref={drop}
-			role={"none"}
+			role="none"
 		>
 			{isActive ? "Release to drop" : "Drag a block here"}
 		</div>

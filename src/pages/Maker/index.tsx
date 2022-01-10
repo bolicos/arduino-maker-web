@@ -31,16 +31,16 @@ const Maker: React.FC = () => {
 	return (
 		<Container fluid>
 			<Row>
-				<Header title={"Projeto Maker"} />
+				<Header title="Projeto Maker" />
 			</Row>
 			<Row className="justify-content-md-center">
 				<DndProvider backend={HTML5Backend}>
 					<Col xs={2}>
 						<Card className="text-center maker-fluid">
-							<Card.Header>Componentes</Card.Header>
+							<Card.Header>{"Componentes"}</Card.Header>
 							<Card.Body>
-								<Card.Title>Aqui tem alguns componentes</Card.Title>
-								<Card.Text>Cada componentes representa um Bloco do Arduino.</Card.Text>
+								<Card.Title>{"Aqui tem alguns componentes"}</Card.Title>
+								<Card.Text>{"Cada componentes representa um Bloco do Arduino."}</Card.Text>
 								<Container>
 									<Row>
 										<Col>
@@ -61,7 +61,7 @@ const Maker: React.FC = () => {
 
 					<Col xs={6}>
 						<Card className="text-center maker-fluid">
-							<Card.Header>Lousa</Card.Header>
+							<Card.Header>{"Lousa"}</Card.Header>
 							<Card.Body>
 								<Board />
 							</Card.Body>
@@ -74,7 +74,7 @@ const Maker: React.FC = () => {
 
 				<Col xs={4}>
 					<Card className="text-center maker-fluid">
-						<Card.Header>Codigo Arduino</Card.Header>
+						<Card.Header>{"Codigo Arduino"}</Card.Header>
 						<Card.Body>{state.code}</Card.Body>
 						<Card.Footer className="text-muted">
 							<br />

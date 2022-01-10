@@ -71,12 +71,12 @@ const Create: React.FC = () => {
 	return (
 		<Container fluid>
 			<Row>
-				<Header title={"Projeto Create"} />
+				<Header title="Projeto Create" />
 			</Row>
 
 			<Row className="justify-content-md-center text-center">
 				<Col>
-					<h1>Arduino Create</h1>
+					<h1>{"Arduino Create"}</h1>
 				</Col>
 			</Row>
 
@@ -85,10 +85,10 @@ const Create: React.FC = () => {
 			<Row className={clsx(["justify-content-md-center", style.row])}>
 				<Col>
 					<>
-						<Form.Label>Selecione o INPUT</Form.Label>
+						<Form.Label>{"Selecione o INPUT"}</Form.Label>
 						<Form.Select aria-label="select-input" onChange={event => handleSelectChange(event, "input")}>
-							<option key={"0"} value={""}>
-								Selecione uma opção:
+							<option key="0" value="">
+								{"Selecione uma opção:"}
 							</option>
 							{inputList?.map(item => (
 								<option key={item} value={item}>
@@ -101,10 +101,10 @@ const Create: React.FC = () => {
 					{state.input && (
 						<>
 							<br />
-							<Form.Label>Selecione a porta do INPUT</Form.Label>
+							<Form.Label>{"Selecione a porta do INPUT"}</Form.Label>
 							<Form.Select aria-label="select-input" onChange={event => handleSelectChange(event, "inputPort")}>
-								<option key={"0"} value={""}>
-									Selecione uma opção:
+								<option key="0" value="">
+									{"Selecione uma opção:"}
 								</option>
 								{inputPortList?.map(item => (
 									<option key={item} value={item}>
@@ -118,9 +118,9 @@ const Create: React.FC = () => {
 
 				<Col>
 					<>
-						<Form.Label>Selecione o OUTPUT</Form.Label>
+						<Form.Label>{"Selecione o OUTPUT"}</Form.Label>
 						<Form.Select aria-label="select-output" onChange={event => handleSelectChange(event, "output")}>
-							<option value={""}>Selecione uma opção:</option>
+							<option value="">{"Selecione uma opção:"}</option>
 							{outputList?.map(item => (
 								<option key={item} value={item}>
 									{item}
@@ -132,10 +132,10 @@ const Create: React.FC = () => {
 					{state.output && (
 						<>
 							<br />
-							<Form.Label>Selecione a porta do OUTPUT</Form.Label>
+							<Form.Label>{"Selecione a porta do OUTPUT"}</Form.Label>
 							<Form.Select aria-label="select-input" onChange={event => handleSelectChange(event, "outputPort")}>
-								<option key={"0"} value={""}>
-									Selecione uma opção:
+								<option key="0" value="">
+									{"Selecione uma opção:"}
 								</option>
 								{outputPortList?.map(item => (
 									<option key={item} value={item}>
@@ -151,7 +151,7 @@ const Create: React.FC = () => {
 			<Row>
 				<Col>
 					<br />
-					<p>Progresso</p>
+					<p>{"Progresso"}</p>
 					<ProgressBar animated now={progress} />
 				</Col>
 			</Row>
@@ -161,7 +161,7 @@ const Create: React.FC = () => {
 					<Col>
 						<br />
 						<Button variant="success" onClick={handleGenerateCode}>
-							Gerar Código
+							{"Gerar Código"}
 						</Button>
 					</Col>
 				</Row>
@@ -172,12 +172,13 @@ const Create: React.FC = () => {
 					<Col>
 						<br />
 						<Card>
-							<Card.Header>Code</Card.Header>
+							<Card.Header>{"Code"}</Card.Header>
 							<Card.Body>
 								<blockquote className="blockquote mb-0">
 									<pre>{state.code}</pre>
 									<footer className="blockquote-footer">
-										Codigo em C gerador por <cite title="Source Title">Arduino Create IFRS</cite>
+										{"Codigo em C gerador por "}
+										<cite title="Source Title">{"Arduino Create IFRS"}</cite>
 									</footer>
 								</blockquote>
 							</Card.Body>

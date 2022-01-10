@@ -29,14 +29,17 @@ const Header: React.FC<Props> = ({ title }) => {
 					{title}
 				</Navbar.Brand>
 				<Button data-testid="navImport" variant="outline-secondary" className="spacing">
-					Importar
-				</Button>{" "}
+					{"Importar"}
+				</Button>
+				{'" "'}
 				<Button data-testid="navDownload" variant="outline-success" className="spacing">
-					Baixar
-				</Button>{" "}
+					{"Baixar"}
+				</Button>
+				{'" "'}
 				<Button data-testid="navDelete" variant="outline-danger" className="spacing">
-					Excluir Tudo
-				</Button>{" "}
+					{"Excluir Tudo"}
+				</Button>
+				{'" "'}
 			</Container>
 		</Navbar>
 	);

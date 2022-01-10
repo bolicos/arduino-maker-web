@@ -1,4 +1,12 @@
 {
+	"overrides": [
+		{
+			"files": ["./config/setupTests.ts", "**/*.test.ts", "**/*.test.tsx"],
+			"env": {
+				"jest": true
+			}
+		}
+	],
 	"env": {
 		"browser": true,
 		"es6": true
@@ -39,7 +47,7 @@
 		"react/function-component-definition": [
 			1,
 			{
-				"namedComponents": "function-declaration"
+				"namedComponents": "arrow-function"
 			}
 		],
 		"react/jsx-curly-brace-presence": [
@@ -54,9 +62,9 @@
 		"react/jsx-boolean-value": 0,
 		"prefer-template": 1,
 		"prefer-const": 1,
-		"no-unused-vars": 1,
-		"import/prefer-default-export": 1,
-		"import/no-extraneous-dependencies": 1,
-		"import/no-unresolved": 1
+		"no-unused-vars": 2,
+		"import/prefer-default-export": 0,
+		"import/no-extraneous-dependencies": 0,
+		"import/no-unresolved": 0
 	}
 }

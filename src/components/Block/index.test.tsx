@@ -1,7 +1,8 @@
-import { BlockTypesEnum } from "@/models/blocks";
+import React from "react";
 import { render } from "@testing-library/react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { BlockTypesEnum } from "@/models/blocks";
 import Block from ".";
 
 function setup(type: BlockTypesEnum, fn: jest.Mock<any, any>) {

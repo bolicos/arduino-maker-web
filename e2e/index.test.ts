@@ -1,20 +1,20 @@
-const { Builder, By, Key, until } = require("selenium-webdriver");
+const { Builder, By } = require("selenium-webdriver");
 const assert = require("assert");
 
 const URL_BASE = "https://arduino-web.netlify.app/";
 
-describe("tela", function () {
+describe("tela", () => {
 	let driver;
 
-	beforeAll(async function () {
+	beforeAll(async () => {
 		driver = await new Builder().forBrowser("chrome").build();
 	});
 
-	afterAll(async function () {
+	afterAll(async () => {
 		await driver.quit();
 	});
 
-	it("tela", async function () {
+	it("tela", async () => {
 		await driver.get(URL_BASE);
 		await driver.manage().window().setRect({ width: 715, height: 733 });
 		await driver.findElement(By.css(".col-md-4:nth-child(1) .btn")).click();
