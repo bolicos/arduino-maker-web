@@ -1,6 +1,6 @@
 import { Server } from "miragejs";
 import { APP } from "@/constants";
-import { RoutesMirage } from "@/services/mirage/routes";
+import { RoutesMirage } from "#/src/services/mirage/routes.config";
 
 export const MirageServer = () => {
 	const server = new Server({

@@ -1,4 +1,6 @@
 .vscode
+.eslintrc
+
 build
 coverage
 node_modules

@@ -1,71 +1,30 @@
 {
-	"overrides": [
-		{
-			"files": ["./config/setupTests.ts", "**/*.test.ts", "**/*.test.tsx"],
-			"env": {
-				"jest": true
-			}
-		}
-	],
-	"env": {
-		"browser": true,
-		"es6": true
-	},
-	"parser": "babel-eslint",
-	"extends": ["airbnb", "prettier"],
-	"globals": {
-		"Atomics": "readonly",
-		"SharedArrayBuffer": "readonly"
-	},
+	"root": true,
+	"parser": "@typescript-eslint/parser", // allows ESLint to understand TypeScript syntax
 	"parserOptions": {
-		"ecmaFeatures": {
-			"jsx": true,
-			"modules": true
-		},
-		"ecmaVersion": 2018,
-		"sourceType": "module"
+		"files": ["*.ts", "*.tsx"], // Your TypeScript files extension
+		"project": ["./tsconfig.json"] // required for "type-aware linting"
 	},
-	"plugins": ["react", "prettier"],
+	"plugins": [
+		"@typescript-eslint" // allows to use the rules within the codebase
+	],
+	"ignorePatterns": [
+		"/lib/**/*", // Ignore built files.
+		"jest.config.ts" // Ignore files outside of src/
+	],
+	"extends": [
+		"plugin:import/recommended",
+		"airbnb-typescript/base" //use Airbnb config
+	],
 	"rules": {
-		"prettier/prettier": "error",
-		"import/extensions": "off",
-		"react/jsx-filename-extension": [
-			1,
-			{
-				"extensions": [".ts", ".tsx"]
-			}
-		],
-		"react/forbid-prop-types": [
-			0,
-			{
-				"forbid": ["any"]
-			}
-		],
-		"arrow-body-style": ["off", "always"],
-		"react/prop-types": 0,
-		"react/destructuring-assignment": 0,
-		"react/function-component-definition": [
-			1,
-			{
-				"namedComponents": "arrow-function",
-				"unnamedComponents": "arrow-function"
-			}
-		],
-		"react/jsx-curly-brace-presence": [
-			1,
-			{
-				"props": "never",
-				"children": "always"
-			}
-		],
-		"react/sort-comp": 0,
-		"react/no-did-update-set-state": 0,
-		"react/jsx-boolean-value": 0,
-		"prefer-template": 1,
-		"prefer-const": 1,
-		"no-unused-vars": 2,
-		"import/prefer-default-export": 0,
-		"import/no-extraneous-dependencies": 0,
-		"import/no-unresolved": 0
+		"no-tabs": 0,
+		"import/extensions": 0,
+		"@typescript-eslint/comma-dangle": 0,
+		"@typescript-eslint/indent": [2, "tab"],
+		"@typescript-eslint/quotes": [2, "double", { "avoidEscape": true }],
+		"import/no-extraneous-dependencies": [
+			"error",
+			{ "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/*.config.ts"] }
+		]
 	}
 }
