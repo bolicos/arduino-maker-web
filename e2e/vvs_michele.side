@@ -1,0 +1,258 @@
+{
+  "id": "d8a05c78-7777-42ba-973f-32105fc73040",
+  "version": "2.0",
+  "name": "vvs_michele",
+  "url": "https://arduino-web.netlify.app",
+  "tests": [{
+    "id": "2fb1f78f-1bc3-411b-a8e5-a359bc66a599",
+    "name": "tela",
+    "commands": [{
+      "id": "25ff3269-ef17-4abc-87cf-4ad86b45c198",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fefbc4f1-03c3-40b7-9aa9-38c82b3fd7ff",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "715x733",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b1ca8004-66b3-4b7c-a264-d551b2fd2af4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-md-4:nth-child(1) .btn",
+      "targets": [
+        ["css=.col-md-4:nth-child(1) .btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Projeto Create')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "685fbfd5-291b-4607-b3be-fc10c80a1e85",
+      "comment": "",
+      "command": "select",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(2)",
+      "targets": [],
+      "value": "label=Servo"
+    }, {
+      "id": "b3b85922-bdf4-447e-b2ca-2ec35682d279",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(2)",
+      "targets": [
+        ["css=.col:nth-child(1) > .form-select:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": "-12,-216.6875"
+    }, {
+      "id": "7407a320-8dcc-4486-9079-0886ffe08a7c",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(2)",
+      "targets": [
+        ["css=.col:nth-child(1) > .form-select:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": "-12,-216.6875"
+    }, {
+      "id": "e2f6b6b0-51d5-46e7-8991-05cfb1ebd010",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(2)",
+      "targets": [
+        ["css=.col:nth-child(1) > .form-select:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": "-12,-216.6875"
+    }, {
+      "id": "c40fe85f-4c04-4a76-8861-33b460ae0bf4",
+      "comment": "",
+      "command": "select",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(2)",
+      "targets": [],
+      "value": "label=Led"
+    }, {
+      "id": "7e0fcd19-0540-417a-89ef-7253d6bda848",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(2)",
+      "targets": [
+        ["css=.col:nth-child(2) > .form-select:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/select", "xpath:position"]
+      ],
+      "value": "-353.5,-216.6875"
+    }, {
+      "id": "91d21b4f-2505-47e1-b1da-514d1839cc46",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(2)",
+      "targets": [
+        ["css=.col:nth-child(2) > .form-select:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/select", "xpath:position"]
+      ],
+      "value": "-353.5,-216.6875"
+    }, {
+      "id": "1826f13f-b02a-4129-a143-72c46d2a3db1",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(2)",
+      "targets": [
+        ["css=.col:nth-child(2) > .form-select:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/select", "xpath:position"]
+      ],
+      "value": "-353.5,-216.6875"
+    }, {
+      "id": "71803e21-eb03-4d88-9edc-837601ac59a7",
+      "comment": "",
+      "command": "select",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(5)",
+      "targets": [],
+      "value": "label=A1"
+    }, {
+      "id": "c3fece14-7ef2-4ce5-912e-0e376eb39cff",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(5)",
+      "targets": [
+        ["css=.col:nth-child(1) > .form-select:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/select[2]", "xpath:idRelative"],
+        ["xpath=//select[2]", "xpath:position"]
+      ],
+      "value": "-12,-310.6875"
+    }, {
+      "id": "a7eb7001-0cab-4f69-b4e8-d086f9b37dd5",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(5)",
+      "targets": [
+        ["css=.col:nth-child(1) > .form-select:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/select[2]", "xpath:idRelative"],
+        ["xpath=//select[2]", "xpath:position"]
+      ],
+      "value": "-12,-310.6875"
+    }, {
+      "id": "f6b74608-98c2-4bba-a03f-3e2c10e31877",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=.col:nth-child(1) > .form-select:nth-child(5)",
+      "targets": [
+        ["css=.col:nth-child(1) > .form-select:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/select[2]", "xpath:idRelative"],
+        ["xpath=//select[2]", "xpath:position"]
+      ],
+      "value": "-12,-310.6875"
+    }, {
+      "id": "9134754c-619f-4564-9072-a865669dd17e",
+      "comment": "",
+      "command": "select",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(5)",
+      "targets": [],
+      "value": "label=D1"
+    }, {
+      "id": "96f7d04e-3770-4ebe-ba49-11a9b0df6fdc",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(5)",
+      "targets": [
+        ["css=.col:nth-child(2) > .form-select:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div[2]/select[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/select[2]", "xpath:position"]
+      ],
+      "value": "-353.5,-310.6875"
+    }, {
+      "id": "1c7c018b-862a-4653-9435-0264a921dae6",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(5)",
+      "targets": [
+        ["css=.col:nth-child(2) > .form-select:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div[2]/select[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/select[2]", "xpath:position"]
+      ],
+      "value": "-353.5,-310.6875"
+    }, {
+      "id": "8391bbaf-6f42-470b-9f88-ed1c485f8ab0",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=.col:nth-child(2) > .form-select:nth-child(5)",
+      "targets": [
+        ["css=.col:nth-child(2) > .form-select:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div[2]/select[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/select[2]", "xpath:position"]
+      ],
+      "value": "-353.5,-310.6875"
+    }, {
+      "id": "af496381-be9a-46f6-91b9-629150a16f5f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[5]/div/button", "xpath:idRelative"],
+        ["xpath=//div[5]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Gerar Código')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8d827b05-1ecf-4d4c-8ab5-7c7122097cc4",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[5]/div/button", "xpath:idRelative"],
+        ["xpath=//div[5]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Gerar Código')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8bad2a42-b440-46f8-871b-e3d2851f138c",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[5]/div/button", "xpath:idRelative"],
+        ["xpath=//div[5]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Gerar Código')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c88eaa79-3414-49fb-8142-1073ec3a40e1",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.card-body",
+      "targets": [
+        ["css=.card-body", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[6]/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "fef37ed9-a753-4f4e-97f7-54a5022ed218",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["2fb1f78f-1bc3-411b-a8e5-a359bc66a599"]
+  }],
+  "urls": ["https://arduino-web.netlify.app/"],
+  "plugins": []
+}
