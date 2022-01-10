@@ -20,6 +20,7 @@
 	"plugins": ["react", "prettier"],
 	"rules": {
 		"prettier/prettier": "error",
+		"import/extensions": "off",
 		"react/jsx-filename-extension": [
 			1,
 			{
@@ -32,8 +33,22 @@
 				"forbid": ["any"]
 			}
 		],
+		"arrow-body-style": ["off", "always"],
 		"react/prop-types": 0,
 		"react/destructuring-assignment": 0,
+		"react/function-component-definition": [
+			1,
+			{
+				"namedComponents": "function-declaration"
+			}
+		],
+		"react/jsx-curly-brace-presence": [
+			1,
+			{
+				"props": "never",
+				"children": "always"
+			}
+		],
 		"react/sort-comp": 0,
 		"react/no-did-update-set-state": 0,
 		"react/jsx-boolean-value": 0,

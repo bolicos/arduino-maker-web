@@ -157,38 +157,34 @@ const Create: React.FC = () => {
 			</Row>
 
 			{progress === 100 && (
-				<>
-					<Row className={clsx(["justify-content-md-center", "text-center", style.row])}>
-						<Col>
-							<br />
-							<Button variant="success" onClick={handleGenerateCode}>
-								Gerar Código
-							</Button>
-						</Col>
-					</Row>
-				</>
+				<Row className={clsx(["justify-content-md-center", "text-center", style.row])}>
+					<Col>
+						<br />
+						<Button variant="success" onClick={handleGenerateCode}>
+							Gerar Código
+						</Button>
+					</Col>
+				</Row>
 			)}
 
 			{progress === 100 && state.code && (
-				<>
-					<Row className={clsx(["justify-content-md-center", style.row])}>
-						<Col>
-							<br />
-							<Card>
-								<Card.Header>Code</Card.Header>
-								<Card.Body>
-									<blockquote className="blockquote mb-0">
-										<pre>{state.code}</pre>
-										<footer className="blockquote-footer">
-											Codigo em C gerador por <cite title="Source Title">Arduino Create IFRS</cite>
-										</footer>
-									</blockquote>
-								</Card.Body>
-							</Card>
-							<br />
-						</Col>
-					</Row>
-				</>
+				<Row className={clsx(["justify-content-md-center", style.row])}>
+					<Col>
+						<br />
+						<Card>
+							<Card.Header>Code</Card.Header>
+							<Card.Body>
+								<blockquote className="blockquote mb-0">
+									<pre>{state.code}</pre>
+									<footer className="blockquote-footer">
+										Codigo em C gerador por <cite title="Source Title">Arduino Create IFRS</cite>
+									</footer>
+								</blockquote>
+							</Card.Body>
+						</Card>
+						<br />
+					</Col>
+				</Row>
 			)}
 		</Container>
 	);
