@@ -74,119 +74,132 @@ const Create: React.FC = () => {
 				<Header title="Projeto Create" />
 			</Row>
 
-			<Row className="justify-content-md-center text-center">
-				<Col>
-					<h1>{"Arduino Create"}</h1>
-				</Col>
-			</Row>
+			<Row className="col-md-10 mx-auto">
 
-			<br />
-
-			<Row className={clsx(["justify-content-md-center", style.row])}>
-				<Col>
-					<>
-						<Form.Label>{"Selecione o INPUT"}</Form.Label>
-						<Form.Select aria-label="select-input" onChange={event => handleSelectChange(event, "input")}>
-							<option key="0" value="">
-								{"Selecione uma opção:"}
-							</option>
-							{inputList?.map(item => (
-								<option key={item} value={item}>
-									{item}
-								</option>
-							))}
-						</Form.Select>
-					</>
-
-					{state.input && (
-						<>
-							<br />
-							<Form.Label>{"Selecione a porta do INPUT"}</Form.Label>
-							<Form.Select aria-label="select-input" onChange={event => handleSelectChange(event, "inputPort")}>
-								<option key="0" value="">
-									{"Selecione uma opção:"}
-								</option>
-								{inputPortList?.map(item => (
-									<option key={item} value={item}>
-										{item}
-									</option>
-								))}
-							</Form.Select>
-						</>
-					)}
-				</Col>
-
-				<Col>
-					<>
-						<Form.Label>{"Selecione o OUTPUT"}</Form.Label>
-						<Form.Select aria-label="select-output" onChange={event => handleSelectChange(event, "output")}>
-							<option value="">{"Selecione uma opção:"}</option>
-							{outputList?.map(item => (
-								<option key={item} value={item}>
-									{item}
-								</option>
-							))}
-						</Form.Select>
-					</>
-
-					{state.output && (
-						<>
-							<br />
-							<Form.Label>{"Selecione a porta do OUTPUT"}</Form.Label>
-							<Form.Select aria-label="select-input" onChange={event => handleSelectChange(event, "outputPort")}>
-								<option key="0" value="">
-									{"Selecione uma opção:"}
-								</option>
-								{outputPortList?.map(item => (
-									<option key={item} value={item}>
-										{item}
-									</option>
-								))}
-							</Form.Select>
-						</>
-					)}
-				</Col>
-			</Row>
-
-			<Row>
-				<Col>
-					<br />
-					<p>{"Progresso"}</p>
-					<ProgressBar animated now={progress} />
-				</Col>
-			</Row>
-
-			{progress === 100 && (
-				<Row className={clsx(["justify-content-md-center", "text-center", style.row])}>
+				<Row className="justify-content-md-center text-center">
 					<Col>
-						<br />
-						<Button variant="success" onClick={handleGenerateCode}>
-							{"Gerar Código"}
-						</Button>
+						<h1>{"Arduino Create"}</h1>
 					</Col>
 				</Row>
-			)}
 
-			{progress === 100 && state.code && (
+				<br />
+
 				<Row className={clsx(["justify-content-md-center", style.row])}>
 					<Col>
-						<br />
-						<Card>
-							<Card.Header>{"Code"}</Card.Header>
-							<Card.Body>
-								<blockquote className="blockquote mb-0">
-									<pre>{state.code}</pre>
-									<footer className="blockquote-footer">
-										{"Codigo em C gerador por "}
-										<cite title="Source Title">{"Arduino Create IFRS"}</cite>
-									</footer>
-								</blockquote>
-							</Card.Body>
-						</Card>
-						<br />
+						<>
+							<Form.Label>{"Selecione o INPUT"}</Form.Label>
+							<Form.Select
+								aria-label="select-input"
+								defaultValue={"0"}
+								onChange={event => handleSelectChange(event, "input")}
+							>
+								<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
+								{inputList?.map(item => (
+									<option key={item} value={item}>
+										{item}
+									</option>
+								))}
+							</Form.Select>
+						</>
+
+						{state.input && (
+							<>
+								<br />
+								<Form.Label>{"Selecione a porta do INPUT"}</Form.Label>
+								<Form.Select
+									aria-label="select-input"
+									defaultValue={"0"}
+									onChange={event => handleSelectChange(event, "inputPort")}
+								>
+									<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
+									{inputPortList?.map(item => (
+										<option key={item} value={item}>
+											{item}
+										</option>
+									))}
+								</Form.Select>
+							</>
+						)}
+					</Col>
+
+					<Col>
+						<>
+							<Form.Label>{"Selecione o OUTPUT"}</Form.Label>
+							<Form.Select
+								aria-label="select-output"
+								defaultValue={"0"}
+								onChange={event => handleSelectChange(event, "output")}
+							>
+								<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
+								{outputList?.map(item => (
+									<option key={item} value={item}>
+										{item}
+									</option>
+								))}
+							</Form.Select>
+						</>
+
+						{state.output && (
+							<>
+								<br />
+								<Form.Label>{"Selecione a porta do OUTPUT"}</Form.Label>
+								<Form.Select
+									aria-label="select-input"
+									defaultValue={"0"}
+									onChange={event => handleSelectChange(event, "outputPort")}
+								>
+									<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
+									{outputPortList?.map(item => (
+										<option key={item} value={item}>
+											{item}
+										</option>
+									))}
+								</Form.Select>
+							</>
+						)}
 					</Col>
 				</Row>
-			)}
+
+				<Row>
+					<Col>
+						<br />
+						<p>{"Progresso"}</p>
+						<ProgressBar animated now={progress} variant={progress === 100 ? "success" : "info"} />
+					</Col>
+				</Row>
+
+				{progress === 100 && (
+					<Row className={clsx(["justify-content-md-center", "text-center", style.row])}>
+						<Col>
+							<br />
+							<Button variant="success" onClick={handleGenerateCode}>
+								{"Gerar Código"}
+							</Button>
+						</Col>
+					</Row>
+				)}
+
+				{progress === 100 && state.code && (
+					<Row className={clsx(["justify-content-md-center", style.row])}>
+						<Col>
+							<br />
+							<Card>
+								<Card.Header>{"Code"}</Card.Header>
+								<Card.Body>
+									<blockquote className="blockquote mb-0">
+										<pre>{state.code}</pre>
+										<footer className="blockquote-footer">
+											{"Codigo em C gerador por "}
+											<cite title="Source Title">{"Arduino Create IFRS"}</cite>
+										</footer>
+									</blockquote>
+								</Card.Body>
+							</Card>
+							<br />
+						</Col>
+					</Row>
+				)}
+			</Row>
 		</Container>
 	);
 };
