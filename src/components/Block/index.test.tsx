@@ -9,7 +9,7 @@ function setup(type: BlockTypesEnum, fn: jest.Mock<any, any>) {
 	return render(
 		<DndProvider backend={HTML5Backend}>
 			<Block block={type} setState={fn} />
-		</DndProvider>
+		</DndProvider>,
 	);
 }
 

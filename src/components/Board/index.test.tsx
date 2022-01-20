@@ -8,7 +8,7 @@ function setup() {
 	return render(
 		<DndProvider backend={HTML5Backend}>
 			<Board />
-		</DndProvider>
+		</DndProvider>,
 	);
 }
 

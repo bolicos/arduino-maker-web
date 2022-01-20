@@ -16,7 +16,7 @@ function setup(title: string) {
 		...render(
 			<Router location={ROUTES.HOME()} navigator={history}>
 				<Header title={title} />
-			</Router>
+			</Router>,
 		),
 		history,
 	};
