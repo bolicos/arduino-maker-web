@@ -23,7 +23,7 @@ export const Board: React.FC = () => {
 			className={clsx(
 				[style.board, style.backgroundColor],
 				isActive && style.backgroundColorIsActive,
-				canDrop && style.backgroundColorCanDrop
+				canDrop && style.backgroundColorCanDrop,
 			)}
 			ref={drop}
 			role="none"
