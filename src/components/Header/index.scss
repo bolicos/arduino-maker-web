@@ -1,15 +1,14 @@
-.spacing {
-	margin-right: 10px;
+.noBottomLink {
+	text-decoration: none;
+  > h3 {
+    color: white;
+  }
 }
 
-.flex-container {
-	display: flex;
+.title {
+  color: white;
 }
 
-.flex-child {
-	flex: 1;
-}
-
-.flex-child:first-child {
-	margin-right: 20px;
+.round {
+  border-radius: 5px;
 }

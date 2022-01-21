@@ -40,6 +40,7 @@ const Create: React.FC = () => {
 	});
 
 	const quantitySelect = ["1", "2", "3"];
+	const title = "Smart Motors Create";
 
 	const fetchBlocks = useCallback(async () => {
 		setLoading(true);
@@ -79,6 +80,18 @@ const Create: React.FC = () => {
 		return values.reduce((a, b) => a + b, 0);
 	};
 
+	const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>, type: string) => {
+		const newValue = event.currentTarget.value;
+
+		setState(prev => ({
+			...prev,
+			[type]: newValue,
+		}));
+	};
+
+	const progress: number = useMemo(handleProgress, [state.sensor, state.actuator, state.quantitySensor, state.quantityActuator]);
+	const actuatorSelect: number | undefined = useMemo(handleSelectActuator, [state.actuator]);
+
 	const handleGenerateCode = () => {
 		const sensor = extract("SENSOR", state.sensor);
 		const actuator = extract("ACTUATOR", state.actuator);
@@ -99,39 +112,76 @@ const Create: React.FC = () => {
 		}));
 	};
 
-	const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>, type: string) => {
-		const newValue = event.currentTarget.value;
-
-		setState(prev => ({
-			...prev,
-			[type]: newValue,
-		}));
-
-		if (handleSelectActuator() === 3) {
-			setState((prev) => ({ ...prev, quantityActuator: "3" }));
-		}
+	const progressClass = progress === 100 ? "success" : "info";
+	const optionHTML = (item: Class) => {
+		return (<option key={item.id} value={item.id}>
+			{item.name}
+		</option>);
 	};
-
-	const progress: number = useMemo(handleProgress, [state.sensor, state.actuator, state.quantitySensor, state.quantityActuator]);
-	const actuatorSelect: number | undefined = useMemo(handleSelectActuator, [state.actuator]);
+	const optionSimpleHTML = (item: string) => {
+		return (<option key={item} value={item}>
+			{item}
+		</option>);
+	};
+	const actuatorSelectHTML = actuatorSelect === 3 ? (
+		<>
+			<br />
+			<Form.Label>{"Select the quantity of ACTUATORS"}</Form.Label>
+			<Form.Select
+				aria-label="select-input"
+				value={state.actuator}
+				disabled
+				onChange={event => handleSelectChange(event, "quantityActuator")}
+			>
+				<option key="0" value="3">{"3"}</option>
+			</Form.Select>
+		</>)
+		: (
+			<>
+				<br />
+				<Form.Label>{"Select the quantity of ACTUATORS"}</Form.Label>
+				<Form.Select
+					aria-label="select-input"
+					value={state.quantityActuator}
+					onChange={event => handleSelectChange(event, "quantityActuator")}
+				>
+					<option key="0" value="" disabled>{"Select one option:"}</option>
+					{quantitySelect?.map(item => optionSimpleHTML(item))}
+				</Form.Select>
+			</>
+		);
 
 	useEffect(() => {
 		fetchBlocks();
 	}, [fetchBlocks]);
+
+	useEffect(() => {
+		if (handleSelectActuator() === 3) {
+			setState((prev) => ({ ...prev, quantityActuator: "3" }));
+		} else {
+			setState((prev) => ({ ...prev, quantityActuator: "" }));
+		}
+	}, [state.actuator]);
+
+	useEffect(() => {
+		setState((prev) => ({ ...prev, quantitySensor: "" }));
+	}, [state.sensor]);
+
 
 	return (
 
 		loading ? <div>LOADING </div> :
 			< Container fluid >
 				<Row>
-					<Header title="Projeto Create" />
+					<Header title={title} />
 				</Row >
 
 				<Row className="col-md-10 mx-auto">
 
 					<Row className="justify-content-md-center text-center">
 						<Col>
-							<h1>{"Arduino Create"}</h1>
+							<div><br /></div>
+							<h1>{title}</h1>
 						</Col>
 					</Row>
 
@@ -140,36 +190,28 @@ const Create: React.FC = () => {
 					<Row className={clsx(["justify-content-md-center", style.row])}>
 						<Col>
 							<>
-								<Form.Label>{"Selecione o SENSOR"}</Form.Label>
+								<Form.Label>{"Select the SENSOR"}</Form.Label>
 								<Form.Select
 									aria-label="select-input"
-									defaultValue={"0"}
+									defaultValue={""}
 									onChange={event => handleSelectChange(event, "sensor")}
 								>
-									<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
-									{state.sensors?.map(item => (
-										<option key={item.id} value={item.id}>
-											{item.name}
-										</option>
-									))}
+									<option key="0" value="" disabled>{"Select one option:"}</option>
+									{state.sensors?.map(item => optionHTML(item))}
 								</Form.Select>
 							</>
 
 							{state.sensor && (
 								<>
 									<br />
-									<Form.Label>{"Selecione a quantidade de SENSORES"}</Form.Label>
+									<Form.Label>{"Select the quantity of SENSORS"}</Form.Label>
 									<Form.Select
 										aria-label="select-input"
-										defaultValue={"0"}
+										value={state.quantitySensor}
 										onChange={event => handleSelectChange(event, "quantitySensor")}
 									>
-										<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
-										{quantitySelect?.map(item => (
-											<option key={item} value={item}>
-												{item}
-											</option>
-										))}
+										<option key="0" value="" disabled>{"Select one option:"}</option>
+										{quantitySelect?.map(item => optionSimpleHTML(item))}
 									</Form.Select>
 								</>
 							)}
@@ -177,56 +219,18 @@ const Create: React.FC = () => {
 
 						<Col>
 							<>
-								<Form.Label>{"Selecione o ATUADOR"}</Form.Label>
+								<Form.Label>{"Select the ACTUATOR"}</Form.Label>
 								<Form.Select
 									aria-label="select-output"
 									defaultValue={"0"}
 									onChange={event => handleSelectChange(event, "actuator")}
 								>
-									<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
-									{state.actuators?.map(item => (
-										<option key={item.id} value={item.id}>
-											{item.name}
-										</option>
-									))}
+									<option key="0" value="0" disabled>{"Select one option:"}</option>
+									{state.actuators?.map(item => optionHTML(item))}
 								</Form.Select>
 							</>
 
-							{state.actuator && (
-
-								actuatorSelect === 3 ? (
-									<>
-										<br />
-										<Form.Label>{"Selecione a quantidade de ATUADORES"}</Form.Label>
-										<Form.Select
-											aria-label="select-input"
-											defaultValue={"3"}
-											disabled
-											onChange={event => handleSelectChange(event, "quantityActuator")}
-										>
-											<option key="0" value="3">{"3"}</option>
-										</Form.Select>
-									</>)
-									: (
-										<>
-											<br />
-											<Form.Label>{"Selecione a quantidade de ATUADORES"}</Form.Label>
-											<Form.Select
-												aria-label="select-input"
-												defaultValue={"0"}
-												onChange={event => handleSelectChange(event, "quantityActuator")}
-											>
-												<option key="0" value="0" disabled>{"Selecione uma opção:"}</option>
-												{quantitySelect?.map(item => (
-													<option key={item} value={item}>
-														{item}
-													</option>
-												))}
-											</Form.Select>
-										</>
-									)
-							)}
-
+							{state.actuator && (actuatorSelectHTML)}
 
 						</Col>
 					</Row>
@@ -234,8 +238,8 @@ const Create: React.FC = () => {
 					<Row>
 						<Col>
 							<br />
-							<p>{"Progresso"}</p>
-							<ProgressBar animated now={progress} variant={progress === 100 ? "success" : "info"} />
+							<p>{"Progress"}</p>
+							<ProgressBar animated now={progress} variant={progressClass} />
 						</Col>
 					</Row>
 
@@ -244,7 +248,7 @@ const Create: React.FC = () => {
 							<Col>
 								<br />
 								<Button variant="success" onClick={handleGenerateCode}>
-									{"Gerar Código"}
+									{"Generate Code"}
 								</Button>
 							</Col>
 						</Row>
@@ -255,13 +259,16 @@ const Create: React.FC = () => {
 							<Col>
 								<br />
 								<Card>
-									<Card.Header>{"Code"}</Card.Header>
+									<Card.Header className="d-flex justify-content-between">
+										{"Code"}
+										<Button variant={"dark"} onClick={() => {navigator.clipboard.writeText(state.code);}}>COPY</Button>
+									</Card.Header>
 									<Card.Body>
 										<blockquote className="blockquote mb-0">
 											<pre>{state.code}</pre>
 											<footer className="blockquote-footer">
-												{"Codigo em C gerador por "}
-												<cite title="Source Title">{"Arduino Create IFRS"}</cite>
+												{"C code generated by "}
+												<cite title="Source Title">{`${title} IFRS`}</cite>
 											</footer>
 										</blockquote>
 									</Card.Body>
