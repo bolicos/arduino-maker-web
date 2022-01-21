@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({ title }) => {
 	return (
 		<Navbar data-testid="navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
 			<Container>
-				<h1 className="title">{title}</h1>
+				<h1 className="title" data-testid="title">{title}</h1>
 
 				{screenWidth > 540
 					? (<Stack gap={2} className="mx-auto" direction="horizontal">
@@ -30,6 +30,7 @@ const Header: React.FC<Props> = ({ title }) => {
 										height={250}
 										alt="IFRS Logo"
 										className="round"
+                    data-testid="ifrsImage"
 										src={ifrsImage}
 									/>
 								</Figure>
@@ -44,6 +45,7 @@ const Header: React.FC<Props> = ({ title }) => {
 									width={250}
 									height={250}
 									alt="Tufts University Logo"
+                  data-testid="tuftsImage"
 									src={tuftsImage}
 								/>
 							</Figure>
@@ -55,6 +57,7 @@ const Header: React.FC<Props> = ({ title }) => {
 									width={100}
 									height={100}
 									alt="Smart Motors Project"
+                  data-testid="bottomlessEngineImage"
 									src={bottomlessEngineImage}
 								/>
 
@@ -71,6 +74,7 @@ const Header: React.FC<Props> = ({ title }) => {
 											height={150}
 											alt="IFRS Logo"
 											className="round"
+                      data-testid="ifrsImage"
 											src={ifrsImage}
 										/>
 									</Figure>
@@ -82,6 +86,7 @@ const Header: React.FC<Props> = ({ title }) => {
 											width={150}
 											height={150}
 											alt="Tufts University Logo"
+                      data-testid="tuftsImage"
 											src={tuftsImage}
 										/>
 									</Figure>
@@ -93,6 +98,7 @@ const Header: React.FC<Props> = ({ title }) => {
 											width={100}
 											height={100}
 											alt="Smart Motors Project"
+                      data-testid="bottomlessEngineImage"
 											src={bottomlessEngineImage}
 										/>
 
