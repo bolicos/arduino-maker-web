@@ -1,8 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router";
-import { Image, Navbar, Button, Container, Stack } from "react-bootstrap";
-import { ROUTES as R } from "#/src/constants";
-import arduinoImage from "@/assets/images/arduino.png";
+import { Navbar, Container, Stack, Figure } from "react-bootstrap";
+import ifrsImage from "@/assets/images/ifrs.jpg";
+import bottomlessEngineImage from "@/assets/images/bottomless-engine.png";
+import tuftsImage from "@/assets/images/tufts.png";
 
 import "./index.scss";
 
@@ -10,62 +10,105 @@ interface Props {
 	title: string;
 }
 const Header: React.FC<Props> = ({ title }) => {
-	const navigate = useNavigate();
 	const screenWidth = screen.width;
+	const ifrsLink = "https://www.poa.ifrs.edu.br/";
+	const tuftsLink = "https://www.tufts.edu";
+	const smartMotorsLink = "https://sites.google.com/tuftsceeo.org/smartmotors/home";
 
 	return (
 		<Navbar data-testid="navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
 			<Container>
+				<h1 className="title" data-testid="title">{title}</h1>
 
-				<Stack gap={2} className="col-md-10 mx-auto" direction="horizontal">
-					<Navbar.Brand data-testid="navBrand" className="me-auto justify-content-center">
-						<Image
-							data-testid="navImage"
-							src={arduinoImage}
-							className="d-inline-block align-top"
-							onClick={() => navigate(R.HOME())}
-							rounded
-							alt="Logo"
-							width="50px"
-							height="50px"
-						/>{" "}
-						{title}
-					</Navbar.Brand>
+				{screenWidth > 540
+					? (<Stack gap={2} className="mx-auto" direction="horizontal">
+						<Navbar.Brand data-testid="navBrand" className="d-flex justify-content-between">
+							<a href={ifrsLink} target="_blank">
+								<Figure>
+									<Figure.Image
+										width={250}
+										height={250}
+										alt="IFRS Logo"
+										className="round"
+										data-testid="ifrsImage"
+										src={ifrsImage}
+									/>
+								</Figure>
+							</a>
 
-					{screenWidth > 540 &&
-            (<>
-            	<Button data-testid="navImport" variant="outline-secondary">
-            		{"Importar"}
-            	</Button>
-            	<Button data-testid="navDownload" variant="outline-success">
-            		{"Baixar"}
-            	</Button>
-            	<Button data-testid="navDelete" variant="outline-danger">
-            		{"Excluir Tudo"}
-            	</Button>
-            </>)}
-
-				</Stack>
+						</Navbar.Brand>
 
 
+						<a href={tuftsLink} target="_blank">
+							<Figure>
+								<Figure.Image
+									width={250}
+									height={250}
+									alt="Tufts University Logo"
+									data-testid="tuftsImage"
+									src={tuftsImage}
+								/>
+							</Figure>
+						</a>
+
+						<a href={smartMotorsLink} target="_blank" className="noBottomLink">
+							<Figure>
+								<Figure.Image
+									width={100}
+									height={100}
+									alt="Smart Motors Project"
+									data-testid="bottomlessEngineImage"
+									src={bottomlessEngineImage}
+								/>
+
+							</Figure>
+						</a>
+					</Stack>)
+					: (
+						<Stack gap={2} className="mx-auto">
+							<Navbar.Brand data-testid="navBrand" className="d-flex justify-content-center">
+								<a href={ifrsLink} target="_blank">
+									<Figure>
+										<Figure.Image
+											width={150}
+											height={150}
+											alt="IFRS Logo"
+											className="round"
+											data-testid="ifrsImage"
+											src={ifrsImage}
+										/>
+									</Figure>
+								</a>
+
+								<a href={tuftsLink} target="_blank">
+									<Figure>
+										<Figure.Image
+											width={150}
+											height={150}
+											alt="Tufts University Logo"
+											data-testid="tuftsImage"
+											src={tuftsImage}
+										/>
+									</Figure>
+								</a>
+
+								<a href={smartMotorsLink} target="_blank" className="noBottomLink">
+									<Figure>
+										<Figure.Image
+											width={100}
+											height={100}
+											alt="Smart Motors Project"
+											data-testid="bottomlessEngineImage"
+											src={bottomlessEngineImage}
+										/>
+
+									</Figure>
+								</a>
+
+							</Navbar.Brand>
+						</Stack>
+					)}
 			</Container>
-
-			{screenWidth <= 540 &&
-        (
-        	<>
-        		<Stack gap={2} className="col-md-8 mx-auto">
-        			<Button data-testid="navImport" variant="outline-secondary">
-        				{"Importar"}
-        			</Button>
-        			<Button data-testid="navDownload" variant="outline-success">
-        				{"Baixar"}
-        			</Button>
-        			<Button data-testid="navDelete" variant="outline-danger">
-        				{"Excluir Tudo"}
-        			</Button>
-        		</Stack>
-        	</>
-        )}
 		</Navbar >
 	);
 };

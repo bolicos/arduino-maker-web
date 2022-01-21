@@ -43,22 +43,21 @@ describe("Header :", () => {
 	it("Verify that the elements are present on screen", () => {
 		const { getByTestId } = setup("Example");
 		const navBrand = getByTestId("navBrand");
-		const navImport = getByTestId("navImport");
-		const navDownload = getByTestId("navDownload");
-		const navDelete = getByTestId("navDelete");
+		const ifrsImage = getByTestId("ifrsImage");
+		const tuftsImage = getByTestId("tuftsImage");
+		const bottomlessEngineImage = getByTestId("bottomlessEngineImage");
 
 		expect(navBrand).toBeInTheDocument();
-		expect(navImport).toBeInTheDocument();
-		expect(navDownload).toBeInTheDocument();
-		expect(navDelete).toBeInTheDocument();
+		expect(ifrsImage).toBeInTheDocument();
+		expect(tuftsImage).toBeInTheDocument();
+		expect(bottomlessEngineImage).toBeInTheDocument();
 	});
 
 	it("Should make the replace of the title", () => {
 		const { getByTestId } = setup("Example");
-		const navBrand = getByTestId("navBrand");
+		const title = getByTestId("title");
 
-		expect(navBrand).toBeInTheDocument();
-		expect(navBrand).toContainHTML("img");
-		expect(navBrand).toContainHTML("Example");
+		expect(title).toBeInTheDocument();
+		expect(title).toContainHTML("Example");
 	});
 });
