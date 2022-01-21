@@ -1,6 +1,6 @@
 export const ROUTES = {
 	HOME: () => "/",
-	// CREATE: () => "/create",
+	CREATE: () => "/create",
 	MAKER: () => "/maker",
 	NOT_FOUND: () => "*",
 };
