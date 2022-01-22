@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Stack, Figure } from "react-bootstrap";
-import ifrsImage from "@/assets/images/ifrs.jpg";
+import ifrsImage from "@/assets/images/ifrs.png";
 import bottomlessEngineImage from "@/assets/images/bottomless-engine.png";
 import tuftsImage from "@/assets/images/tufts.png";
 
@@ -23,7 +23,11 @@ const Header: React.FC<Props> = ({ title }) => {
 				{screenWidth > 540
 					? (<Stack gap={2} className="mx-auto" direction="horizontal">
 						<Navbar.Brand data-testid="navBrand" className="d-flex justify-content-between">
-							<a href={ifrsLink} target="_blank">
+							<a
+								href={ifrsLink}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<Figure>
 									<Figure.Image
 										width={250}
@@ -39,7 +43,11 @@ const Header: React.FC<Props> = ({ title }) => {
 						</Navbar.Brand>
 
 
-						<a href={tuftsLink} target="_blank">
+						<a
+							href={tuftsLink}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<Figure>
 								<Figure.Image
 									width={250}
@@ -51,7 +59,11 @@ const Header: React.FC<Props> = ({ title }) => {
 							</Figure>
 						</a>
 
-						<a href={smartMotorsLink} target="_blank" className="noBottomLink">
+						<a
+							href={smartMotorsLink}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<Figure>
 								<Figure.Image
 									width={100}
@@ -67,7 +79,11 @@ const Header: React.FC<Props> = ({ title }) => {
 					: (
 						<Stack gap={2} className="mx-auto">
 							<Navbar.Brand data-testid="navBrand" className="d-flex justify-content-center">
-								<a href={ifrsLink} target="_blank">
+								<a
+									href={ifrsLink}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
 									<Figure>
 										<Figure.Image
 											width={150}
@@ -80,7 +96,11 @@ const Header: React.FC<Props> = ({ title }) => {
 									</Figure>
 								</a>
 
-								<a href={tuftsLink} target="_blank">
+								<a
+									href={tuftsLink}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
 									<Figure>
 										<Figure.Image
 											width={150}
@@ -92,7 +112,11 @@ const Header: React.FC<Props> = ({ title }) => {
 									</Figure>
 								</a>
 
-								<a href={smartMotorsLink} target="_blank" className="noBottomLink">
+								<a
+									href={smartMotorsLink}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
 									<Figure>
 										<Figure.Image
 											width={100}
@@ -101,7 +125,6 @@ const Header: React.FC<Props> = ({ title }) => {
 											data-testid="bottomlessEngineImage"
 											src={bottomlessEngineImage}
 										/>
-
 									</Figure>
 								</a>
 
