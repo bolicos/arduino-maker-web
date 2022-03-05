@@ -8,7 +8,7 @@ import MakerPage from "@/pages/Maker";
 import NotFoundPage from "@/pages/NotFound";
 
 const Routes: React.FC = () => {
-	return (
+  return (
 		<BrowserRouter>
 			<Switch>
 				{/* <Route path={R.HOME()} element={<HomePage />} /> */}
@@ -17,7 +17,7 @@ const Routes: React.FC = () => {
 				<Route path={R.NOT_FOUND()} element={<NotFoundPage />} />
 			</Switch>
 		</BrowserRouter>
-	);
+  );
 };
 
 export default Routes;

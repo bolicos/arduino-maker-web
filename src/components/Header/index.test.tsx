@@ -8,56 +8,56 @@ import { MirageServer } from "#/src/services/mirage/server.config";
 import Header from ".";
 
 function setup(title: string) {
-	const history = createMemoryHistory({
-		initialEntries: [ROUTES.HOME()],
-	});
+  const history = createMemoryHistory({
+    initialEntries: [ROUTES.HOME()],
+  });
 
-	return {
-		...render(
+  return {
+    ...render(
 			<Router location={ROUTES.HOME()} navigator={history}>
 				<Header title={title} />
 			</Router>,
-		),
-		history,
-	};
+    ),
+    history,
+  };
 }
 
 describe("Header :", () => {
-	let server: Server;
+  let server: Server;
 
-	beforeEach(() => {
-		server = MirageServer();
-	});
+  beforeEach(() => {
+    server = MirageServer();
+  });
 
-	afterEach(() => {
-		server.shutdown();
-	});
+  afterEach(() => {
+    server.shutdown();
+  });
 
-	it("Component is alive", () => {
-		const { getByTestId } = setup("Example");
-		const element = getByTestId("navbar");
+  it("Component is alive", () => {
+    const { getByTestId } = setup("Example");
+    const element = getByTestId("navbar");
 
-		expect(element).toBeInTheDocument();
-	});
+    expect(element).toBeInTheDocument();
+  });
 
-	it("Verify that the elements are present on screen", () => {
-		const { getByTestId } = setup("Example");
-		const navBrand = getByTestId("navBrand");
-		const ifrsImage = getByTestId("ifrsImage");
-		const tuftsImage = getByTestId("tuftsImage");
-		const bottomlessEngineImage = getByTestId("bottomlessEngineImage");
+  it("Verify that the elements are present on screen", () => {
+    const { getByTestId } = setup("Example");
+    const navBrand = getByTestId("navBrand");
+    const ifrsImage = getByTestId("ifrsImage");
+    const tuftsImage = getByTestId("tuftsImage");
+    const bottomlessEngineImage = getByTestId("bottomlessEngineImage");
 
-		expect(navBrand).toBeInTheDocument();
-		expect(ifrsImage).toBeInTheDocument();
-		expect(tuftsImage).toBeInTheDocument();
-		expect(bottomlessEngineImage).toBeInTheDocument();
-	});
+    expect(navBrand).toBeInTheDocument();
+    expect(ifrsImage).toBeInTheDocument();
+    expect(tuftsImage).toBeInTheDocument();
+    expect(bottomlessEngineImage).toBeInTheDocument();
+  });
 
-	it("Should make the replace of the title", () => {
-		const { getByTestId } = setup("Example");
-		const title = getByTestId("title");
+  it("Should make the replace of the title", () => {
+    const { getByTestId } = setup("Example");
+    const title = getByTestId("title");
 
-		expect(title).toBeInTheDocument();
-		expect(title).toContainHTML("Example");
-	});
+    expect(title).toBeInTheDocument();
+    expect(title).toContainHTML("Example");
+  });
 });

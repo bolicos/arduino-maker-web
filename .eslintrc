@@ -13,6 +13,7 @@
 		"jest.config.ts" // Ignore files outside of src/
 	],
 	"extends": [
+		// "plugin:import/recommended"
 		"plugin:import/recommended",
 		"airbnb-typescript/base" //use Airbnb config
 	],
@@ -20,10 +21,9 @@
 		"no-tabs": 0,
 		"import/extensions": 0,
 		"@typescript-eslint/comma-dangle": 1,
-		"@typescript-eslint/indent": [1, "tab"],
-		"@typescript-eslint/quotes": [2, "double", { "avoidEscape": true }],
+		"@typescript-eslint/quotes": [1, "double", { "avoidEscape": true }],
 		"import/no-extraneous-dependencies": [
-			"error",
+			1,
 			{ "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/*.config.ts"] }
 		]
 	}

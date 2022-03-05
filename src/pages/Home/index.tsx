@@ -10,9 +10,9 @@ import arduinoCommunity from "@/assets/images/arduino-community.png";
 import style from "./style.module.scss";
 
 const Home: React.FC = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	return (
+  return (
 		<Container fluid>
 			<Row>
 				<Navbar bg="light" expand={false}>
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
 				</Col>
 			</Row>
 		</Container>
-	);
+  );
 };
 
 export default Home;
