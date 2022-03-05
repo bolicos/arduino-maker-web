@@ -12,19 +12,10 @@
 		"/lib/**/*", // Ignore built files.
 		"jest.config.ts" // Ignore files outside of src/
 	],
-	"extends": [
-		// "plugin:import/recommended"
-		"plugin:import/recommended",
-		"airbnb-typescript/base" //use Airbnb config
-	],
 	"rules": {
 		"no-tabs": 0,
 		"import/extensions": 0,
-		"@typescript-eslint/comma-dangle": 1,
-		"@typescript-eslint/quotes": [1, "double", { "avoidEscape": true }],
-		"import/no-extraneous-dependencies": [
-			1,
-			{ "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/*.config.ts"] }
-		]
+		"@typescript-eslint/comma-dangle": [1, "always-multiline"],
+		"@typescript-eslint/quotes": [1, "double", { "avoidEscape": true }]
 	}
 }
