@@ -1,55 +1,55 @@
 export enum AnalogSensorsEnum {
-	PINO_A0 = "A0",
-	PINO_A1 = "A1",
-	PINO_A2 = "A2",
-	PINO_A3 = "A3",
-	PINO_12 = "12",
-	PINO_13 = "13",
+  PINO_A0 = "A0",
+  PINO_A1 = "A1",
+  PINO_A2 = "A2",
+  PINO_A3 = "A3",
+  PINO_12 = "12",
+  PINO_13 = "13",
 }
 
 export enum Button {
-	PINO_07 = "7",
+  PINO_07 = "7",
 }
 
 export enum Servo {
-	PINO_03 = "3",
+  PINO_03 = "3",
 }
 
 export enum Motor1 {
-	PINO_02 = "2",
-	PINO_04 = "4",
-	PINO_05 = "5",
+  PINO_02 = "2",
+  PINO_04 = "4",
+  PINO_05 = "5",
 }
 
 export enum RgbLed {
-	PINO_11 = "11",
-	PINO_09 = "9",
-	PINO_10 = "10",
+  PINO_11 = "11",
+  PINO_09 = "9",
+  PINO_10 = "10",
 }
 
 export interface ArduinoCodeType {
-	lightPin: AnalogSensorsEnum;
-	potPin: AnalogSensorsEnum;
-	linePin: AnalogSensorsEnum;
-	distIRPin: AnalogSensorsEnum;
-	distTrigPin: AnalogSensorsEnum;
-	distEchoPin: AnalogSensorsEnum;
+  lightPin: AnalogSensorsEnum;
+  potPin: AnalogSensorsEnum;
+  linePin: AnalogSensorsEnum;
+  distIRPin: AnalogSensorsEnum;
+  distTrigPin: AnalogSensorsEnum;
+  distEchoPin: AnalogSensorsEnum;
 
-	buttonPin: Button;
+  buttonPin: Button;
 
-	servoPin: Servo;
+  servoPin: Servo;
 
-	dir1PinA: Motor1;
-	dir2PinA: Motor1;
-	speedPinA: Motor1;
+  dir1PinA: Motor1;
+  dir2PinA: Motor1;
+  speedPinA: Motor1;
 
-	redPin: RgbLed;
-	greenPin: RgbLed;
-	bluePin: RgbLed;
+  redPin: RgbLed;
+  greenPin: RgbLed;
+  bluePin: RgbLed;
 }
 
 export const ArduinoCode = (param: ArduinoCodeType) => {
-	return `
+  return `
     int lightPin = ${param.lightPin};
     int potPin = ${param.potPin};
     int linePin = ${param.linePin};

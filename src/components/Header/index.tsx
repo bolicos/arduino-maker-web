@@ -7,21 +7,21 @@ import tuftsImage from "@/assets/images/tufts.png";
 import "./index.scss";
 
 interface Props {
-	title: string;
+  title: string;
 }
 const Header: React.FC<Props> = ({ title }) => {
-	const screenWidth = screen.width;
-	const ifrsLink = "https://www.poa.ifrs.edu.br/";
-	const tuftsLink = "https://www.tufts.edu";
-	const smartMotorsLink = "https://sites.google.com/tuftsceeo.org/smartmotors/home";
+  const screenWidth = screen.width;
+  const ifrsLink = "https://www.poa.ifrs.edu.br/";
+  const tuftsLink = "https://www.tufts.edu";
+  const smartMotorsLink = "https://sites.google.com/tuftsceeo.org/smartmotors/home";
 
-	return (
-		<Navbar data-testid="navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
+  return (
+		<Navbar data-testid="navbar" collapseOnSelect expand="lg" bg="secondary" variant="light" >
 			<Container>
 				<h1 className="title" data-testid="title">{title}</h1>
 
 				{screenWidth > 540
-					? (<Stack gap={2} className="mx-auto" direction="horizontal">
+				  ? (<Stack gap={2} className="mx-auto" direction="horizontal">
 						<Navbar.Brand data-testid="navBrand" className="d-flex justify-content-between">
 							<a
 								href={ifrsLink}
@@ -76,7 +76,7 @@ const Header: React.FC<Props> = ({ title }) => {
 							</Figure>
 						</a>
 					</Stack>)
-					: (
+				  : (
 						<Stack gap={2} className="mx-auto">
 							<Navbar.Brand data-testid="navBrand" className="d-flex justify-content-center">
 								<a
@@ -130,10 +130,10 @@ const Header: React.FC<Props> = ({ title }) => {
 
 							</Navbar.Brand>
 						</Stack>
-					)}
+				  )}
 			</Container>
 		</Navbar >
-	);
+  );
 };
 
 export default Header;

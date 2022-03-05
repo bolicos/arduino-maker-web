@@ -11,24 +11,24 @@ import { BlockTypesEnum } from "@/models/blocks";
 import "./index.scss";
 
 export interface StateMaker {
-	code: string;
+  code: string;
 }
 
 const Maker: React.FC = () => {
-	const [state, setState] = useState<StateMaker>({
-		code: "",
-	});
+  const [state, setState] = useState<StateMaker>({
+    code: "",
+  });
 
-	const blocks = [BlockTypesEnum.SMART_MOTORS, BlockTypesEnum.IF];
+  const blocks = [BlockTypesEnum.SMART_MOTORS, BlockTypesEnum.IF];
 
-	const handleCode = () => {
-		setState(prev => ({
-			...prev,
-			code: "",
-		}));
-	};
+  const handleCode = () => {
+    setState(prev => ({
+      ...prev,
+      code: "",
+    }));
+  };
 
-	return (
+  return (
 		<Container fluid>
 			<Row>
 				<Header title="Projeto Maker" />
@@ -83,7 +83,7 @@ const Maker: React.FC = () => {
 				</Col>
 			</Row>
 		</Container>
-	);
+  );
 };
 
 export default Maker;
