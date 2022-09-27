@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { useDrop } from "react-dnd";
-import { ItemTypes } from "@/models/ItemTypes";
+import { ItemTypes } from "#/models/ItemTypes";
 
 import style from "./style.module.scss";
 

@@ -3,10 +3,10 @@ import { Card, Col, Container, Row, Stack } from "react-bootstrap";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import Header from "@/components/Header";
-import Block from "@/components/Block";
-import Board from "@/components/Board";
-import { BlockTypesEnum } from "@/models/blocks";
+import Header from "#/components/Header";
+import Block from "#/components/Block";
+import Board from "#/components/Board";
+import { BlockTypesEnum } from "#/models/blocks";
 
 import "./index.scss";
 

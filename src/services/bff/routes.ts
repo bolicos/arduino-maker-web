@@ -1,5 +1,5 @@
-import { Class } from "@/models/classes/classes";
-import { bff, List, Object } from "@/services/bff/server";
+import { Class } from "#/models/classes/classes";
+import { bff, List, Object } from "#/services/bff/server";
 
 export const ENDPOINTS = {
   BLOCKS: () => "/blocks",

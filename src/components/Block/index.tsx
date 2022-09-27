@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import clsx from "clsx";
 import { useDrag } from "react-dnd";
-import { StateMaker } from "@/pages/Maker";
-import { ItemTypes } from "@/models/ItemTypes";
-import { BlockTypesEnum } from "@/models/blocks";
+import { StateMaker } from "#/pages/Maker";
+import { ItemTypes } from "#/models/ItemTypes";
+import { BlockTypesEnum } from "#/models/blocks";
 
 import style from "./style.module.scss";
 

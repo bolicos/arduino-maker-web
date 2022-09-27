@@ -1,8 +1,8 @@
 import React from "react";
 import { Navbar, Container, Stack, Figure } from "react-bootstrap";
-import ifrsImage from "@/assets/images/ifrs.png";
-import bottomlessEngineImage from "@/assets/images/bottomless-engine.png";
-import tuftsImage from "@/assets/images/tufts.png";
+import ifrsImage from "#/assets/images/ifrs.png";
+import bottomlessEngineImage from "#/assets/images/bottomless-engine.png";
+import tuftsImage from "#/assets/images/tufts.png";
 
 import "./index.scss";
 
@@ -10,7 +10,7 @@ interface Props {
   title: string;
 }
 const Header: React.FC<Props> = ({ title }) => {
-  const screenWidth = screen.width;
+  const screenWidth = window.screen.width;
   const ifrsLink = "https://www.poa.ifrs.edu.br/";
   const tuftsLink = "https://www.tufts.edu";
   const smartMotorsLink = "https://sites.google.com/tuftsceeo.org/smartmotors/home";

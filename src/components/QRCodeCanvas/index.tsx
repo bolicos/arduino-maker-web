@@ -11,7 +11,7 @@ const QRCodeCanvas: React.FC<Props> = ({ text }) => {
   const [isError, setError] = useState(false);
   const errorMessage = "Ocorreu um erro ao gerar o QRCode";
 
-  const toError = (error: Error) => {
+  const toError = (error: Error | null | undefined) => {
     if (error) {
       console.log("Canvas QRCode Error");
       console.log(error.message);

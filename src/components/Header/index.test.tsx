@@ -3,8 +3,8 @@ import { render } from "@testing-library/react";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { Server } from "miragejs";
-import { ROUTES } from "@/constants";
-import { MirageServer } from "#/src/services/mirage/server.config";
+import { ROUTES } from "#/constants";
+import { MirageServer } from "#/services/mirage/server.config";
 import Header from ".";
 
 function setup(title: string) {

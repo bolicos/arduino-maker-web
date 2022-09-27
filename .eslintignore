@@ -1,7 +1,0 @@
-.vscode
-.eslintrc
-.idea
-
-build
-coverage
-node_modules
