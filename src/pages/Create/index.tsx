@@ -2,12 +2,12 @@ import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from "r
 import clsx from "clsx";
 import { Card, Col, Container, Form, ProgressBar, Row, Button, Collapse } from "react-bootstrap";
 
-import QRCodeCanvas from "#/src/components/QRCodeCanvas";
-import Header from "@/components/Header";
-import Loading from "@/components/Loading";
-import Code from "@/components/Code";
-import { Class } from "@/models/classes/classes";
-import { BFF } from "@/services/bff/routes";
+import QRCodeCanvas from "#/components/QRCodeCanvas";
+import Header from "#/components/Header";
+import Loading from "#/components/Loading";
+import Code from "#/components/Code";
+import { Class } from "#/models/classes/classes";
+import { BFF } from "#/services/bff/routes";
 
 import style from "./style.module.scss";
 
@@ -44,7 +44,7 @@ const Create: React.FC = () => {
   });
 
   const quantitySelect = ["1", "2", "3"];
-  const title = "Smart Motors Create";
+  const title = "SmartCode";
 
   const fetchBlocks = useCallback(async () => {
     setLoading(true);

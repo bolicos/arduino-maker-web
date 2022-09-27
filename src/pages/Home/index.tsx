@@ -2,10 +2,10 @@ import React from "react";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Container, Image, Nav, Navbar, NavDropdown, Offcanvas, Row } from "react-bootstrap";
-import { ROUTES as R, LINKS } from "#/src/constants";
-import arduinoLogo from "@/assets/images/arduino-logo.png";
-import arduinoMaker from "@/assets/images/arduino-maker.jpg";
-import arduinoCommunity from "@/assets/images/arduino-community.png";
+import { ROUTES as R, LINKS } from "#/constants";
+import arduinoLogo from "#/assets/images/arduino-logo.png";
+import arduinoMaker from "#/assets/images/arduino-maker.jpg";
+import arduinoCommunity from "#/assets/images/arduino-community.png";
 
 import style from "./style.module.scss";
 

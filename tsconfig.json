@@ -1,7 +1,10 @@
 {
-  "extends": "./config/tsconfig-overrides.json",
   "compilerOptions": {
-    "target": "ES2016",
+    "baseUrl": ".",
+		"paths": {
+			"#/*": ["./src/*"]
+		},
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -19,11 +22,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "sourceMap": true,
     "jsx": "react-jsx"
   },
   "include": [
-    "src",
-    "e2e"
+    "src"
   ]
 }

@@ -1,21 +1,14 @@
 {
-	"root": true,
-	"parser": "@typescript-eslint/parser", // allows ESLint to understand TypeScript syntax
-	"parserOptions": {
-		"files": ["*.ts", "*.tsx"], // Your TypeScript files extension
-		"project": ["./tsconfig.json"] // required for "type-aware linting"
-	},
-	"plugins": [
-		"@typescript-eslint" // allows to use the rules within the codebase
-	],
-	"ignorePatterns": [
-		"/lib/**/*", // Ignore built files.
-		"jest.config.ts" // Ignore files outside of src/
-	],
-	"rules": {
-		"no-tabs": 0,
-		"import/extensions": 0,
-		"@typescript-eslint/comma-dangle": [1, "always-multiline"],
-		"@typescript-eslint/quotes": [1, "double", { "avoidEscape": true }]
-	}
-}
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": { 
+      "react-hooks/exhaustive-deps": "off"
+    }
+  }

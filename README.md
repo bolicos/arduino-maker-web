@@ -22,10 +22,6 @@ but work with robotics) of public schools in Brazil.
 
 [@Ana Lucia](https://github.com/analuciabolico)
 
-[@Michele Menezes](https://github.com/amimenezes)
-
-[@Andressa Ruy](https://github.com/thedessa)
-
 ## Notion
 
 [Alma Smart Motors IFRS-POA](https://alma-smart-motors-ifrs.notion.site/Github-981509f3960846db98a6942e6e84072c)
