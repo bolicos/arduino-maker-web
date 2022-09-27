@@ -44,7 +44,7 @@ const Create: React.FC = () => {
   });
 
   const quantitySelect = ["1", "2", "3"];
-  const title = "SmartCode2";
+  const title = "SmartCode";
 
   const fetchBlocks = useCallback(async () => {
     setLoading(true);
