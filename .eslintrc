@@ -6,12 +6,9 @@
     ],
     "extends": [
       "react-app",
-      "react-app/jest",
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended"
+      "react-app/jest"
     ],
     "rules": { 
-      "react-hooks/exhaustive-deps": "warn"
+      "react-hooks/exhaustive-deps": "off"
     }
   }
