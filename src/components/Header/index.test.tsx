@@ -1,25 +1,10 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
-import { Server } from "miragejs";
-import { ROUTES } from "#/constants";
 import { MirageServer } from "#/services/mirage/server.config";
+import { setup } from "#/setupTests";
+import { Server } from "miragejs";
 import Header from ".";
 
-function setup(title: string) {
-  const history = createMemoryHistory({
-    initialEntries: [ROUTES.HOME()],
-  });
-
-  return {
-    ...render(
-			<Router location={ROUTES.HOME()} navigator={history}>
-				<Header title={title} />
-			</Router>,
-    ),
-    history,
-  };
+const init = (title: string) => {
+  return setup(<Header title={title} />)
 }
 
 describe("Header :", () => {
@@ -41,7 +26,7 @@ describe("Header :", () => {
   });
 
   it("Verify that the elements are present on screen", () => {
-    const { getByTestId } = setup("Example");
+    const { getByTestId } = init("Example");
     const navBrand = getByTestId("navBrand");
     const ifrsImage = getByTestId("ifrsImage");
     const tuftsImage = getByTestId("tuftsImage");
@@ -54,7 +39,7 @@ describe("Header :", () => {
   });
 
   it("Should make the replace of the title", () => {
-    const { getByTestId } = setup("Example");
+    const { getByTestId } = init("Example");
     const title = getByTestId("title");
 
     expect(title).toBeInTheDocument();

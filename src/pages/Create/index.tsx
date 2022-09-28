@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
-import { Card, Col, Container, Form, ProgressBar, Row, Button, Collapse } from "react-bootstrap";
+import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { Button, Card, Col, Collapse, Container, Form, ProgressBar, Row } from "react-bootstrap";
 
-import QRCodeCanvas from "#/components/QRCodeCanvas";
+import Code from "#/components/Code";
 import Header from "#/components/Header";
 import Loading from "#/components/Loading";
-import Code from "#/components/Code";
+import QRCodeCanvas from "#/components/QRCodeCanvas";
 import { Class } from "#/models/classes/classes";
 import { BFF } from "#/services/bff/routes";
 
