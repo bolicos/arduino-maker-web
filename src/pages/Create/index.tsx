@@ -5,7 +5,6 @@ import { Button, Card, Col, Collapse, Container, Form, ProgressBar, Row } from "
 import Code from "#/components/Code";
 import Header from "#/components/Header";
 import Loading from "#/components/Loading";
-import QRCodeCanvas from "#/components/QRCodeCanvas";
 import { Class } from "#/models/classes/classes";
 import { BFF } from "#/services/bff/routes";
 
@@ -259,10 +258,6 @@ const Create: React.FC = () => {
           {progress === 100 && state.code && (
             <Row >
               <Col>
-                <br />
-                <QRCodeCanvas text={state.code} />
-                <br />
-
                 <Card>
                   <Card.Header className="d-flex justify-content-between">
                     {"Code"}
