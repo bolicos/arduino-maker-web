@@ -2,6 +2,7 @@ export const ROUTES = {
   HOME: () => "/",
   CREATE: () => "/create",
   MAKER: () => "/maker",
+  CODE: () => "/code",
   NOT_FOUND: () => "*",
 };
 
