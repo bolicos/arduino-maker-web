@@ -9,16 +9,19 @@ import { Class } from "#/models/classes/classes";
 import { BFF } from "#/services/bff/routes";
 
 import style from "./style.module.scss";
+import { Board } from "#/models/boards";
 
 interface State {
   sensors: Array<Class>;
   actuators: Array<Class>;
+  boards: Array<Board>;
   fixed: Class;
   code: string;
   sensor: string;
   actuator: string;
   quantitySensor: string;
   quantityActuator: string;
+  board: string;
 }
 
 const Create: React.FC = () => {
@@ -27,6 +30,7 @@ const Create: React.FC = () => {
   const [state, setState] = useState<State>({
     sensors: [],
     actuators: [],
+    boards: [Board.ARDUINO_UNO, Board.NODE_MCU_ESP8266, Board.RASPBERRY_PI_PICO_V3],
     fixed: {
       id: "",
       name: "",
@@ -40,6 +44,7 @@ const Create: React.FC = () => {
     actuator: "",
     quantitySensor: "",
     quantityActuator: "",
+    board: "",
   });
 
   const quantitySelect = ["1", "2", "3"];
@@ -123,17 +128,19 @@ const Create: React.FC = () => {
       {item.name}
     </option>);
   };
+  
   const optionSimpleHTML = (item: string) => {
     return (<option key={item} value={item}>
       {item}
     </option>);
   };
+
   const actuatorSelectHTML = actuatorSelect === 3 ? (
     <>
       <br />
       <Form.Label>{"Select the quantity of ACTUATORS"}</Form.Label>
       <Form.Select
-        aria-label="select-input"
+        aria-label="quantity-actuators"
         value={state.actuator}
         disabled
         onChange={event => handleSelectChange(event, "quantityActuator")}
@@ -146,7 +153,7 @@ const Create: React.FC = () => {
         <br />
         <Form.Label>{"Select the quantity of ACTUATORS"}</Form.Label>
         <Form.Select
-          aria-label="select-input"
+          aria-label="quantity-actuators"
           value={state.quantityActuator}
           onChange={event => handleSelectChange(event, "quantityActuator")}
         >
@@ -199,12 +206,26 @@ const Create: React.FC = () => {
 
           <br />
 
-          <Row className={clsx(["justify-content-md-center", style.row])}>
+          <Row className={clsx(["justify-content-md-center", style.board])}>
+          <Col>
+            <Form.Label>{"Select the BOARD"}</Form.Label>
+                <Form.Select
+                  aria-label="boards"
+                  defaultValue={""}
+                  onChange={event => handleSelectChange(event, "board")}
+                >
+                  <option key="0" value="" disabled>{"Select one option:"}</option>
+                  {state.boards?.map(item => optionSimpleHTML(item))}
+                </Form.Select>
+            </Col>
+          </Row>
+          
+          <Row className={clsx(["justify-content-md-center", style.row])}>            
             <Col>
               <>
                 <Form.Label>{"Select the SENSOR"}</Form.Label>
                 <Form.Select
-                  aria-label="select-input"
+                  aria-label="sensors"
                   defaultValue={""}
                   onChange={event => handleSelectChange(event, "sensor")}
                 >
@@ -218,7 +239,7 @@ const Create: React.FC = () => {
                   <br />
                   <Form.Label>{"Select the quantity of SENSORS"}</Form.Label>
                   <Form.Select
-                    aria-label="select-input"
+                    aria-label="quantity-sensors"
                     value={state.quantitySensor}
                     onChange={event => handleSelectChange(event, "quantitySensor")}
                   >
@@ -233,7 +254,7 @@ const Create: React.FC = () => {
               <>
                 <Form.Label>{"Select the ACTUATOR"}</Form.Label>
                 <Form.Select
-                  aria-label="select-output"
+                  aria-label="actuators"
                   defaultValue={"0"}
                   onChange={event => handleSelectChange(event, "actuator")}
                 >
