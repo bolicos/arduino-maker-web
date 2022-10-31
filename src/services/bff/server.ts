@@ -8,6 +8,7 @@ export const bff = axios.create({
   baseURL: "https://arduino-maker-bff.herokuapp.com/",
   timeout: 30000,
   headers: {
+    "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Accept": "*/*",
   }
