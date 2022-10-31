@@ -7,9 +7,9 @@ export interface Object<T> extends Promise<Response<T>> { }
 export const bff = axios.create({
   baseURL: "https://arduino-maker-bff.herokuapp.com/",
   timeout: 30000,
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Accept": "*/*",
-  }
+  // headers: {
+  //   "Content-Type": "application/json",
+  //   "Access-Control-Allow-Origin": "*",
+  //   "Accept": "*/*",
+  // }
 });
