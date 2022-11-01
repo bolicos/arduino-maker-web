@@ -2,10 +2,10 @@ import { Class } from "#/models/classes/classes";
 import { bff, List, Object } from "#/services/bff/server";
 
 export const ENDPOINTS = {
-  BLOCKS: () => "/blocks",
-  ACTUATORS: () => "/blocks/actuators",
-  SENSORS: () => "/blocks/sensors",
-  FIXED: () => "/blocks/fixed",
+  BLOCKS: () => "/api/blocks",
+  ACTUATORS: () => "/api/blocks/actuators",
+  SENSORS: () => "/api/blocks/sensors",
+  FIXED: () => "/api/blocks/fixed",
 };
 
 export const BFF = {
