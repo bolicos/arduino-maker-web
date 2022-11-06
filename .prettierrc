@@ -1,13 +1,17 @@
 {
-	"singleQuote": false,
-	"trailingComma": "es5",
-	"printWidth": 120,
-	"tabWidth": 2,
-	"useTabs": true,
-	"semi": true,
 	"bracketSpacing": true,
+	"bracketSameLine": false,
+	"singleQuote": true,
+	"arrowParens": "always",
+	"trailingComma": "all",
+	"printWidth": 140,
+	"tabWidth": 2,
+	"useTabs": false,
+	"semi": true,
 	"newline-before-return": true,
-	"no-duplicate-variable": [true, "check-parameters"],
-	"no-var-keyword": true,
-	"arrowParens": "avoid"
+	"no-duplicate-variable": [
+		true,
+		"check-parameters"
+	],
+	"no-var-keyword": true
 }
