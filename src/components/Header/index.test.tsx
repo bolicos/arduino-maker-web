@@ -1,4 +1,4 @@
-import { MirageServer } from "#/services/mirage/server.config";
+import { MirageServer } from "#/controllers/mirage/server";
 import { setup } from "#/setupTests";
 import { Server } from "miragejs";
 import Header from ".";

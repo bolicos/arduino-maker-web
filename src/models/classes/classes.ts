@@ -1,4 +1,4 @@
-export type Class = {
+export type Block = {
   id: string,
   name: string,
   code: string

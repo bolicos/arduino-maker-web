@@ -17,5 +17,5 @@ export const APP = {
     const env = process.env.NODE_ENV;
     return env !== null ? env : "development";
   },
-  BFF_URL: "https://arduino-maker-bff.herokuapp.com",
+  BFF_URL: process.env.BFF_URL || "https://arduino-maker-bff.herokuapp.com",
 };

@@ -5,17 +5,17 @@ import { Button, Card, Col, Collapse, Container, Form, ProgressBar, Row } from "
 import Code from "#/components/Code";
 import Header from "#/components/Header";
 import Loading from "#/components/Loading";
-import { Class } from "#/models/classes/classes";
-import { BFF } from "#/services/bff/routes";
+import { Block } from "#/models/classes/classes";
+import BffController from "#/controllers/bff";
 
 import style from "./style.module.scss";
 import { Board } from "#/models/boards";
 
-interface State {
-	sensors: Array<Class>;
-	actuators: Array<Class>;
+type State = {
+	sensors: Array<Block>;
+	actuators: Array<Block>;
 	boards: Array<Board>;
-	fixed: Class;
+	fixed: Block;
 	code: string;
 	sensor: string;
 	actuator: string;
@@ -53,7 +53,7 @@ const Create: React.FC = () => {
 	const fetchBlocks = useCallback(async () => {
 		setLoading(true);
 
-		BFF.ACTUATORS()
+		BffController.getActuators()
 			.then(response => {
 				setState(prev => ({
 					...prev,
@@ -65,7 +65,7 @@ const Create: React.FC = () => {
 			})
 			.finally(() => setLoading(false));
 
-		BFF.SENSORS()
+			BffController.getSensors()
 			.then(response => {
 				setState(prev => ({
 					...prev,
@@ -77,7 +77,7 @@ const Create: React.FC = () => {
 			})
 			.finally(() => setLoading(false));
 
-		BFF.FIXED()
+			BffController.getFixed()
 			.then(response => {
 				setState(prev => ({
 					...prev,
@@ -126,6 +126,7 @@ const Create: React.FC = () => {
 		state.quantitySensor,
 		state.quantityActuator,
 	]);
+
 	const actuatorSelect: number | undefined = useMemo(handleSelectActuator, [state.actuator]);
 
 	const handleGenerateCode = () => {
@@ -151,7 +152,7 @@ const Create: React.FC = () => {
 	const progressClass = progress === 100 ? "success" : "info";
 	const expandOrCollapse = open === true ? "COLLAPSE" : "EXPAND";
 
-	const optionHTML = (item: Class) => {
+	const optionHTML = (item: Block) => {
 		return (
 			<option key={item.id} value={item.id}>
 				{item.name}
