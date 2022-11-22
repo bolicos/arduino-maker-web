@@ -65,7 +65,7 @@ const Create: React.FC = () => {
       values.selectedActuator.quantity,
       values.selectedSensor.quantity,
     ];
-    const allValues: Array<number> = array.map((key) => (key === '' ? 0 : 25));
+    const allValues: Array<number> = array.map((key) => (key === '' ? 0 : 20));
 
     return allValues.reduce((a, b) => a + b, 0);
   };
