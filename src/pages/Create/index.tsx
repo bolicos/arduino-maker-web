@@ -86,13 +86,57 @@ const Create: React.FC = () => {
 
   const actuatorSelect: number | undefined = useMemo(handleSelectActuator, [values.selectedActuator.value]);
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>, type: string) => {
+  const handleSelectBoard = (event: ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.currentTarget.value;
 
     setValues((prev) => ({
       ...prev,
-      [type]: newValue,
+      selectedBoard: newValue,
     }));
+  };
+
+  const handleSelectSensor = (event: ChangeEvent<HTMLSelectElement>, type: 'value' | 'quantity') => {
+    const newValue = event.currentTarget.value;
+
+    if (type === 'value') {
+      setValues((prev) => ({
+        ...prev,
+        selectedSensor: {
+          ...prev.selectedSensor,
+          value: newValue,
+        },
+      }));
+    } else {
+      setValues((prev) => ({
+        ...prev,
+        selectedSensor: {
+          ...prev.selectedSensor,
+          quantity: newValue,
+        },
+      }));
+    }
+  };
+
+  const handleChangeActuator = (event: ChangeEvent<HTMLSelectElement>, type: 'value' | 'quantity') => {
+    const newValue = event.currentTarget.value;
+
+    if (type === 'value') {
+      setValues((prev) => ({
+        ...prev,
+        selectedActuator: {
+          ...prev.selectedActuator,
+          value: newValue,
+        },
+      }));
+    } else {
+      setValues((prev) => ({
+        ...prev,
+        selectedActuator: {
+          ...prev.selectedActuator,
+          quantity: newValue,
+        },
+      }));
+    }
   };
 
   const handleGenerateCode = () => {
@@ -148,7 +192,7 @@ const Create: React.FC = () => {
           aria-label="quantity-actuators"
           value={values.selectedActuator.value}
           disabled
-          onChange={(event) => handleSelectChange(event, 'selectedActuator.value')}
+          onChange={(event) => handleChangeActuator(event, 'value')}
         >
           <option key="0" value="3">
             {'3'}
@@ -162,7 +206,7 @@ const Create: React.FC = () => {
         <Form.Select
           aria-label="quantity-actuators"
           value={values.selectedActuator.quantity}
-          onChange={(event) => handleSelectChange(event, 'selectedActuator.quantity')}
+          onChange={(event) => handleChangeActuator(event, 'quantity')}
         >
           <option key="0" value="" disabled>
             {'Select one option:'}
@@ -243,7 +287,7 @@ const Create: React.FC = () => {
         <Row className={clsx(['justify-content-md-center', style.board])}>
           <Col>
             <Form.Label>{'Select the BOARD'}</Form.Label>
-            <Form.Select aria-label="boards" defaultValue={''} onChange={(event) => handleSelectChange(event, 'board')}>
+            <Form.Select aria-label="boards" defaultValue={''} onChange={(event) => handleSelectBoard(event)}>
               <option key="0" value="" disabled>
                 {'Select one option:'}
               </option>
@@ -256,7 +300,7 @@ const Create: React.FC = () => {
           <Col>
             <>
               <Form.Label>{'Select the SENSOR'}</Form.Label>
-              <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelectChange(event, 'selectedSensor.value')}>
+              <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelectSensor(event, 'value')}>
                 <option key="0" value="" disabled>
                   {'Select one option:'}
                 </option>
@@ -271,7 +315,7 @@ const Create: React.FC = () => {
                 <Form.Select
                   aria-label="quantity-sensors"
                   value={values.selectedSensor.quantity}
-                  onChange={(event) => handleSelectChange(event, 'selectedSensor.quantity')}
+                  onChange={(event) => handleSelectSensor(event, 'quantity')}
                 >
                   <option key="0" value="" disabled>
                     {'Select one option:'}
@@ -285,11 +329,7 @@ const Create: React.FC = () => {
           <Col>
             <>
               <Form.Label>{'Select the ACTUATOR'}</Form.Label>
-              <Form.Select
-                aria-label="actuators"
-                defaultValue={'0'}
-                onChange={(event) => handleSelectChange(event, 'selectedActuator.value')}
-              >
+              <Form.Select aria-label="actuators" defaultValue={'0'} onChange={(event) => handleChangeActuator(event, 'value')}>
                 <option key="0" value="0" disabled>
                   {'Select one option:'}
                 </option>
