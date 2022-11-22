@@ -51,7 +51,7 @@ const Create: React.FC = () => {
   const quantitySelect = ['1', '2', '3'];
   const title = 'SmartCode';
 
-  const extract = (type: string, id: string) => {
+  const extract = (type: 'SENSOR' | 'ACTUATOR', id: string) => {
     const sensors = state?.sensors;
     const actuators = state?.actuators;
     return type === 'SENSOR' ? sensors?.find((item) => item.id === id) : actuators?.find((item) => item.id === id);
@@ -71,8 +71,7 @@ const Create: React.FC = () => {
   };
 
   const handleActuatorQuantity = () => {
-    const id = values.selectedActuator.value;
-    const actuator = state?.actuators?.find((item) => item.id === id);
+    const actuator = extract('ACTUATOR', values.selectedActuator.value);
 
     return actuator && actuator.quantity;
   };
