@@ -70,6 +70,13 @@ const Create: React.FC = () => {
     return allValues.reduce((a, b) => a + b, 0);
   };
 
+  const handleActuatorQuantity = () => {
+    const id = values.selectedActuator.value;
+    const actuator = state?.actuators?.find((item) => item.id === id);
+
+    return actuator && actuator.quantity;
+  };
+
   const progress: number = useMemo(handleProgress, [
     values.selectedBoard,
     values.selectedActuator.value,
@@ -78,13 +85,7 @@ const Create: React.FC = () => {
     values.selectedSensor.quantity,
   ]);
 
-  const handleActuatorQuantity = () => {
-    const id = values.selectedActuator.value;
-    const actuator = state?.actuators?.find((item) => item.id === id);
-    return actuator && actuator.quantity;
-  };
-
-  const actuatorSelect: number | undefined = useMemo(handleActuatorQuantity, [values.selectedActuator]);
+  const actuatorSelect: number | undefined = useMemo(handleActuatorQuantity, [values.selectedActuator.value]);
 
   const handleSelectBoard = (event: ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.currentTarget.value;
@@ -246,7 +247,7 @@ const Create: React.FC = () => {
   }, [fetchAll]);
 
   useEffect(() => {
-    if (handleActuatorQuantity() === 3) {
+    if (actuatorSelect === 3) {
       setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '3' } }));
     } else {
       setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '' } }));
