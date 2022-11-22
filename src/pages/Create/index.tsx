@@ -31,22 +31,24 @@ type Values = {
   };
 };
 
+const INITIAL_VALUES = {
+  code: '',
+  selectedBoard: '',
+  selectedSensor: {
+    value: '',
+    quantity: '',
+  },
+  selectedActuator: {
+    value: '',
+    quantity: '',
+  },
+};
+
 const Create: React.FC = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [state, setState] = useState<State>();
-  const [values, setValues] = useState<Values>({
-    code: '',
-    selectedBoard: '',
-    selectedSensor: {
-      value: '',
-      quantity: '',
-    },
-    selectedActuator: {
-      value: '',
-      quantity: '',
-    },
-  });
+  const [values, setValues] = useState<Values>(INITIAL_VALUES);
 
   const quantitySelect = ['1', '2', '3'];
   const title = 'SmartCode';
@@ -262,7 +264,17 @@ const Create: React.FC = () => {
       handleGenerateCode();
       setOpen(true);
     }
-  }, [values.selectedBoard, values.selectedSensor.quantity, values.selectedActuator.quantity]);
+  }, [values.selectedSensor.quantity, values.selectedActuator.quantity]);
+
+  useEffect(() => {
+    if (values.selectedBoard !== '') {
+      setValues((prev) => ({
+        ...prev,
+        INITIAL_VALUES,
+        selectedBoard: prev.selectedBoard,
+      }));
+    }
+  }, [values.selectedBoard]);
 
   return isLoading ? (
     <Loading />
