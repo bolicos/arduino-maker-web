@@ -78,13 +78,13 @@ const Create: React.FC = () => {
     values.selectedSensor.quantity,
   ]);
 
-  const handleSelectActuator = () => {
+  const handleActuatorQuantity = () => {
     const id = values.selectedActuator.value;
     const actuator = state?.actuators?.find((item) => item.id === id);
     return actuator && actuator.quantity;
   };
 
-  const actuatorSelect: number | undefined = useMemo(handleSelectActuator, [values.selectedActuator.value]);
+  const actuatorSelect: number | undefined = useMemo(handleActuatorQuantity, [values.selectedActuator]);
 
   const handleSelectBoard = (event: ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.currentTarget.value;
@@ -246,7 +246,7 @@ const Create: React.FC = () => {
   }, [fetchAll]);
 
   useEffect(() => {
-    if (handleSelectActuator() === 3) {
+    if (handleActuatorQuantity() === 3) {
       setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '3' } }));
     } else {
       setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '' } }));
