@@ -144,19 +144,19 @@ const Create: React.FC = () => {
     const sensor = extract('SENSOR', values.selectedSensor.value);
     const actuator = extract('ACTUATOR', values.selectedActuator.value);
 
-    const codeIFRS = `
-    ${sensor?.include}
-    ${actuator?.include}
-    const int act_num=${values.selectedActuator.quantity};
-    const int sen_num=${values.selectedSensor.quantity};
-    ${sensor?.code}
-    ${actuator?.code}
-    ${state?.fixed?.map((elem) => elem?.code)}
+    const newCode = `
+    ${sensor?.include || ''}
+    ${actuator?.include || ''}
+    const int act_num=${values.selectedActuator.quantity || ''};
+    const int sen_num=${values.selectedSensor.quantity || ''};
+    ${sensor?.code || ''}
+    ${actuator?.code || ''}
+    ${state?.fixed?.map((elem) => elem?.code) || ''}
     `;
 
     setValues((prev) => ({
       ...prev,
-      code: codeIFRS,
+      code: newCode,
     }));
   };
 
@@ -297,50 +297,52 @@ const Create: React.FC = () => {
           </Col>
         </Row>
 
-        <Row className={clsx(['justify-content-md-center', style.row])}>
-          <Col>
-            <>
-              <Form.Label>{'Select the SENSOR'}</Form.Label>
-              <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelectSensor(event, 'value')}>
-                <option key="0" value="" disabled>
-                  {'Select one option:'}
-                </option>
-                {state?.sensors?.map((item) => optionHTML(item))}
-              </Form.Select>
-            </>
-
-            {values.selectedSensor.value && (
+        {values.selectedBoard && (
+          <Row className={clsx(['justify-content-md-center', style.row])}>
+            <Col>
               <>
-                <br />
-                <Form.Label>{'Select the quantity of SENSORS'}</Form.Label>
-                <Form.Select
-                  aria-label="quantity-sensors"
-                  value={values.selectedSensor.quantity}
-                  onChange={(event) => handleSelectSensor(event, 'quantity')}
-                >
+                <Form.Label>{'Select the SENSOR'}</Form.Label>
+                <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelectSensor(event, 'value')}>
                   <option key="0" value="" disabled>
                     {'Select one option:'}
                   </option>
-                  {quantitySelect?.map((item) => optionSimpleHTML(item))}
+                  {state?.sensors?.map((item) => optionHTML(item))}
                 </Form.Select>
               </>
-            )}
-          </Col>
 
-          <Col>
-            <>
-              <Form.Label>{'Select the ACTUATOR'}</Form.Label>
-              <Form.Select aria-label="actuators" defaultValue={'0'} onChange={(event) => handleChangeActuator(event, 'value')}>
-                <option key="0" value="0" disabled>
-                  {'Select one option:'}
-                </option>
-                {state?.actuators?.map((item) => optionHTML(item))}
-              </Form.Select>
-            </>
+              {values.selectedSensor.value && (
+                <>
+                  <br />
+                  <Form.Label>{'Select the quantity of SENSORS'}</Form.Label>
+                  <Form.Select
+                    aria-label="quantity-sensors"
+                    value={values.selectedSensor.quantity}
+                    onChange={(event) => handleSelectSensor(event, 'quantity')}
+                  >
+                    <option key="0" value="" disabled>
+                      {'Select one option:'}
+                    </option>
+                    {quantitySelect?.map((item) => optionSimpleHTML(item))}
+                  </Form.Select>
+                </>
+              )}
+            </Col>
 
-            {values.selectedActuator.value && actuatorSelectHTML}
-          </Col>
-        </Row>
+            <Col>
+              <>
+                <Form.Label>{'Select the ACTUATOR'}</Form.Label>
+                <Form.Select aria-label="actuators" defaultValue={'0'} onChange={(event) => handleChangeActuator(event, 'value')}>
+                  <option key="0" value="0" disabled>
+                    {'Select one option:'}
+                  </option>
+                  {state?.actuators?.map((item) => optionHTML(item))}
+                </Form.Select>
+              </>
+
+              {values.selectedActuator.value && actuatorSelectHTML}
+            </Col>
+          </Row>
+        )}
 
         <Row>
           <Col>
