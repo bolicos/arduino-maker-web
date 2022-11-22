@@ -5,151 +5,127 @@ import { Button, Card, Col, Collapse, Container, Form, ProgressBar, Row } from '
 import Code from '#/components/Code';
 import Header from '#/components/Header';
 import Loading from '#/components/Loading';
-import { Block } from '#/models/classes/classes';
-import BffController from '#/controllers/bff';
+import { Block } from '#/models/blocks';
 
 import style from './style.module.scss';
 import { Board } from '#/models/boards';
+import bff from '#/controllers/bff';
 
 type State = {
-  sensors: Array<Block>;
-  actuators: Array<Block>;
   boards: Array<Board>;
-  fixed: Block;
+  actuators: Array<Block>;
+  sensors: Array<Block>;
+  fixed: Array<Block>;
+};
+
+type Values = {
   code: string;
-  sensor: string;
-  actuator: string;
-  quantitySensor: string;
-  quantityActuator: string;
-  board: string;
+  selectedBoard: string;
+  selectedSensor: {
+    value: string;
+    quantity: string;
+  };
+  selectedActuator: {
+    value: string;
+    quantity: string;
+  };
 };
 
 const Create: React.FC = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
-  const [state, setState] = useState<State>({
-    sensors: [],
-    actuators: [],
-    boards: [Board.ARDUINO_UNO, Board.NODE_MCU_ESP8266, Board.RASPBERRY_PI_PICO_V3],
-    fixed: {
-      id: '',
-      name: '',
-      code: '',
-      include: '',
-      type: '',
-      quantity: 0,
-    },
+  const [state, setState] = useState<State>();
+  const [values, setValues] = useState<Values>({
     code: '',
-    sensor: '',
-    actuator: '',
-    quantitySensor: '',
-    quantityActuator: '',
-    board: '',
+    selectedBoard: '',
+    selectedSensor: {
+      value: '',
+      quantity: '',
+    },
+    selectedActuator: {
+      value: '',
+      quantity: '',
+    },
   });
 
   const quantitySelect = ['1', '2', '3'];
   const title = 'SmartCode';
 
-  const fetchBlocks = useCallback(async () => {
-    setLoading(true);
-
-    BffController.getActuators()
-      .then((response) => {
-        setState((prev) => ({
-          ...prev,
-          actuators: response.data,
-        }));
-      })
-      .catch((reason) => {
-        console.error(reason);
-      })
-      .finally(() => setLoading(false));
-
-    BffController.getSensors()
-      .then((response) => {
-        setState((prev) => ({
-          ...prev,
-          sensors: response.data,
-        }));
-      })
-      .catch((reason) => {
-        console.error(reason);
-      })
-      .finally(() => setLoading(false));
-
-    BffController.getFixed()
-      .then((response) => {
-        setState((prev) => ({
-          ...prev,
-          fixed: response.data,
-        }));
-      })
-      .catch((reason) => {
-        console.error(reason);
-      })
-      .finally(() => setLoading(false));
-
-    setLoading(false);
-  }, []);
-
   const extract = (type: string, id: string) => {
-    const sensors = state.sensors;
-    const actuators = state.actuators;
-    return type === 'SENSOR' ? sensors.find((item) => item.id === id) : actuators.find((item) => item.id === id);
-  };
-
-  const handleSelectActuator = () => {
-    const id = state.actuator;
-    const actuator = state.actuators.find((item) => item.id === id);
-    return actuator && actuator.quantity;
+    const sensors = state?.sensors;
+    const actuators = state?.actuators;
+    return type === 'SENSOR' ? sensors?.find((item) => item.id === id) : actuators?.find((item) => item.id === id);
   };
 
   const handleProgress = () => {
-    const array = [state.sensor, state.actuator, state.quantitySensor, state.quantityActuator];
-    const values: Array<number> = array.map((key) => (key === '' ? 0 : 25));
+    const array = [
+      values.selectedBoard,
+      values.selectedActuator.value,
+      values.selectedSensor.value,
+      values.selectedActuator.quantity,
+      values.selectedSensor.quantity,
+    ];
+    const allValues: Array<number> = array.map((key) => (key === '' ? 0 : 25));
 
-    return values.reduce((a, b) => a + b, 0);
+    return allValues.reduce((a, b) => a + b, 0);
   };
+
+  const progress: number = useMemo(handleProgress, [
+    values.selectedBoard,
+    values.selectedActuator.value,
+    values.selectedSensor.value,
+    values.selectedActuator.quantity,
+    values.selectedSensor.quantity,
+  ]);
+
+  const handleSelectActuator = () => {
+    const id = values.selectedActuator.value;
+    const actuator = state?.actuators?.find((item) => item.id === id);
+    return actuator && actuator.quantity;
+  };
+
+  const actuatorSelect: number | undefined = useMemo(handleSelectActuator, [values.selectedActuator.value]);
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>, type: string) => {
     const newValue = event.currentTarget.value;
 
-    setState((prev) => ({
+    setValues((prev) => ({
       ...prev,
       [type]: newValue,
     }));
   };
 
-  const progress: number = useMemo(handleProgress, [state.sensor, state.actuator, state.quantitySensor, state.quantityActuator]);
-
-  const actuatorSelect: number | undefined = useMemo(handleSelectActuator, [state.actuator]);
-
   const handleGenerateCode = () => {
-    const sensor = extract('SENSOR', state.sensor);
-    const actuator = extract('ACTUATOR', state.actuator);
+    const sensor = extract('SENSOR', values.selectedSensor.value);
+    const actuator = extract('ACTUATOR', values.selectedActuator.value);
 
     const codeIFRS = `
     ${sensor?.include}
     ${actuator?.include}
-    const int act_num=${state.quantityActuator};
-    const int sen_num=${state.quantitySensor};
+    const int act_num=${values.selectedActuator.quantity};
+    const int sen_num=${values.selectedSensor.quantity};
     ${sensor?.code}
     ${actuator?.code}
-    ${state.fixed?.code}
+    ${state?.fixed?.map((elem) => elem?.code)}
     `;
 
-    setState((prev) => ({
+    setValues((prev) => ({
       ...prev,
       code: codeIFRS,
     }));
   };
 
-  const progressClass = progress === 100 ? 'success' : 'info';
-  const expandOrCollapse = open === true ? 'COLLAPSE' : 'EXPAND';
-
   const optionHTML = (item: Block) => {
     return (
       <option key={item.id} value={item.id}>
+        {item.name}
+      </option>
+    );
+  };
+
+  const optionBoardHTML = (item: Board) => {
+    return (
+      <option key={item.type} value={item.type}>
         {item.name}
       </option>
     );
@@ -170,9 +146,9 @@ const Create: React.FC = () => {
         <Form.Label>{'Select the quantity of ACTUATORS'}</Form.Label>
         <Form.Select
           aria-label="quantity-actuators"
-          value={state.actuator}
+          value={values.selectedActuator.value}
           disabled
-          onChange={(event) => handleSelectChange(event, 'quantityActuator')}
+          onChange={(event) => handleSelectChange(event, 'selectedActuator.value')}
         >
           <option key="0" value="3">
             {'3'}
@@ -185,8 +161,8 @@ const Create: React.FC = () => {
         <Form.Label>{'Select the quantity of ACTUATORS'}</Form.Label>
         <Form.Select
           aria-label="quantity-actuators"
-          value={state.quantityActuator}
-          onChange={(event) => handleSelectChange(event, 'quantityActuator')}
+          value={values.selectedActuator.quantity}
+          onChange={(event) => handleSelectChange(event, 'selectedActuator.quantity')}
         >
           <option key="0" value="" disabled>
             {'Select one option:'}
@@ -196,28 +172,53 @@ const Create: React.FC = () => {
       </>
     );
 
+  const progressClass = progress === 100 ? 'success' : 'info';
+  const expandOrCollapse = open === true ? 'COLLAPSE' : 'EXPAND';
+
+  const fetchAll = useCallback(async () => {
+    setLoading(true);
+
+    try {
+      const data1 = await bff.getActuators();
+      const data2 = await bff.getSensors();
+      const data3 = await bff.getBoards();
+      const data4 = await bff.getFixed();
+
+      setState(() => ({
+        actuators: data1.data,
+        sensors: data2.data,
+        boards: data3.data,
+        fixed: data4.data,
+      }));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
-    fetchBlocks();
-  }, [fetchBlocks]);
+    fetchAll();
+  }, [fetchAll]);
 
   useEffect(() => {
     if (handleSelectActuator() === 3) {
-      setState((prev) => ({ ...prev, quantityActuator: '3' }));
+      setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '3' } }));
     } else {
-      setState((prev) => ({ ...prev, quantityActuator: '' }));
+      setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '' } }));
     }
-  }, [state.actuator]);
+  }, [values.selectedActuator.value]);
 
   useEffect(() => {
-    setState((prev) => ({ ...prev, quantitySensor: '' }));
-  }, [state.sensor]);
+    setValues((prev) => ({ ...prev, selectedSensor: { ...prev.selectedSensor, quantity: '' } }));
+  }, [values.selectedSensor.value]);
 
   useEffect(() => {
-    if (state.quantitySensor && state.quantityActuator) {
+    if (values.selectedSensor.quantity && values.selectedActuator.quantity) {
       handleGenerateCode();
       setOpen(true);
     }
-  }, [state.quantitySensor, state.quantityActuator]);
+  }, [values.selectedBoard, values.selectedSensor.quantity, values.selectedActuator.quantity]);
 
   return isLoading ? (
     <Loading />
@@ -246,7 +247,7 @@ const Create: React.FC = () => {
               <option key="0" value="" disabled>
                 {'Select one option:'}
               </option>
-              {state.boards?.map((item) => optionSimpleHTML(item))}
+              {state?.boards?.map((item) => optionBoardHTML(item))}
             </Form.Select>
           </Col>
         </Row>
@@ -255,22 +256,22 @@ const Create: React.FC = () => {
           <Col>
             <>
               <Form.Label>{'Select the SENSOR'}</Form.Label>
-              <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelectChange(event, 'sensor')}>
+              <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelectChange(event, 'selectedSensor.value')}>
                 <option key="0" value="" disabled>
                   {'Select one option:'}
                 </option>
-                {state.sensors?.map((item) => optionHTML(item))}
+                {state?.sensors?.map((item) => optionHTML(item))}
               </Form.Select>
             </>
 
-            {state.sensor && (
+            {values.selectedSensor.value && (
               <>
                 <br />
                 <Form.Label>{'Select the quantity of SENSORS'}</Form.Label>
                 <Form.Select
                   aria-label="quantity-sensors"
-                  value={state.quantitySensor}
-                  onChange={(event) => handleSelectChange(event, 'quantitySensor')}
+                  value={values.selectedSensor.quantity}
+                  onChange={(event) => handleSelectChange(event, 'selectedSensor.quantity')}
                 >
                   <option key="0" value="" disabled>
                     {'Select one option:'}
@@ -284,15 +285,19 @@ const Create: React.FC = () => {
           <Col>
             <>
               <Form.Label>{'Select the ACTUATOR'}</Form.Label>
-              <Form.Select aria-label="actuators" defaultValue={'0'} onChange={(event) => handleSelectChange(event, 'actuator')}>
+              <Form.Select
+                aria-label="actuators"
+                defaultValue={'0'}
+                onChange={(event) => handleSelectChange(event, 'selectedActuator.value')}
+              >
                 <option key="0" value="0" disabled>
                   {'Select one option:'}
                 </option>
-                {state.actuators?.map((item) => optionHTML(item))}
+                {state?.actuators?.map((item) => optionHTML(item))}
               </Form.Select>
             </>
 
-            {state.actuator && actuatorSelectHTML}
+            {values.selectedActuator.value && actuatorSelectHTML}
           </Col>
         </Row>
 
@@ -304,7 +309,7 @@ const Create: React.FC = () => {
           </Col>
         </Row>
 
-        {progress === 100 && state.code && (
+        {progress === 100 && values.code && (
           <Row>
             <Col>
               <Card>
@@ -313,7 +318,7 @@ const Create: React.FC = () => {
                   <Button onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>
                     {expandOrCollapse}
                   </Button>
-                  <Button variant={'dark'} onClick={() => navigator.clipboard.writeText(state.code)}>
+                  <Button variant={'dark'} onClick={() => navigator.clipboard.writeText(values.code)}>
                     COPY
                   </Button>
                 </Card.Header>
@@ -322,7 +327,7 @@ const Create: React.FC = () => {
                   <blockquote className="blockquote mb-0">
                     <Collapse in={open}>
                       <div>
-                        <Code code={state.code} language={'arduino'} />
+                        <Code code={values.code} language={'arduino'} />
                       </div>
                     </Collapse>
                     <footer className="blockquote-footer">

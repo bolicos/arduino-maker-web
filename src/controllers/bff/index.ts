@@ -1,34 +1,35 @@
-import { Block } from "#/models/classes/classes";
-import { BFF_INSTANCE, Bff, Get, ListDto, ObjectDto } from "#/controllers/server";
+import { BFF_INSTANCE, Bff, ListDto } from '#/controllers/server';
+import { Block } from '#/models/blocks';
+import { Board } from '#/models/boards';
 
 const ENDPOINTS = {
-  BLOCKS: "/api/v1/blocks",
-  ACTUATORS: "/api/v1/blocks/actuators",
-  SENSORS: "/api/v1/blocks/sensors",
-  FIXED: "/api/v1/blocks/fixed",
+  BLOCKS: '/api/v1/boards',
+  ACTUATORS: '/api/v1/blocks/actuators',
+  SENSORS: '/api/v1/blocks/sensors',
+  FIXED: '/api/v1/blocks/fixed',
 };
 
 class BffController {
-  private GET: Get;
+  private BFF: Bff;
 
   constructor(service: Bff) {
-    this.GET = service.get;
+    this.BFF = service;
   }
 
-  getBlocks(): ListDto<Block> {
-    return this.GET(ENDPOINTS.BLOCKS);
+  getBoards(): ListDto<Board> {
+    return this.BFF.get(ENDPOINTS.BLOCKS);
   }
 
   getActuators(): ListDto<Block> {
-    return this.GET(ENDPOINTS.ACTUATORS);
+    return this.BFF.get(ENDPOINTS.ACTUATORS);
   }
 
   getSensors(): ListDto<Block> {
-    return this.GET(ENDPOINTS.SENSORS);
+    return this.BFF.get(ENDPOINTS.SENSORS);
   }
 
-  getFixed(): ObjectDto<Block> {
-    return this.GET(ENDPOINTS.FIXED);
+  getFixed(): ListDto<Block> {
+    return this.BFF.get(ENDPOINTS.FIXED);
   }
 }
 
