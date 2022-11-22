@@ -348,6 +348,7 @@ const Create: React.FC = () => {
             <br />
             <p>{'Progress'}</p>
             <ProgressBar animated now={progress} variant={progressClass} />
+            <br />
           </Col>
         </Row>
 
