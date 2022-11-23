@@ -269,8 +269,7 @@ const Create: React.FC = () => {
   useEffect(() => {
     if (values.selectedBoard !== '') {
       setValues((prev) => ({
-        ...prev,
-        INITIAL_VALUES,
+        ...INITIAL_VALUES,
         selectedBoard: prev.selectedBoard,
       }));
     }
