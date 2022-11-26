@@ -10,6 +10,7 @@ import { Block } from '#/models/blocks';
 import style from './style.module.scss';
 import { Board } from '#/models/boards';
 import bff from '#/controllers/bff';
+import Helpers from '#/utils/Functions';
 
 type State = {
   boards: Array<Board>;
@@ -53,11 +54,11 @@ const Create: React.FC = () => {
   const quantitySelect = ['1', '2', '3'];
   const title = 'SmartCode';
 
-  const extract = (type: 'SENSOR' | 'ACTUATOR', id: string) => {
-    const sensors = state?.sensors;
-    const actuators = state?.actuators;
-    return type === 'SENSOR' ? sensors?.find((item) => item.id === id) : actuators?.find((item) => item.id === id);
-  };
+  // const extract = (type: 'SENSOR' | 'ACTUATOR', id: string) => {
+  //   const sensors = state?.sensors;
+  //   const actuators = state?.actuators;
+  //   return type === 'SENSOR' ? sensors?.find((item) => item.id === id) : actuators?.find((item) => item.id === id);
+  // };
 
   const handleProgress = () => {
     const array = [
@@ -73,7 +74,8 @@ const Create: React.FC = () => {
   };
 
   const handleActuatorQuantity = () => {
-    const actuator = extract('ACTUATOR', values.selectedActuator.value);
+    // const actuator = extract('ACTUATOR', values.selectedActuator.value);
+    const actuator = Helpers.find(state?.actuators || [], values.selectedActuator.value, 'id');
 
     return actuator && actuator.quantity;
   };
@@ -142,8 +144,11 @@ const Create: React.FC = () => {
   };
 
   const handleGenerateCode = () => {
-    const sensor = extract('SENSOR', values.selectedSensor.value);
-    const actuator = extract('ACTUATOR', values.selectedActuator.value);
+    // const sensor = extract('SENSOR', values.selectedSensor.value);
+    // const actuator = extract('ACTUATOR', values.selectedActuator.value);
+
+    const sensor = Helpers.find(state?.sensors || [], values.selectedSensor.value, 'id');
+    const actuator = Helpers.find(state?.actuators || [], values.selectedActuator.value, 'id');
 
     const newCode = `
     ${sensor?.include || ''}

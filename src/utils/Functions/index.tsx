@@ -1,11 +1,11 @@
-type TypeBoard = 'SENSOR' | 'ACTUATOR';
+// type TypeBoard = 'SENSOR' | 'ACTUATOR';
 
-export default class Functions {
+export default class Helpers {
   static frutas = () => {
     return '';
   };
 
-  static find = <V,>(list: Array<V>, value: string, key: keyof V, type: TypeBoard) => {
+  static find = <V,>(list: Array<V>, value: string, key: keyof V) => {
     return list.find((item) => item[key] === value);
   };
 }
