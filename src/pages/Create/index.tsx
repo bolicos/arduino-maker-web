@@ -1,18 +1,18 @@
 import clsx from 'clsx';
 import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { Button, Card, Col, Collapse, Container, Form, ProgressBar, Row } from 'react-bootstrap';
+import { Button, Card, Col, Collapse, Container, ProgressBar, Row } from 'react-bootstrap';
 
 import Code from '#/components/Code';
 import Header from '#/components/Header';
+import Select from '#/components/Select';
 import Loading from '#/components/Loading';
 
-import { Block } from '#/models/blocks';
+import { ActionsType, Block } from '#/models/blocks';
 import { Board } from '#/models/boards';
 
 import bff from '#/controllers/bff';
 
 import Helpers from '#/utils/Functions';
-import Htmls from '#/utils/Htmls';
 
 import style from './style.module.scss';
 
@@ -91,17 +91,17 @@ const Create: React.FC = () => {
     return actuator && actuator.quantity;
   };
 
-  const handleSelect = (event: ChangeEvent<HTMLSelectElement>, type: 1 | 2 | 3 | 4 | 5) => {
+  const handleSelect = (event: ChangeEvent<HTMLSelectElement>, type: ActionsType) => {
     const newValue = event.currentTarget.value;
 
     switch (type) {
-      case 1:
+      case ActionsType.BOARD:
         setValues((prev) => ({
           ...prev,
           selectedBoard: newValue,
         }));
         break;
-      case 2:
+      case ActionsType.SENSOR_VALUE:
         setValues((prev) => ({
           ...prev,
           selectedSensor: {
@@ -110,7 +110,7 @@ const Create: React.FC = () => {
           },
         }));
         break;
-      case 3:
+      case ActionsType.SENSOR_QUANTITY:
         setValues((prev) => ({
           ...prev,
           selectedSensor: {
@@ -120,7 +120,7 @@ const Create: React.FC = () => {
         }));
         break;
 
-      case 4:
+      case ActionsType.ACTUATOR_VALUE:
         setValues((prev) => ({
           ...prev,
           selectedActuator: {
@@ -129,7 +129,7 @@ const Create: React.FC = () => {
           },
         }));
         break;
-      case 5:
+      case ActionsType.ACTUATOR_QUANTITY:
         setValues((prev) => ({
           ...prev,
           selectedActuator: {
@@ -269,73 +269,68 @@ const Create: React.FC = () => {
 
         <Row className={clsx(['justify-content-md-center', style.board])}>
           <Col>
-            <Form.Label>{'Select the BOARD'}</Form.Label>
-            <Form.Select aria-label="boards" defaultValue={''} onChange={(event) => handleSelect(event, 1)}>
-              <option key="0" value="" disabled>
-                {'Select one option:'}
-              </option>
-              {state?.boards?.map((item) => Htmls.optionBoardHTML(item))}
-            </Form.Select>
+            <Select
+              label={'Select the BOARD'}
+              ariaLabel={'boards'}
+              value={values.selectedBoard}
+              array={state?.boards}
+              handle={handleSelect}
+              type={ActionsType.BOARD}
+            />
           </Col>
         </Row>
 
         {values.selectedBoard && (
           <Row className={clsx(['justify-content-md-center', style.row])}>
             <Col>
-              <>
-                <Form.Label>{'Select the SENSOR'}</Form.Label>
-                <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelect(event, 2)}>
-                  <option key="0" value="" disabled>
-                    {'Select one option:'}
-                  </option>
-                  {state?.sensors?.map((item) => Htmls.optionHTML(item))}
-                </Form.Select>
-              </>
+              <Select
+                label={'Select the SENSOR'}
+                ariaLabel={'sensors'}
+                value={values.selectedSensor.value}
+                array={state?.sensors}
+                handle={handleSelect}
+                type={ActionsType.SENSOR_VALUE}
+              />
 
               {values.selectedSensor.value && (
                 <>
                   <br />
-                  <Form.Label>{'Select the quantity of SENSORS'}</Form.Label>
-                  <Form.Select
-                    aria-label="quantity-sensors"
+
+                  <Select
+                    label={'Select the quantity of SENSORS'}
+                    ariaLabel={'quantity-sensors'}
                     value={values.selectedSensor.quantity}
-                    onChange={(event) => handleSelect(event, 3)}
-                  >
-                    <option key="0" value="" disabled>
-                      {'Select one option:'}
-                    </option>
-                    {QUANTITY?.map((item) => Htmls.optionSimpleHTML(item))}
-                  </Form.Select>
+                    array={QUANTITY}
+                    handle={handleSelect}
+                    type={ActionsType.SENSOR_QUANTITY}
+                  />
                 </>
               )}
             </Col>
 
             <Col>
-              <>
-                <Form.Label>{'Select the ACTUATOR'}</Form.Label>
-                <Form.Select aria-label="actuators" defaultValue={'0'} onChange={(event) => handleSelect(event, 4)}>
-                  <option key="0" value="0" disabled>
-                    {'Select one option:'}
-                  </option>
-                  {state?.actuators?.map((item) => Htmls.optionHTML(item))}
-                </Form.Select>
-              </>
+              <Select
+                label={'Select the ACTUATOR'}
+                ariaLabel={'actuators'}
+                value={values.selectedActuator.value}
+                array={state?.actuators}
+                handle={handleSelect}
+                type={ActionsType.ACTUATOR_VALUE}
+              />
 
               {values.selectedActuator.value && (
                 <>
                   <br />
-                  <Form.Label>{'Select the quantity of ACTUATORS'}</Form.Label>
-                  <Form.Select
-                    aria-label="quantity-actuators"
+
+                  <Select
+                    label={'Select the quantity of ACTUATORS'}
+                    ariaLabel={'quantity-actuators'}
                     value={values.selectedActuator.quantity}
-                    onChange={(event) => handleSelect(event, 5)}
+                    array={QUANTITY}
+                    handle={handleSelect}
+                    type={ActionsType.ACTUATOR_QUANTITY}
                     disabled={actuatorSelect === 3}
-                  >
-                    <option key="0" value="" disabled>
-                      {'Select one option:'}
-                    </option>
-                    {QUANTITY?.map((item) => Htmls.optionSimpleHTML(item))}
-                  </Form.Select>
+                  />
                 </>
               )}
             </Col>
