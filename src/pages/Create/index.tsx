@@ -36,7 +36,14 @@ type Values = {
   };
 };
 
-const INITIAL_VALUES = {
+const INITIAL_STATE: State = {
+  boards: [],
+  actuators: [],
+  sensors: [],
+  fixed: [],
+};
+
+const INITIAL_VALUES: Values = {
   code: '',
   selectedBoard: '',
   selectedSensor: {
@@ -53,10 +60,17 @@ const QUANTITY = ['1', '2', '3'];
 const TITLE = 'SmartCode';
 
 const Create: React.FC = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [isLoading, setLoad] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
-  const [state, setState] = useState<State>();
+  const [state, setState] = useState<State>(INITIAL_STATE);
   const [values, setValues] = useState<Values>(INITIAL_VALUES);
+
+  const setStateValue = (key: keyof State, data: Array<any>) => {
+    setState((prev) => ({
+      ...prev,
+      [key]: data,
+    }));
+  };
 
   const handleProgress = () => {
     const array = [
@@ -158,33 +172,62 @@ const Create: React.FC = () => {
   const progressClass = progress === 100 ? 'success' : 'info';
   const expandOrCollapse = open === true ? 'COLLAPSE' : 'EXPAND';
 
-  const fetchAll = useCallback(async () => {
-    setLoading(true);
-    console.log('AQUI', state);
+  const fetchBoard = useCallback(async () => {
+    setLoad(true);
 
-    try {
-      const data1 = await bff.getBoards();
-      const data2 = await bff.getSensors();
-      const data3 = await bff.getActuators();
-      const data4 = await bff.getFixed();
+    bff
+      .getBoards()
+      .then(({ data }) => setStateValue('boards', data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoad(false));
+  }, []);
 
-      setState(() => ({
-        boards: data1.data,
-        sensors: data2.data,
-        actuators: data3.data,
-        fixed: data4.data,
-      }));
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  const fetchFixed = useCallback(async (board: string) => {
+    setLoad(true);
+
+    bff
+      .getFixed(board)
+      .then(({ data }) => setStateValue('fixed', data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoad(false));
+  }, []);
+
+  const fetchSensors = useCallback(async (board: string) => {
+    setLoad(true);
+
+    bff
+      .getSensors(board)
+      .then(({ data }) => setStateValue('sensors', data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoad(false));
+  }, []);
+
+  const fetchActuators = useCallback(async (board: string) => {
+    setLoad(true);
+
+    bff
+      .getActuators(board)
+      .then(({ data }) => setStateValue('actuators', data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoad(false));
   }, []);
 
   useEffect(() => {
-    fetchAll();
-    console.log('STATE', state);
-  }, [fetchAll]);
+    fetchBoard();
+  }, [fetchBoard]);
+
+  useEffect(() => {
+    if (values.selectedBoard !== '') {
+      fetchFixed(values.selectedBoard);
+      fetchSensors(values.selectedBoard);
+      fetchActuators(values.selectedBoard);
+
+      setValues((prev) => ({
+        ...INITIAL_VALUES,
+        selectedBoard: prev.selectedBoard,
+      }));
+    }
+  }, [values.selectedBoard, fetchFixed, fetchSensors, fetchActuators]);
 
   useEffect(() => {
     if (actuatorSelect === 3) {
@@ -204,15 +247,6 @@ const Create: React.FC = () => {
       setOpen(true);
     }
   }, [values.selectedSensor.quantity, values.selectedActuator.quantity]);
-
-  useEffect(() => {
-    if (values.selectedBoard !== '') {
-      setValues((prev) => ({
-        ...INITIAL_VALUES,
-        selectedBoard: prev.selectedBoard,
-      }));
-    }
-  }, [values.selectedBoard]);
 
   return (
     <Container fluid>

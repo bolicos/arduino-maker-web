@@ -20,16 +20,34 @@ class BffController {
     return this.BFF.get(ENDPOINTS.BLOCKS);
   }
 
-  getActuators(): ListDto<Block> {
-    return this.BFF.get(ENDPOINTS.ACTUATORS);
+  getFixed(board?: string | undefined): ListDto<Block> {
+    return board
+      ? this.BFF.get(ENDPOINTS.FIXED, {
+          params: {
+            board: board,
+          },
+        })
+      : this.BFF.get(ENDPOINTS.FIXED);
   }
 
-  getSensors(): ListDto<Block> {
-    return this.BFF.get(ENDPOINTS.SENSORS);
+  getSensors(board?: string | undefined): ListDto<Block> {
+    return board
+      ? this.BFF.get(ENDPOINTS.SENSORS, {
+          params: {
+            board: board,
+          },
+        })
+      : this.BFF.get(ENDPOINTS.SENSORS);
   }
 
-  getFixed(): ListDto<Block> {
-    return this.BFF.get(ENDPOINTS.FIXED);
+  getActuators(board?: string | undefined): ListDto<Block> {
+    return board
+      ? this.BFF.get(ENDPOINTS.ACTUATORS, {
+          params: {
+            board: board,
+          },
+        })
+      : this.BFF.get(ENDPOINTS.ACTUATORS);
   }
 }
 
