@@ -5,12 +5,16 @@ import { Button, Card, Col, Collapse, Container, Form, ProgressBar, Row } from '
 import Code from '#/components/Code';
 import Header from '#/components/Header';
 import Loading from '#/components/Loading';
+
 import { Block } from '#/models/blocks';
+import { Board } from '#/models/boards';
+
+import bff from '#/controllers/bff';
+
+import Helpers from '#/utils/Functions';
+import Htmls from '#/utils/Htmls';
 
 import style from './style.module.scss';
-import { Board } from '#/models/boards';
-import bff from '#/controllers/bff';
-import Helpers from '#/utils/Functions';
 
 type State = {
   boards: Array<Board>;
@@ -45,27 +49,21 @@ const INITIAL_VALUES = {
   },
 };
 
+const QUANTITY = ['1', '2', '3'];
+const TITLE = 'SmartCode';
+
 const Create: React.FC = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [state, setState] = useState<State>();
   const [values, setValues] = useState<Values>(INITIAL_VALUES);
 
-  const quantitySelect = ['1', '2', '3'];
-  const title = 'SmartCode';
-
-  // const extract = (type: 'SENSOR' | 'ACTUATOR', id: string) => {
-  //   const sensors = state?.sensors;
-  //   const actuators = state?.actuators;
-  //   return type === 'SENSOR' ? sensors?.find((item) => item.id === id) : actuators?.find((item) => item.id === id);
-  // };
-
   const handleProgress = () => {
     const array = [
       values.selectedBoard,
       values.selectedActuator.value,
-      values.selectedSensor.value,
       values.selectedActuator.quantity,
+      values.selectedSensor.value,
       values.selectedSensor.quantity,
     ];
     const allValues: Array<number> = array.map((key) => (key === '' ? 0 : 20));
@@ -74,91 +72,80 @@ const Create: React.FC = () => {
   };
 
   const handleActuatorQuantity = () => {
-    // const actuator = extract('ACTUATOR', values.selectedActuator.value);
     const actuator = Helpers.find(state?.actuators || [], values.selectedActuator.value, 'id');
 
     return actuator && actuator.quantity;
   };
 
-  const progress: number = useMemo(handleProgress, [
-    values.selectedBoard,
-    values.selectedActuator.value,
-    values.selectedSensor.value,
-    values.selectedActuator.quantity,
-    values.selectedSensor.quantity,
-  ]);
-
-  const actuatorSelect: number | undefined = useMemo(handleActuatorQuantity, [values.selectedActuator.value]);
-
-  const handleSelectBoard = (event: ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = (event: ChangeEvent<HTMLSelectElement>, type: 1 | 2 | 3 | 4 | 5) => {
     const newValue = event.currentTarget.value;
 
-    setValues((prev) => ({
-      ...prev,
-      selectedBoard: newValue,
-    }));
-  };
+    switch (type) {
+      case 1:
+        setValues((prev) => ({
+          ...prev,
+          selectedBoard: newValue,
+        }));
+        break;
+      case 2:
+        setValues((prev) => ({
+          ...prev,
+          selectedSensor: {
+            ...prev.selectedSensor,
+            value: newValue,
+          },
+        }));
+        break;
+      case 3:
+        setValues((prev) => ({
+          ...prev,
+          selectedSensor: {
+            ...prev.selectedSensor,
+            quantity: newValue,
+          },
+        }));
+        break;
 
-  const handleSelectSensor = (event: ChangeEvent<HTMLSelectElement>, type: 'value' | 'quantity') => {
-    const newValue = event.currentTarget.value;
-
-    if (type === 'value') {
-      setValues((prev) => ({
-        ...prev,
-        selectedSensor: {
-          ...prev.selectedSensor,
-          value: newValue,
-        },
-      }));
-    } else {
-      setValues((prev) => ({
-        ...prev,
-        selectedSensor: {
-          ...prev.selectedSensor,
-          quantity: newValue,
-        },
-      }));
-    }
-  };
-
-  const handleChangeActuator = (event: ChangeEvent<HTMLSelectElement>, type: 'value' | 'quantity') => {
-    const newValue = event.currentTarget.value;
-
-    if (type === 'value') {
-      setValues((prev) => ({
-        ...prev,
-        selectedActuator: {
-          ...prev.selectedActuator,
-          value: newValue,
-        },
-      }));
-    } else {
-      setValues((prev) => ({
-        ...prev,
-        selectedActuator: {
-          ...prev.selectedActuator,
-          quantity: newValue,
-        },
-      }));
+      case 4:
+        setValues((prev) => ({
+          ...prev,
+          selectedActuator: {
+            ...prev.selectedActuator,
+            value: newValue,
+          },
+        }));
+        break;
+      case 5:
+        setValues((prev) => ({
+          ...prev,
+          selectedActuator: {
+            ...prev.selectedActuator,
+            quantity: newValue,
+          },
+        }));
+        break;
+      default:
+        break;
     }
   };
 
   const handleGenerateCode = () => {
-    // const sensor = extract('SENSOR', values.selectedSensor.value);
-    // const actuator = extract('ACTUATOR', values.selectedActuator.value);
-
     const sensor = Helpers.find(state?.sensors || [], values.selectedSensor.value, 'id');
     const actuator = Helpers.find(state?.actuators || [], values.selectedActuator.value, 'id');
+    const board = Helpers.find(state?.boards || [], values.selectedBoard, 'type');
 
-    const newCode = `
-    ${sensor?.include || ''}
-    ${actuator?.include || ''}
-    const int act_num=${values.selectedActuator.quantity || ''};
-    const int sen_num=${values.selectedSensor.quantity || ''};
-    ${sensor?.code || ''}
-    ${actuator?.code || ''}
-    ${state?.fixed?.map((elem) => elem?.code) || ''}
-    `;
+    const props: Parameters<typeof Helpers.generateCode> = [
+      {
+        sensor: sensor,
+        actuator: actuator,
+        board: board,
+        actuatorQuantity: values.selectedActuator.quantity,
+        sensorQuantity: values.selectedSensor.quantity,
+        fixed: state?.fixed?.map((elem) => elem.code) || [''],
+      },
+    ];
+
+    const newCode = Helpers.generateCode(props[0]);
 
     setValues((prev) => ({
       ...prev,
@@ -166,79 +153,25 @@ const Create: React.FC = () => {
     }));
   };
 
-  const optionHTML = (item: Block) => {
-    return (
-      <option key={item.id} value={item.id}>
-        {item.name}
-      </option>
-    );
-  };
-
-  const optionBoardHTML = (item: Board) => {
-    return (
-      <option key={item.type} value={item.type}>
-        {item.name}
-      </option>
-    );
-  };
-
-  const optionSimpleHTML = (item: string) => {
-    return (
-      <option key={item} value={item}>
-        {item}
-      </option>
-    );
-  };
-
-  const actuatorSelectHTML =
-    actuatorSelect === 3 ? (
-      <>
-        <br />
-        <Form.Label>{'Select the quantity of ACTUATORS'}</Form.Label>
-        <Form.Select
-          aria-label="quantity-actuators"
-          value={values.selectedActuator.value}
-          disabled
-          onChange={(event) => handleChangeActuator(event, 'value')}
-        >
-          <option key="0" value="3">
-            {'3'}
-          </option>
-        </Form.Select>
-      </>
-    ) : (
-      <>
-        <br />
-        <Form.Label>{'Select the quantity of ACTUATORS'}</Form.Label>
-        <Form.Select
-          aria-label="quantity-actuators"
-          value={values.selectedActuator.quantity}
-          onChange={(event) => handleChangeActuator(event, 'quantity')}
-        >
-          <option key="0" value="" disabled>
-            {'Select one option:'}
-          </option>
-          {quantitySelect?.map((item) => optionSimpleHTML(item))}
-        </Form.Select>
-      </>
-    );
-
+  const progress: number = useMemo(handleProgress, [values.selectedBoard, values.selectedActuator, values.selectedSensor]);
+  const actuatorSelect: number | undefined = useMemo(handleActuatorQuantity, [values.selectedActuator.value]);
   const progressClass = progress === 100 ? 'success' : 'info';
   const expandOrCollapse = open === true ? 'COLLAPSE' : 'EXPAND';
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
+    console.log('AQUI', state);
 
     try {
-      const data1 = await bff.getActuators();
+      const data1 = await bff.getBoards();
       const data2 = await bff.getSensors();
-      const data3 = await bff.getBoards();
+      const data3 = await bff.getActuators();
       const data4 = await bff.getFixed();
 
       setState(() => ({
-        actuators: data1.data,
+        boards: data1.data,
         sensors: data2.data,
-        boards: data3.data,
+        actuators: data3.data,
         fixed: data4.data,
       }));
     } catch (error) {
@@ -250,6 +183,7 @@ const Create: React.FC = () => {
 
   useEffect(() => {
     fetchAll();
+    console.log('STATE', state);
   }, [fetchAll]);
 
   useEffect(() => {
@@ -280,12 +214,11 @@ const Create: React.FC = () => {
     }
   }, [values.selectedBoard]);
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <Container fluid>
+      <Loading show={isLoading} />
       <Row>
-        <Header title={title} />
+        <Header title={TITLE} />
       </Row>
 
       <Row className="col-md-10 mx-auto">
@@ -294,7 +227,7 @@ const Create: React.FC = () => {
             <div>
               <br />
             </div>
-            <h1>{title}</h1>
+            <h1>{TITLE}</h1>
           </Col>
         </Row>
 
@@ -303,11 +236,11 @@ const Create: React.FC = () => {
         <Row className={clsx(['justify-content-md-center', style.board])}>
           <Col>
             <Form.Label>{'Select the BOARD'}</Form.Label>
-            <Form.Select aria-label="boards" defaultValue={''} onChange={(event) => handleSelectBoard(event)}>
+            <Form.Select aria-label="boards" defaultValue={''} onChange={(event) => handleSelect(event, 1)}>
               <option key="0" value="" disabled>
                 {'Select one option:'}
               </option>
-              {state?.boards?.map((item) => optionBoardHTML(item))}
+              {state?.boards?.map((item) => Htmls.optionBoardHTML(item))}
             </Form.Select>
           </Col>
         </Row>
@@ -317,11 +250,11 @@ const Create: React.FC = () => {
             <Col>
               <>
                 <Form.Label>{'Select the SENSOR'}</Form.Label>
-                <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelectSensor(event, 'value')}>
+                <Form.Select aria-label="sensors" defaultValue={''} onChange={(event) => handleSelect(event, 2)}>
                   <option key="0" value="" disabled>
                     {'Select one option:'}
                   </option>
-                  {state?.sensors?.map((item) => optionHTML(item))}
+                  {state?.sensors?.map((item) => Htmls.optionHTML(item))}
                 </Form.Select>
               </>
 
@@ -332,12 +265,12 @@ const Create: React.FC = () => {
                   <Form.Select
                     aria-label="quantity-sensors"
                     value={values.selectedSensor.quantity}
-                    onChange={(event) => handleSelectSensor(event, 'quantity')}
+                    onChange={(event) => handleSelect(event, 3)}
                   >
                     <option key="0" value="" disabled>
                       {'Select one option:'}
                     </option>
-                    {quantitySelect?.map((item) => optionSimpleHTML(item))}
+                    {QUANTITY?.map((item) => Htmls.optionSimpleHTML(item))}
                   </Form.Select>
                 </>
               )}
@@ -346,15 +279,31 @@ const Create: React.FC = () => {
             <Col>
               <>
                 <Form.Label>{'Select the ACTUATOR'}</Form.Label>
-                <Form.Select aria-label="actuators" defaultValue={'0'} onChange={(event) => handleChangeActuator(event, 'value')}>
+                <Form.Select aria-label="actuators" defaultValue={'0'} onChange={(event) => handleSelect(event, 4)}>
                   <option key="0" value="0" disabled>
                     {'Select one option:'}
                   </option>
-                  {state?.actuators?.map((item) => optionHTML(item))}
+                  {state?.actuators?.map((item) => Htmls.optionHTML(item))}
                 </Form.Select>
               </>
 
-              {values.selectedActuator.value && actuatorSelectHTML}
+              {values.selectedActuator.value && (
+                <>
+                  <br />
+                  <Form.Label>{'Select the quantity of ACTUATORS'}</Form.Label>
+                  <Form.Select
+                    aria-label="quantity-actuators"
+                    value={values.selectedActuator.quantity}
+                    onChange={(event) => handleSelect(event, 5)}
+                    disabled={actuatorSelect === 3}
+                  >
+                    <option key="0" value="" disabled>
+                      {'Select one option:'}
+                    </option>
+                    {QUANTITY?.map((item) => Htmls.optionSimpleHTML(item))}
+                  </Form.Select>
+                </>
+              )}
             </Col>
           </Row>
         )}
@@ -391,7 +340,7 @@ const Create: React.FC = () => {
                     </Collapse>
                     <footer className="blockquote-footer">
                       {'C code generated by '}
-                      <cite title="Source Title">{`${title} IFRS`}</cite>
+                      <cite title="Source Title">{`${TITLE} IFRS`}</cite>
                     </footer>
                   </blockquote>
                 </Card.Body>
