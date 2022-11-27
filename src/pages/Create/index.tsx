@@ -3,6 +3,7 @@ import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'r
 import { Button, Card, Col, Collapse, Container, ProgressBar, Row } from 'react-bootstrap';
 
 import Code from '#/components/Code';
+import Lines from '#/components/Line';
 import Header from '#/components/Header';
 import Select from '#/components/Select';
 import Loading from '#/components/Loading';
@@ -11,7 +12,6 @@ import { ActionsType, Block } from '#/models/blocks';
 import { Board } from '#/models/boards';
 
 import bff from '#/controllers/bff';
-
 import Helpers from '#/utils/Functions';
 
 import style from './style.module.scss';
@@ -251,19 +251,20 @@ const Create: React.FC = () => {
   return (
     <Container fluid>
       <Loading show={isLoading} />
+
       <Row>
         <Header title={TITLE} />
       </Row>
 
       <Row className="col-md-10 mx-auto">
-        <Row className="justify-content-md-center text-center">
-          <Col>
+        <Lines classNames={['justify-content-md-center', 'text-center']}>
+          <>
             <div>
               <br />
             </div>
             <h1>{TITLE}</h1>
-          </Col>
-        </Row>
+          </>
+        </Lines>
 
         <br />
 
@@ -337,18 +338,18 @@ const Create: React.FC = () => {
           </Row>
         )}
 
-        <Row>
-          <Col>
+        <Lines classNames={[]}>
+          <>
             <br />
             <p>{'Progress'}</p>
             <ProgressBar animated now={progress} variant={progressClass} />
             <br />
-          </Col>
-        </Row>
+          </>
+        </Lines>
 
         {progress === 100 && values.code && (
-          <Row>
-            <Col>
+          <Lines classNames={[]}>
+            <>
               <Card>
                 <Card.Header className="d-flex justify-content-between">
                   {'Code'}
@@ -375,8 +376,8 @@ const Create: React.FC = () => {
                 </Card.Body>
               </Card>
               <br />
-            </Col>
-          </Row>
+            </>
+          </Lines>
         )}
       </Row>
     </Container>
