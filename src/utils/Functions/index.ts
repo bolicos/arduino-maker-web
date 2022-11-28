@@ -11,6 +11,7 @@ export type CodeProps = {
   sensorQuantity: string;
   fixed: Array<string>;
 };
+
 export default class Helpers {
   static find = <V>(list: Array<V>, value: string, key: keyof V) => {
     return list.find((item) => item[key] === value);

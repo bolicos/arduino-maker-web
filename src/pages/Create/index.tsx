@@ -159,9 +159,6 @@ const Create: React.FC = () => {
 
     const newCode = Helpers.generateCode(props[0]);
 
-    console.log('AQUI: ', newCode);
-    console.log('PROPS: ', props);
-
     setValues((prev) => ({
       ...prev,
       code: newCode,
