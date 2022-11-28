@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, Card, Col, Collapse, Container, ProgressBar, Row } from 'react-bootstrap';
 
 import Code from '#/components/Code';
@@ -91,9 +91,7 @@ const Create: React.FC = () => {
     return actuator && actuator.quantity;
   };
 
-  const handleSelect = (event: ChangeEvent<HTMLSelectElement>, type: ActionsType) => {
-    const newValue = event.currentTarget.value;
-
+  const handleSelect = (newValue: string, type: ActionsType) => {
     switch (type) {
       case ActionsType.BOARD:
         setValues((prev) => ({
@@ -160,6 +158,9 @@ const Create: React.FC = () => {
     ];
 
     const newCode = Helpers.generateCode(props[0]);
+
+    console.log('AQUI: ', newCode);
+    console.log('PROPS: ', props);
 
     setValues((prev) => ({
       ...prev,
@@ -231,14 +232,14 @@ const Create: React.FC = () => {
 
   useEffect(() => {
     if (actuatorSelect === 3) {
-      setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '3' } }));
+      handleSelect('3', ActionsType.ACTUATOR_QUANTITY);
     } else {
-      setValues((prev) => ({ ...prev, selectedActuator: { ...prev.selectedActuator, quantity: '' } }));
+      handleSelect('', ActionsType.ACTUATOR_QUANTITY);
     }
   }, [values.selectedActuator.value]);
 
   useEffect(() => {
-    setValues((prev) => ({ ...prev, selectedSensor: { ...prev.selectedSensor, quantity: '' } }));
+    handleSelect('', ActionsType.SENSOR_QUANTITY);
   }, [values.selectedSensor.value]);
 
   useEffect(() => {

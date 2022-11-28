@@ -37,7 +37,7 @@ export const Select: React.FC<Props> = ({ label, value, ariaLabel, handle, array
   return (
     <>
       <Form.Label>{label}</Form.Label>
-      <Form.Select aria-label={ariaLabel} value={value} onChange={(event) => handle(event, type)} disabled={disabled}>
+      <Form.Select aria-label={ariaLabel} value={value} onChange={(event) => handle(event.currentTarget.value, type)} disabled={disabled}>
         {empty}
         {options}
       </Form.Select>

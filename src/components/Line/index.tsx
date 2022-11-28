@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const Lines: React.FC<Props> = ({ children, classNames, board, row }) => {
-  const names = classNames.toString();
+  const names = classNames.toString().replaceAll(',', ' ');
 
   return <Row className={clsx([names], board && style.board, row && style.row)}>{children !== undefined && <Col>{children}</Col>}</Row>;
 };
