@@ -21,46 +21,54 @@ export default class Helpers {
     switch (props.board?.name) {
       case BoardType.ARDUINO_UNO:
         return `
-// Arduino UNO Board Pins
+// ${BoardType.ARDUINO_UNO} Board Pins
 //
 // Sensors pins: A0, A1, A2.
 // Actuators (Commons) pins: 9, 10, 11.
 // Actuators (Potentiometer) pin: A3, A4, A5.
 
-${props.sensor?.include || ''}
-${props.actuator?.include || ''}
+${props.sensor?.include || '// No Sensor Include'}
+${props.actuator?.include || '// No Actuator Include'}
+
 const int act_num=${props.actuatorQuantity || ''};
 const int sen_num=${props.sensorQuantity || ''};
+
 ${props.sensor?.code || ''}
 ${props.actuator?.code || ''}
+
 ${props.fixed?.map((elem) => elem) || ''}
 `;
+
       case BoardType.NODE_MCU_ESP8266:
         return `
-// Node MCU ESP8266 Board Pins
+// ${BoardType.NODE_MCU_ESP8266} Board Pins
 //
 // Sensors pins: A0, A1, A2.
 // Actuators (Commons) pins: 9, 10, 11.
 // Actuators (Potentiometer) pin: A3, A4, A5.
 
-${props.sensor?.include || ''}
-${props.actuator?.include || ''}
+${props.sensor?.include || '// No Sensor Include'}
+${props.actuator?.include || '// No Actuator Include'}
+
 const int act_num=${props.actuatorQuantity || ''};
 const int sen_num=${props.sensorQuantity || ''};
+
 ${props.sensor?.code || ''}
 ${props.actuator?.code || ''}
 ${props.fixed?.map((elem) => elem) || ''}
 `;
+
       case BoardType.RASPBERRY_PI_PICO_V3:
         return `
-// Raspberry Pi Pico Board Pins
+// ${BoardType.RASPBERRY_PI_PICO_V3} Board Pins
 //
 // Sensors pins: A0, A1, A2.
 // Actuators (Commons) pins: 9, 10, 11.
 // Actuators (Potentiometer) pin: A3, A4, A5.
 
-${props.sensor?.include || ''}
-${props.actuator?.include || ''}
+${props.sensor?.include || '// No Sensor Include'}
+${props.actuator?.include || '// No Actuator Include'}
+
 const int act_num=${props.actuatorQuantity || ''};
 const int sen_num=${props.sensorQuantity || ''};
 ${props.sensor?.code || ''}
