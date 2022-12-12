@@ -363,7 +363,7 @@ const Create: React.FC = () => {
                   <blockquote className="blockquote mb-0">
                     <Collapse in={open}>
                       <div>
-                        <Code code={values.code} language={'arduino'} />
+                        <Code code={values.code} language={values.selectedBoard === 'ARDUINO_UNO' ? 'arduino' : 'python'} />
                       </div>
                     </Collapse>
                     <footer className="blockquote-footer">
