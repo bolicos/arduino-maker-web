@@ -75,8 +75,8 @@ ${props.fixed?.map((elem) => elem) || ''}
         return `
 # ${BoardType.RASPBERRY_PI_PICO_V3} Board Pins
 #
-# Sensors pins: A0 - 31.
-# Sensors (Potentiometer) pins: A1 - 32.
+# Sensors pins: A0 - GPIO26.
+# Sensors (Potentiometer) pins: A1 - GPIO27.
 # Actuators (Commons) pins: 5, 6, 7 - GPIO3, GPIO4 e GPIO5.
 # Button pin: 2 - GPIO1.
 
@@ -88,8 +88,8 @@ BAUD_RATE = 9600
 ELEMENT_COUNT_MAX = 50
 
 PIN_BUTTON = 2
-PIN_SENSORS_INIT = 31
-PIN_SENSORS_POTENTIOMETER_INIT = 32
+PIN_SENSORS_INIT = 26
+PIN_SENSORS_POTENTIOMETER_INIT = 27
 PIN_ACTUATORS_INIT = 5
 
 TRAINING_MODE = False
