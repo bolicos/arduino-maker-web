@@ -1,6 +1,6 @@
-import React from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import React from 'react';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { androidstudio } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export interface Props {
   code: string;
@@ -9,7 +9,7 @@ export interface Props {
 
 const Code: React.FC<Props> = ({ code, language }) => {
   return (
-    <SyntaxHighlighter language={language} style={docco} showLineNumbers={true} >
+    <SyntaxHighlighter language={language} style={androidstudio} showLineNumbers={true}>
       {code}
     </SyntaxHighlighter>
   );

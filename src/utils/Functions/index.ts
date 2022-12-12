@@ -41,12 +41,12 @@ ${props.fixed?.map((elem) => elem) || ''}
 
       case BoardType.NODE_MCU_ESP8266:
         return `
-// ${BoardType.NODE_MCU_ESP8266} Board Pins
-//
-// Sensors pins: A0 - 31.
-// Sensors (Potentiometer) pins: A1 - 32.
-// Actuators (Commons) pins: 5, 6, 7 - GPIO3, GPIO4 e GPIO5.
-// Button pin: 2 - GPIO1.
+# ${BoardType.NODE_MCU_ESP8266} Board Pins
+#
+# Sensors pins: A0 - 31.
+# Sensors (Potentiometer) pins: A1 - 32.
+# Actuators (Commons) pins: 5, 6, 7 - GPIO3, GPIO4 e GPIO5.
+# Button pin: 2 - GPIO1.
 
 ${props.sensor?.include || '// No Sensor Include'}
 ${props.actuator?.include || '// No Actuator Include'}
@@ -73,12 +73,12 @@ ${props.fixed?.map((elem) => elem) || ''}
 
       case BoardType.RASPBERRY_PI_PICO_V3:
         return `
-// ${BoardType.RASPBERRY_PI_PICO_V3} Board Pins
-//
-// Sensors pins: A0 - 31.
-// Sensors (Potentiometer) pins: A1 - 32.
-// Actuators (Commons) pins: 5, 6, 7 - GPIO3, GPIO4 e GPIO5.
-// Button pin: 2 - GPIO1.
+# ${BoardType.RASPBERRY_PI_PICO_V3} Board Pins
+#
+# Sensors pins: A0 - 31.
+# Sensors (Potentiometer) pins: A1 - 32.
+# Actuators (Commons) pins: 5, 6, 7 - GPIO3, GPIO4 e GPIO5.
+# Button pin: 2 - GPIO1.
 
 ${props.sensor?.include || '// No Sensor Include'}
 ${props.actuator?.include || '// No Actuator Include'}
